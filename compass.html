@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 시대 미래진로 나침반 v0.1</title>
+  <style>
+    :root{
+      --paper:#f1ede2; --sheet:#fbf8f1; --ink:#272217; --faint:#837b68;
+      --line:#ded5c0; --line-soft:#e9e2d1;
+      --accent:#17594e; --accent-deep:#0f453c; --accent-soft:#dce8e0;
+      --gold:#9c7a2c; --danger:#9e3120;
+      --serif:"KoPub Batang","KoPubWorld Batang","MaruBuri","Noto Serif KR","Nanum Myeongjo","HANBatang","Batang","AppleMyungjo",serif;
+      --sans:"Pretendard Variable","Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{-webkit-text-size-adjust:100%}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.62}
+    ::selection{background:var(--accent-soft)}
+    .sheet{max-width:880px;margin:34px auto 60px;background:var(--sheet);border:1px solid var(--line);padding:clamp(26px,5.5vw,56px) clamp(18px,6vw,64px) clamp(36px,6vw,56px)}
+    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+    /* 표제부 */
+    .masthead{border-top:3px solid var(--ink);position:relative;padding-top:16px}
+    .masthead::before{content:"";position:absolute;top:5px;left:0;right:0;border-top:1px solid var(--ink)}
+    .mast-top{display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;font-size:11.5px;letter-spacing:.14em;font-weight:600;color:var(--faint)}
+    h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5.6vw,49px);line-height:1.24;letter-spacing:-.015em;margin:24px 0 14px}
+    h1 em{font-style:normal;color:var(--accent)}
+    .lede{max-width:640px;margin:0 0 24px;font-size:15.8px;line-height:1.85}
+    .mast-meta{display:flex;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;font-size:12.5px;color:var(--faint)}
+    .mast-meta span+span::before{content:"·";margin:0 9px;color:var(--line)}
+
+    /* 일러두기 */
+    .notice{margin:32px 0 4px;padding:18px 18px 13px;border:1px solid var(--ink);position:relative}
+    .notice-label{position:absolute;top:-9px;left:14px;background:var(--sheet);padding:0 9px;font-size:11px;letter-spacing:.24em;font-weight:700;color:var(--gold)}
+    .notice p{margin:5px 0;font-size:13.8px;line-height:1.75}
+
+    /* 문항부 */
+    .part{margin-top:46px}
+    .part-head{display:flex;gap:16px;align-items:flex-start;border-bottom:2px solid var(--ink);padding-bottom:13px}
+    .part-no{font-family:var(--serif);font-size:33px;line-height:1;color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;transform:translateY(3px)}
+    .part-head h2{margin:0;font-family:var(--serif);font-size:21px;letter-spacing:-.01em}
+    .part-head p{margin:5px 0 0;font-size:13px;color:var(--faint)}
+    fieldset.item{border:0;margin:0;padding:20px 0 16px;border-top:1px solid var(--line)}
+    .part fieldset.item:first-of-type{border-top:0}
+    .stem{display:block;width:100%;padding:0;margin:0 0 12px;font-weight:600;font-size:15px;line-height:1.6}
+    .qnum{display:inline-block;min-width:30px;font-family:var(--serif);color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums}
+    .scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+    .scale label{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:1px;text-align:center;border:1px solid var(--line);background:transparent;padding:8px 3px 7px;cursor:pointer;min-height:58px;transition:border-color .15s,background .15s}
+    .scale label b{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+    .scale label span{font-size:11px;color:var(--faint);line-height:1.35}
+    .scale label:hover{border-color:var(--accent)}
+    .scale input{position:absolute;opacity:0;pointer-events:none}
+    .scale label:has(input:checked){background:var(--accent);border-color:var(--accent)}
+    .scale label:has(input:checked) b,.scale label:has(input:checked) span{color:#f6f2e7}
+    .scale label:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
+
+    /* 미래 문제 선택 */
+    fieldset.arena-set{border:0;margin:0;padding:0}
+    .arena-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(198px,1fr));gap:8px;margin-top:16px}
+    .arena{display:flex;gap:9px;align-items:flex-start;border:1px solid var(--line);padding:11px 12px;cursor:pointer;font-size:13.5px;line-height:1.5;transition:border-color .15s,background .15s}
+    .arena input{margin:3px 0 0;accent-color:var(--accent)}
+    .arena:hover{border-color:var(--accent)}
+    .arena:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+    .arena:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
+    .arena-msg{display:block;min-height:18px;font-size:12.5px;color:var(--danger);margin-top:9px;font-weight:600}
+    .part-note{font-size:12.5px;color:var(--faint);margin:12px 0 0}
+
+    /* 진행률 */
+    .progress-shell{position:sticky;top:0;z-index:20;background:var(--sheet);padding:10px 0 6px;margin-top:28px;border-bottom:1px solid var(--line-soft)}
+    .progress{height:3px;background:var(--line-soft)}
+    .progress>div{height:100%;width:0;background:var(--accent);transition:width .25s}
+    .progress-text{margin-top:5px;text-align:right;font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums;letter-spacing:.06em}
+
+    /* 채점 */
+    .score-block{margin-top:38px;border-top:2px solid var(--ink);padding-top:22px}
+    .score-block p{margin:0 0 16px;font-size:13.5px;color:var(--faint)}
+    button{font:inherit;font-weight:700;font-size:14.5px;padding:12px 22px;border:1px solid var(--ink);background:var(--ink);color:var(--sheet);cursor:pointer;border-radius:0}
+    button:hover{opacity:.88}
+    button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+    button.ghost{background:transparent;color:var(--ink)}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+    .error{color:var(--danger);font-weight:700;min-height:22px;margin-top:12px;font-size:14px}
+
+    /* 결과 보고서 */
+    #results{display:none;margin-top:56px}
+    .report-head{border-top:3px solid var(--ink);position:relative;padding-top:14px}
+    .report-head::before{content:"";position:absolute;top:5px;left:0;right:0;border-top:1px solid var(--ink)}
+    .report-title{font-family:var(--serif);font-size:clamp(24px,4vw,31px);margin:18px 0 4px;font-weight:700;letter-spacing:-.01em}
+    .hyp{font-family:var(--serif);font-size:18px;line-height:2.05;margin:14px 0 4px}
+    .hyp-sub{font-size:14.5px;line-height:1.85;margin:8px 0 0}
+    .hl{background:linear-gradient(transparent 62%,var(--accent-soft) 62%);padding:0 2px;font-weight:700}
+    .report-sec{margin-top:40px;border-top:2px solid var(--ink);padding-top:14px}
+    .report-sec h3{font-family:var(--serif);font-size:20px;margin:0 0 4px}
+    .sec-guide{font-size:12.8px;color:var(--faint);margin:0 0 18px;line-height:1.7}
+    .result-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(236px,1fr));gap:26px}
+    .col-title{font-size:12px;letter-spacing:.16em;color:var(--gold);font-weight:700;margin:0 0 10px}
+    .bar-row{display:grid;grid-template-columns:96px 1fr 44px;align-items:center;gap:10px;margin:11px 0 2px;font-size:13.5px}
+    .bar{height:7px;background:var(--line-soft)}
+    .bar span{display:block;height:100%;background:var(--accent)}
+    .bar-row strong{font-variant-numeric:tabular-nums;text-align:right;font-size:13px}
+    .band{text-align:right;font-size:11px;color:var(--faint);margin:0 0 5px}
+    .mean-item{margin:0 0 13px;font-size:14px;line-height:1.7}
+    .mean-item .small{display:block;color:var(--faint);font-size:12.8px}
+    .tie{font-size:12.5px;color:var(--gold);margin-top:12px;line-height:1.7}
+    .next{border:1px dashed var(--accent);padding:15px 16px 13px;margin:12px 0;font-size:14px;line-height:1.75}
+    .next-label{display:block;font-size:11px;letter-spacing:.18em;font-weight:700;color:var(--accent);margin-bottom:6px}
+    .footnote{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint);line-height:1.8}
+    .colophon{margin-top:54px;border-top:2px solid var(--ink);padding-top:12px;display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;font-size:12px;color:var(--faint);letter-spacing:.04em}
+
+    @media(max-width:640px){
+      .sheet{margin:0;border:0}
+      .scale{gap:4px}
+      .scale label span{font-size:10px}
+      .scale label{min-height:62px;padding:7px 2px 6px}
+      .bar-row{grid-template-columns:84px 1fr 40px}
+      .part-no{font-size:26px}
+    }
+    @media print{
+      body{background:#fff;font-size:12.5px}
+      .sheet{border:0;margin:0;max-width:none;padding:0}
+      .progress-shell,.no-print{display:none!important}
+      body:not(.scored) #results{display:none!important}
+      body.scored #introCard,body.scored #arenaCard,body.scored #testArea{display:none!important}
+      fieldset.item{break-inside:avoid;padding:10px 0 8px}
+      .scale label{min-height:0;padding:5px 2px}
+      .report-sec,.next,.notice{break-inside:avoid}
+      #results{margin-top:22px}
+      .bar span,.hl,.scale label:has(input:checked),.arena:has(input:checked){-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+
+    <header class="masthead">
+      <div class="mast-top"><span>LEV LAB 진로교육 연구도구 · 제1호</span><span>연구·수업용 프로토타입 v0.1.1</span></div>
+      <h1>AI 시대<br><em>미래진로 나침반</em></h1>
+      <p class="lede">직업 하나를 정답처럼 고르는 대신, 내가 즐기는 과업과 중요하게 여기는 가치, 변화에 대처하는 자원, 실제 탐색 행동, 인간–AI 협업 방식을 함께 살펴봅니다.</p>
+      <div class="mast-meta"><span>중·고등학생용</span><span>63문항</span><span>15~20분</span><span>응답은 이 기기 밖으로 나가지 않습니다</span></div>
+    </header>
+
+    <section id="introCard">
+      <aside class="notice">
+        <b class="notice-label">일러두기</b>
+        <p><strong>이 도구는 아직 표준화된 심리검사가 아닙니다.</strong> 점수로 학생을 선발·배치·서열화하거나 ‘미래에 성공할 직업’을 단정해서는 안 됩니다. 지금의 진로 가설을 만들고 작은 경험으로 확인하기 위한 대화 도구입니다.</p>
+        <p>정답은 없습니다. ‘잘할 것 같은 것’보다 <strong>지금 내가 실제로 느끼고 행동하는 모습</strong>에 가깝게 답하세요. 응답은 인터넷으로 전송되지 않으며, 실수로 새로고침해도 남도록 이 브라우저 탭 안에만 잠시 보관됩니다. 탭을 닫으면 함께 사라집니다.</p>
+      </aside>
+    </section>
+
+    <section class="part" id="arenaCard">
+      <div class="part-head"><span class="part-no">00</span><div><h2>요즘 더 알아보고 싶은 미래 문제</h2><p>직업명이 아니라 해결해 보고 싶은 문제 영역을 최대 3개 골라 보세요. 선택하지 않아도 검사를 진행할 수 있습니다.</p></div></div>
+      <fieldset class="arena-set">
+        <legend class="sr-only">요즘 더 알아보고 싶은 미래 문제 (최대 3개 선택)</legend>
+        <div class="arena-grid" id="arenaGrid"></div>
+      </fieldset>
+      <span class="arena-msg" id="arenaMsg" role="status"></span>
+      <p class="part-note">이 목록은 노동시장과 사회 변화에 맞춰 매년 갱신하는 모듈입니다. 선택은 능력 점수가 아니라 현재의 관심 신호입니다.</p>
+    </section>
+
+    <div class="progress-shell" aria-live="polite">
+      <div class="progress"><div id="progressBar"></div></div>
+      <div class="progress-text" id="progressText">0 / 63 응답</div>
+    </div>
+
+    <div id="testArea"></div>
+
+    <section class="score-block no-print">
+      <p>모든 문항에 답하면 결과 보고서가 만들어집니다. 결과는 이 기기에서만 계산되며, 필요하면 인쇄하거나 텍스트 파일로 저장할 수 있습니다.</p>
+      <button class="primary" id="scoreBtn">내 진로 나침반 보기</button>
+      <div class="error" id="error" role="alert"></div>
+    </section>
+
+    <section id="results" aria-live="polite">
+      <div class="report-head">
+        <div class="mast-top"><span>결과 보고서 · <span id="reportDate"></span></span><span>미래진로 나침반 v0.1.1</span></div>
+        <h2 class="report-title">나의 현재 진로 가설</h2>
+        <div id="hypothesis"></div>
+      </div>
+
+      <div class="report-sec">
+        <h3>1. 내가 끌리는 과업</h3>
+        <p class="sec-guide">홀랜드 RIASEC를 직업명이 아닌 활동·과업 언어로 바꾼 상대적 프로필입니다. 점수의 높고 낮음보다 상위 2~3개의 조합을 봅니다.</p>
+        <div class="result-cols">
+          <div><div id="interestBars"></div></div>
+          <div id="interestMeaning"></div>
+        </div>
+      </div>
+
+      <div class="report-sec">
+        <h3>2. 내가 중요하게 여기는 일의 조건</h3>
+        <p class="sec-guide">가치에는 정답이 없습니다. 상위 가치가 서로 충돌할 때 어떤 타협을 할지도 탐색 주제가 됩니다.</p>
+        <div class="result-cols">
+          <div><div id="valueBars"></div></div>
+          <div id="valueMeaning"></div>
+        </div>
+      </div>
+
+      <div class="report-sec">
+        <h3>3. 변화 속에서 길을 만드는 자원</h3>
+        <p class="sec-guide">아래 단계는 규준이 아닌 임시 설명 기준입니다: 발견 시작(1.00~2.49), 연습 중(2.50~3.49), 활용 중(3.50~4.19), 확장 중(4.20~5.00).</p>
+        <div class="result-cols">
+          <div><p class="col-title">진로적응 4C</p><div id="adaptBars"></div></div>
+          <div><p class="col-title">탐색 행동 자본</p><div id="actionBars"></div></div>
+          <div><p class="col-title">인간–AI 협업</p><div id="aiBars"></div></div>
+        </div>
+      </div>
+
+      <div class="report-sec">
+        <h3>4. 앞으로 30일의 작은 실험</h3>
+        <div id="nextSteps"></div>
+        <div class="actions no-print">
+          <button class="primary" onclick="window.print()">인쇄 / PDF 저장</button>
+          <button class="ghost" id="downloadBtn">텍스트 결과 저장</button>
+          <button class="ghost" id="resetBtn">다시 검사하기</button>
+        </div>
+        <div class="footnote">결과는 현재 상태의 스냅샷입니다. 3~6개월 뒤 실제 경험을 한 후 다시 실시해 변화와 새로운 질문을 비교하세요. 과목·학과·직업 결정에는 상담, 성취 자료, 포트폴리오, 체험 기록, 노동시장 정보 등을 함께 사용해야 합니다.</div>
+      </div>
+    </section>
+
+    <footer class="colophon"><span>Lev Lab — 진로·사회정서교육 연구도구</span><span>v0.1.1 · 표준화 검사가 아닙니다</span></footer>
+  </div>
+
+  <script>
+    const DRAFT_KEY="career_compass_v01_draft";
+
+    const arenas = [
+      "건강·돌봄·삶의 질", "기후·에너지·생태", "디지털·AI·데이터 신뢰",
+      "교육·학습·성장", "문화·콘텐츠·소통", "지역사회·공공·안전",
+      "제조·로봇·이동", "식량·생명과학·자원"
+    ];
+
+    const sections = [
+      {title:"활동 선호", guide:"각 활동을 앞으로 더 해 보고 싶은 정도를 표시하세요.", scale:["전혀 하고 싶지 않다","별로 하고 싶지 않다","보통이다","해 보고 싶다","매우 해 보고 싶다"], items:[
+        ["R","손이나 도구를 사용해 물건을 만들거나 고치는 활동을 해 보고 싶다."],
+        ["R","교실 밖 현장이나 자연에서 직접 움직이며 문제를 해결해 보고 싶다."],
+        ["R","기계·장비·재료가 어떻게 작동하는지 직접 다뤄 보고 싶다."],
+        ["I","어떤 현상의 원인을 찾기 위해 자료를 모으고 비교하는 것을 즐긴다."],
+        ["I","답이 정해지지 않은 질문을 실험이나 조사로 확인해 보고 싶다."],
+        ["I","복잡한 현상을 논리적으로 분석하고 설명하는 활동에 끌린다."],
+        ["A","이야기·이미지·음악·영상·디자인으로 생각을 표현하고 싶다."],
+        ["A","익숙한 것을 다른 방식으로 바꾸거나 새로운 아이디어를 내는 것이 좋다."],
+        ["A","하나의 정답보다 나만의 해석과 표현이 가능한 과제가 좋다."],
+        ["S","누군가가 이해하고 성장하도록 설명하거나 돕는 일에서 보람을 느낀다."],
+        ["S","사람의 감정과 상황을 잘 듣고 함께 해결책을 찾는 활동이 좋다."],
+        ["S","팀의 협력 분위기를 만들고 갈등을 조정하는 데 관심이 있다."],
+        ["E","내 아이디어를 제안하고 사람들의 참여를 이끌어 내는 활동이 좋다."],
+        ["E","목표를 세우고 역할을 나누어 프로젝트를 추진해 보고 싶다."],
+        ["E","필요를 발견하면 새로운 행사·모임·프로젝트를 시작하고 싶다."],
+        ["C","정보나 자료를 기준에 따라 정확하게 분류하고 정리하는 것이 좋다."],
+        ["C","일정·규칙·절차를 만들어 일이 안정적으로 돌아가게 하는 데 관심이 있다."],
+        ["C","오류를 찾아내고 결과가 기준에 맞는지 꼼꼼히 확인하는 활동이 좋다."]
+      ]},
+      {title:"일에서 원하는 것", guide:"장래에 어떤 일을 하든 나에게 얼마나 중요한 조건인지 표시하세요.", scale:["전혀 중요하지 않다","별로 중요하지 않다","보통이다","중요하다","매우 중요하다"], items:[
+        ["VM","내 일이 다른 사람이나 사회에 긍정적인 변화를 만드는 것."],
+        ["VM","내가 중요하다고 느끼는 실제 문제 해결에 기여하는 것."],
+        ["VG","새로운 것을 계속 배우며 전문성을 키울 수 있는 것."],
+        ["VG","어려운 과제를 해결하면서 내 능력이 성장하는 것."],
+        ["VA","일하는 방법을 스스로 선택하고 의견을 낼 수 있는 것."],
+        ["VA","새로운 아이디어와 시도를 허용하는 환경에서 일하는 것."],
+        ["VR","서로 존중하고 협력하는 사람들과 신뢰를 쌓는 것."],
+        ["VR","소속감을 느끼며 함께 성과를 만드는 것."],
+        ["VS","경제적·고용 조건이 비교적 안정적인 것."],
+        ["VS","일과 휴식, 개인 생활의 균형을 지킬 수 있는 것."],
+        ["VI","내가 만든 결과가 인정받고 실제 영향력을 갖는 것."],
+        ["VI","책임을 맡아 중요한 결정과 변화를 이끄는 것."]
+      ]},
+      {title:"변화에 대처하는 방식", guide:"최근의 나와 얼마나 비슷한지 표시하세요.", scale:["전혀 그렇지 않다","그렇지 않은 편이다","보통이다","그런 편이다","매우 그렇다"], items:[
+        ["ACN","미래의 사회와 일의 변화를 알아보고 내 선택에 어떤 의미가 있는지 생각한다."],
+        ["ACN","하나의 직업을 확정하지 않았더라도 다음에 해 볼 일을 계획한다."],
+        ["ACN","과목·활동 선택이 앞으로의 여러 가능성과 어떻게 이어지는지 살펴본다."],
+        ["ACT","진로 선택에서 다른 사람의 기대뿐 아니라 내 판단의 책임도 중요하게 여긴다."],
+        ["ACT","큰 목표를 이번 주나 이번 달에 할 수 있는 작은 행동으로 나눈다."],
+        ["ACT","막히면 필요한 정보나 도움을 누구에게 요청할지 찾아 행동한다."],
+        ["ACU","서로 다른 여러 미래의 내 모습을 상상해 본다."],
+        ["ACU","익숙하지 않은 분야도 실제로 알아본 뒤 판단하려 한다."],
+        ["ACU","관심 분야에서 일하는 사람의 하루와 진입 경로를 궁금해한다."],
+        ["ACF","새로운 기술이 필요해도 연습하면 배울 수 있다고 생각한다."],
+        ["ACF","실패나 계획 변경이 생겨도 다른 방법을 찾아 다시 시도할 수 있다."],
+        ["ACF","내 강점을 구체적인 경험과 사례로 설명할 수 있다."]
+      ]},
+      {title:"실제 탐색 행동", guide:"최근 6개월 동안의 실제 행동에 가깝게 답하세요.", scale:["전혀 하지 않았다","거의 하지 않았다","가끔 했다","여러 번 했다","꾸준히 했다"], items:[
+        ["EX","관심 분야를 공식 자료·영상·책·현직자 이야기 등 여러 출처로 알아보았다."],
+        ["EX","서로 다른 분야의 직업인이나 전공자에게 실제 경험을 물어보았다."],
+        ["EX","관심 분야의 필요한 과업·역량·학습 경로를 비교해 보았다."],
+        ["EP","동아리·프로젝트·봉사·직업체험 등으로 관심 분야를 직접 경험했다."],
+        ["EP","짧게라도 결과물이나 시제품을 만들며 나와 맞는지 시험했다."],
+        ["EP","체험 뒤 좋았던 점·힘들었던 점·다음 질문을 기록했다."],
+        ["CN","교사·가족·친구와 내 진로 생각을 구체적으로 이야기했다."],
+        ["CN","필요한 정보나 기회를 물어볼 수 있는 사람을 알고 있다."],
+        ["CN","익숙한 관계 밖의 사람이나 기관에도 예의를 갖춰 질문해 보았다."]
+      ]},
+      {title:"인간–AI 협업 방식", guide:"AI를 거의 써 보지 않았다면 현재 할 수 있는 정도에 가깝게 답하세요.", scale:["전혀 그렇지 않다","그렇지 않은 편이다","보통이다","그런 편이다","매우 그렇다"], items:[
+        ["HA","AI를 쓰기 전에 내가 해결하려는 문제와 판단 기준을 먼저 정한다."],
+        ["HA","AI의 제안을 그대로 따르지 않고 최종 선택과 책임은 사람이 맡아야 한다고 생각한다."],
+        ["HA","공감·맥락 판단·가치 선택처럼 사람이 특별히 책임져야 할 부분을 구분한다."],
+        ["HE","AI에 개인정보나 민감한 정보를 함부로 입력하지 않는다."],
+        ["HE","저작권·편향·차별·안전 문제를 살피며 AI 결과를 사용한다."],
+        ["HE","AI 사용이 다른 사람과 사회에 미칠 결과까지 생각한다."],
+        ["HV","AI가 제시한 사실과 출처를 다른 믿을 만한 자료로 확인한다."],
+        ["HV","AI 답변에서 사실·추론·의견을 구분하려고 한다."],
+        ["HV","AI 결과의 오류 가능성과 한계를 다른 사람에게 설명할 수 있다."],
+        ["HD","AI와 사람이 맡을 일을 나누어 질문·아이디어·결과물을 개선한다."],
+        ["HD","복잡한 문제를 작은 단계로 나누고 AI를 필요한 단계에 선택적으로 활용한다."],
+        ["HD","첫 결과에 멈추지 않고 피드백을 주며 여러 번 수정·시험한다."]
+      ]}
+    ];
+
+    const meta = {
+      R:["만들기·현장","도구·재료·공간을 직접 다루며 눈에 보이는 변화를 만드는 과업"],
+      I:["탐구·분석","질문을 세우고 자료·실험·논리로 원인과 원리를 밝히는 과업"],
+      A:["창작·표현","새로운 의미·형식·경험을 상상하고 표현하는 과업"],
+      S:["도움·성장","사람을 이해하고 가르치며 돌보고 협력하게 만드는 과업"],
+      E:["기획·영향","목표를 제안하고 사람과 자원을 움직여 변화를 만드는 과업"],
+      C:["정리·운영","정보와 절차를 정확히 관리해 신뢰와 안정성을 만드는 과업"],
+      VM:["의미·기여","실제 문제와 공동의 이익에 기여"], VG:["성장·전문성","계속 배우며 어려운 문제에 도전"],
+      VA:["자율·창의","방법을 선택하고 새롭게 시도"], VR:["관계·소속","존중과 신뢰 속에서 협력"],
+      VS:["안정·균형","지속 가능한 조건과 삶의 균형"], VI:["성취·영향","책임과 영향력 있는 결과"],
+      ACN:["관심(Concern)","미래를 생각하고 준비하기"], ACT:["통제(Control)","선택의 주도권과 책임 갖기"],
+      ACU:["호기심(Curiosity)","가능한 나와 환경 탐색하기"], ACF:["자신감(Confidence)","장애물을 다루며 실행하기"],
+      EX:["탐색","다양한 출처와 실제 사람으로 알아보기"], EP:["경험","작게 해 보고 증거와 성찰 남기기"], CN:["연결","도움을 주고받을 관계 만들기"],
+      HA:["인간 주도성","목표·판단·책임을 사람이 갖기"], HE:["윤리·책임","안전·권리·공정성을 살피기"],
+      HV:["비판적 검증","출처·오류·한계를 확인하기"], HD:["적용·설계","문제를 나누고 반복해 공동 창작하기"]
+    };
+
+    const pairMeta = {
+      RI:["실험·제작 문제해결자","원리를 탐구하고 실제 장치·환경·제품으로 시험하는 조합"],
+      RA:["감각적 설계·제작자","아이디어를 재료와 형태로 구현하는 조합"], RS:["현장 지원·코치","사람을 돕는 일을 실제 활동과 현장에서 수행하는 조합"],
+      RE:["현장 실행 리더","현장 자원과 사람을 움직여 결과를 만드는 조합"], RC:["정밀 운영·품질 설계자","도구와 절차를 정확하고 안전하게 운영하는 조합"],
+      IA:["통찰 기반 창작자","조사와 분석에서 새로운 표현·설계 아이디어를 만드는 조합"], IS:["연구 기반 교육·지원자","근거를 이해해 사람의 학습과 삶을 돕는 조합"],
+      IE:["분석 기반 전략가","자료와 통찰로 방향을 제안하고 변화를 추진하는 조합"], IC:["데이터·품질 분석가","정보를 구조화하고 오류와 패턴을 찾는 조합"],
+      AS:["공감형 콘텐츠·경험 설계자","사람을 이해해 의미 있는 표현과 경험을 만드는 조합"], AE:["아이디어 확산·기획자","새로운 개념을 제안하고 참여와 영향력을 만드는 조합"],
+      AC:["디자인 시스템·콘텐츠 운영자","창작물을 일관된 구조와 품질로 구현하는 조합"], SE:["사람과 조직의 변화 촉진자","관계와 리더십으로 성장과 변화를 이끄는 조합"],
+      SC:["서비스 운영·지원 설계자","사람을 돕는 과정을 정확하고 지속 가능하게 만드는 조합"], EC:["프로젝트·사업 운영자","목표와 자원을 구조화해 성과를 만드는 조합"]
+    };
+
+    const interestOrder=["R","I","A","S","E","C"];
+    const valueKeys=["VM","VG","VA","VR","VS","VI"];
+    const adaptKeys=["ACN","ACT","ACU","ACF"];
+    const actionKeys=["EX","EP","CN"];
+    const aiKeys=["HA","HE","HV","HD"];
+    const selectedArenas = new Set();
+
+    /* ---- 미래 문제 선택 ---- */
+    const arenaGrid=document.getElementById("arenaGrid");
+    const arenaMsg=document.getElementById("arenaMsg");
+    let arenaMsgTimer=null;
+    arenas.forEach((a,i)=>{
+      const label=document.createElement("label"); label.className="arena";
+      label.innerHTML=`<input type="checkbox" value="${i}"><span>${a}</span>`;
+      label.querySelector("input").addEventListener("change",e=>{
+        if(e.target.checked && selectedArenas.size>=3){
+          e.target.checked=false;
+          arenaMsg.textContent="최대 3개까지 선택할 수 있습니다.";
+          clearTimeout(arenaMsgTimer); arenaMsgTimer=setTimeout(()=>{arenaMsg.textContent="";},2500);
+          return;
+        }
+        e.target.checked?selectedArenas.add(a):selectedArenas.delete(a);
+        saveDraft();
+      });
+      arenaGrid.appendChild(label);
+    });
+
+    /* ---- 문항 생성 ---- */
+    const testArea=document.getElementById("testArea");
+    let q=0;
+    sections.forEach((sec,si)=>{
+      const part=document.createElement("section"); part.className="part";
+      part.innerHTML=`<div class="part-head"><span class="part-no">${String(si+1).padStart(2,"0")}</span><div><h2>${sec.title}</h2><p>${sec.guide}</p></div></div>`;
+      sec.items.forEach(([key,stem])=>{
+        q++;
+        const item=document.createElement("fieldset"); item.className="item"; item.dataset.key=key;
+        item.innerHTML=`<legend class="stem"><span class="qnum">${q}</span>${stem}</legend><div class="scale">${sec.scale.map((lab,idx)=>`<label><input type="radio" name="q${q}" value="${idx+1}"><b>${idx+1}</b><span>${lab}</span></label>`).join("")}</div>`;
+        part.appendChild(item);
+      });
+      testArea.appendChild(part);
+    });
+
+    /* ---- 임시 보관 (탭 안에서만, 탭을 닫으면 삭제) ---- */
+    function saveDraft(){
+      const d={a:{},ar:[...document.querySelectorAll('#arenaGrid input:checked')].map(x=>x.value)};
+      document.querySelectorAll('.item input[type=radio]:checked').forEach(r=>d.a[r.name]=r.value);
+      try{sessionStorage.setItem(DRAFT_KEY,JSON.stringify(d));}catch(_){}
+    }
+    function restoreDraft(){
+      let d=null;
+      try{d=JSON.parse(sessionStorage.getItem(DRAFT_KEY)||"null");}catch(_){}
+      if(!d)return;
+      Object.entries(d.a||{}).forEach(([n,v])=>{
+        const el=document.querySelector(`.item input[name="${n}"][value="${v}"]`);
+        if(el)el.checked=true;
+      });
+      (d.ar||[]).forEach(v=>{
+        const el=document.querySelector(`#arenaGrid input[value="${v}"]`);
+        if(el){el.checked=true; selectedArenas.add(arenas[Number(v)]);}
+      });
+    }
+
+    document.addEventListener("change",e=>{
+      if(e.target.matches('.item input[type=radio]')){updateProgress(); saveDraft();}
+    });
+    function answeredCount(){return document.querySelectorAll('.item input[type=radio]:checked').length;}
+    function updateProgress(){
+      const done=answeredCount();
+      document.getElementById("progressBar").style.width=`${done/63*100}%`;
+      document.getElementById("progressText").textContent=`${done} / 63 응답`;
+    }
+    window.addEventListener("beforeunload",e=>{
+      if(window.__skipGuard)return;
+      if(answeredCount()>0 && !document.body.classList.contains("scored")){e.preventDefault(); e.returnValue="";}
+    });
+
+    /* ---- 채점 ---- */
+    function meanFor(key){
+      const vals=[...document.querySelectorAll(`.item[data-key="${key}"]`)].map(el=>Number(el.querySelector("input:checked").value));
+      return vals.reduce((a,b)=>a+b,0)/vals.length;
+    }
+    function scores(keys){return Object.fromEntries(keys.map(k=>[k,meanFor(k)]));}
+    function sorted(obj){return Object.entries(obj).sort((a,b)=>b[1]-a[1]);}
+    function band(v){return v<2.5?"발견 시작":v<3.5?"연습 중":v<4.2?"활용 중":"확장 중";}
+    function josa(word,pair){ // pair: "과와"·"을를" 등 [받침O, 받침X] 순
+      const code=word.charCodeAt(word.length-1);
+      if(code<0xAC00||code>0xD7A3)return pair[0];
+      return (code-0xAC00)%28>0?pair[0]:pair[1];
+    }
+    function tiedAfter(sortedArr,n){
+      const cut=sortedArr[n-1][1];
+      return sortedArr.slice(n).filter(([,v])=>Math.abs(v-cut)<1e-9).map(([k])=>meta[k][0]);
+    }
+    function bars(target,obj,showBand=false){
+      target.innerHTML=sorted(obj).map(([k,v])=>`<div class="bar-row"><span>${meta[k][0]}</span><div class="bar"><span style="width:${v/5*100}%"></span></div><strong>${v.toFixed(2)}</strong></div>${showBand?`<div class="band">${band(v)}</div>`:""}`).join("");
+    }
+
+    const recommendations={
+      ACN:"관심: 3년 뒤 한 모습만 정하지 말고 ‘가능한 미래 3개’를 적은 뒤, 각각 이번 달에 확인할 질문을 하나씩 만드세요.",
+      ACT:"통제: 가장 중요한 진로 과제를 20분 안에 할 수 있는 첫 행동으로 줄여 7일 안에 일정에 넣으세요.",
+      ACU:"호기심: 지금까지 잘 몰랐던 분야 두 개를 골라 현직자 하루·핵심 과업·진입 경로를 비교하세요.",
+      ACF:"자신감: 작은 결과물 하나를 완성하고 ‘막힘–시도–배운 점’을 포트폴리오에 기록하세요.",
+      EX:"탐색: 관심 분야 하나를 공식 통계, 교육기관 자료, 현직자 이야기의 세 출처로 교차 확인하세요.",
+      EP:"경험: 2시간짜리 미니 프로젝트·관찰·봉사·시제품 중 하나로 실제 과업을 해 보세요.",
+      CN:"연결: 궁금한 분야의 사람 한 명에게 세 가지 구체적 질문을 담아 예의 있게 연락해 보세요.",
+      HA:"인간 주도성: AI를 켜기 전에 ‘내 목표·내 기준·사람이 책임질 결정’을 세 줄로 먼저 쓰세요.",
+      HE:"윤리·책임: 다음 AI 과제에서 개인정보·저작권·편향·영향을 확인하는 네 칸 체크리스트를 사용하세요.",
+      HV:"비판적 검증: AI 답변의 핵심 주장 두 개를 원자료나 신뢰할 수 있는 다른 출처로 확인하세요.",
+      HD:"적용·설계: 작은 문제를 세 단계로 나누고 AI를 쓸 단계와 사람이 맡을 단계를 정한 뒤 두 번 이상 수정하세요."
+    };
+    const experimentByInterest={
+      R:"직접 만들기·고치기·현장 관찰 중 하나", I:"궁금한 문제를 자료나 작은 실험으로 조사하는 일", A:"아이디어를 글·이미지·영상·디자인 결과물로 표현하는 일",
+      S:"누군가를 인터뷰·설명·지원하고 반응을 듣는 일", E:"작은 프로젝트를 제안하고 사람의 참여를 이끄는 일", C:"흩어진 정보나 과정을 정리하고 오류·품질을 확인하는 일"
+    };
+    const lensByValue={VM:"실제 사람이나 공동체에 어떤 도움이 되는지 확인하며",VG:"새 기술 하나를 의도적으로 배우며",VA:"방법과 형식을 스스로 정하며",VR:"한 명 이상의 협력자와 함께하며",VS:"시간·비용·지속 가능 조건까지 비교하며",VI:"결과를 공개하고 피드백과 영향력을 확인하며"};
+
+    let textReport="";
+    document.getElementById("scoreBtn").addEventListener("click",()=>{
+      const done=answeredCount();
+      if(done<63){
+        document.getElementById("error").textContent=`아직 ${63-done}문항이 남았습니다.`;
+        const first=[...document.querySelectorAll(".item")].find(el=>!el.querySelector("input:checked"));
+        first?.scrollIntoView({behavior:"smooth",block:"center"});
+        return;
+      }
+      document.getElementById("error").textContent="";
+
+      const interest=scores(interestOrder), values=scores(valueKeys), adapt=scores(adaptKeys), action=scores(actionKeys), ai=scores(aiKeys);
+      const sortedI=sorted(interest), sortedV=sorted(values);
+      const topI=sortedI.slice(0,3), topV=sortedV.slice(0,3);
+      const pair=[topI[0][0],topI[1][0]].sort((a,b)=>interestOrder.indexOf(a)-interestOrder.indexOf(b)).join("");
+      const pairInfo=pairMeta[pair];
+      const tieI=tiedAfter(sortedI,2), tieV=tiedAfter(sortedV,2);
+      const arenaText=selectedArenas.size?[...selectedArenas].join(" · "):"아직 정하지 않음 — 다음 탐색에서 골라도 됩니다";
+
+      const dateStr=new Date().toLocaleDateString("ko-KR",{year:"numeric",month:"long",day:"numeric"});
+      document.getElementById("reportDate").textContent=dateStr;
+
+      const v0=meta[topV[0][0]][0], v1=meta[topV[1][0]][0];
+      document.getElementById("hypothesis").innerHTML=
+        `<p class="hyp">지금 나는 <span class="hl">「${pairInfo[0]}」(${topI[0][0]}${topI[1][0]})</span> 조합의 과업에 끌리고, <span class="hl">${v0}</span>${josa(v0,"과와")} <span class="hl">${v1}</span>${josa(v1,"을를")} 중요하게 여깁니다.</p>`+
+        `<p class="hyp-sub">${pairInfo[1]}입니다. 현재 관심 문제는 <strong>${arenaText}</strong>입니다. 이것은 확정된 진로가 아니라 경험으로 확인할 가설입니다.</p>`;
+
+      bars(document.getElementById("interestBars"),interest);
+      document.getElementById("interestMeaning").innerHTML=
+        `<div class="mean-item"><b>상위 조합 「${pairInfo[0]}」</b><span class="small">${pairInfo[1]}</span></div>`+
+        topI.map(([k])=>`<div class="mean-item"><b>${meta[k][0]}</b><span class="small">${meta[k][1]}</span></div>`).join("")+
+        `<p class="sec-guide" style="margin-top:12px">추천 직업명이 아니라 여러 직업과 프로젝트에서 반복되는 과업 언어입니다. 실제로 해 본 뒤 에너지·몰입·배움의 증거를 기록하세요.</p>`+
+        (tieI.length?`<p class="tie">※ ${tieI.join(", ")} 점수가 2위와 같습니다. 위 조합은 표기 순서에 따라 정한 것이므로, 동점인 과업이 들어간 다른 조합도 함께 살펴보세요.</p>`:"");
+
+      bars(document.getElementById("valueBars"),values);
+      document.getElementById("valueMeaning").innerHTML=
+        topV.map(([k])=>`<div class="mean-item"><b>${meta[k][0]}</b><span class="small">${meta[k][1]}</span></div>`).join("")+
+        `<p class="sec-guide" style="margin-top:12px">예: 자율성과 안정이 모두 높다면, 어느 정도의 안정 속에서 얼마나 선택권이 필요한지 실제 환경별로 비교합니다.</p>`+
+        (tieV.length?`<p class="tie">※ ${tieV.join(", ")} 점수가 2위와 같습니다. 동점 가치도 함께 우선 가치로 다루세요.</p>`:"");
+
+      bars(document.getElementById("adaptBars"),adapt,true);
+      bars(document.getElementById("actionBars"),action,true);
+      bars(document.getElementById("aiBars"),ai,true);
+
+      const capability={...adapt,...action,...ai};
+      const low=Object.entries(capability).sort((a,b)=>a[1]-b[1]).slice(0,3);
+      const expTask=experimentByInterest[topI[0][0]];
+      const exp=`${lensByValue[topV[0][0]]} ${expTask}${josa(expTask,"을를")} 해 보세요. 주제는 ‘${selectedArenas.size?[...selectedArenas][0]:"요즘 궁금한 생활 속 문제"}’에서 고르고, 시작 전 예상과 끝난 뒤 실제 느낌을 비교하세요.`;
+      document.getElementById("nextSteps").innerHTML=
+        `<div class="next"><b class="next-label">핵심 진로 실험</b>${exp}</div>`+
+        low.map(([k])=>`<div class="next"><b class="next-label">${meta[k][0]} · ${band(capability[k])}</b>${recommendations[k]}</div>`).join("")+
+        `<div class="next"><b class="next-label">상담 질문</b>“이 결과 중 실제 경험으로 확인된 것은 무엇이고, 아직 생각만으로 답한 것은 무엇인가?”를 교사·보호자·친구와 이야기하세요.</div>`;
+
+      const lines=(obj)=>sorted(obj).map(([k,v])=>`- ${meta[k][0]}: ${v.toFixed(2)}${[...adaptKeys,...actionKeys,...aiKeys].includes(k)?` (${band(v)})`:""}`).join("\n");
+      textReport=`AI 시대 미래진로 나침반 v0.1.1 — 결과 보고서 (${dateStr})\n\n[현재 진로 가설]\n${pairInfo[0]} (${topI[0][0]}${topI[1][0]}): ${pairInfo[1]}\n우선 가치: ${topV.slice(0,2).map(([k])=>meta[k][0]).join(" + ")}\n관심 문제: ${arenaText}${tieI.length?`\n※ 동점 안내: ${tieI.join(", ")} 점수가 과업 2위와 같음`:""}${tieV.length?`\n※ 동점 안내: ${tieV.join(", ")} 점수가 가치 2위와 같음`:""}\n\n[과업 흥미]\n${lines(interest)}\n\n[일 가치]\n${lines(values)}\n\n[진로적응]\n${lines(adapt)}\n\n[탐색 행동]\n${lines(action)}\n\n[인간-AI 협업]\n${lines(ai)}\n\n[30일 핵심 실험]\n${exp}\n\n[보완 행동]\n${low.map(([k])=>recommendations[k]).join("\n")}\n\n주의: 연구·수업용 미표준화 프로토타입이며 선발·배치·진단에 사용할 수 없습니다.`;
+
+      document.body.classList.add("scored");
+      document.getElementById("results").style.display="block";
+      document.getElementById("results").scrollIntoView({behavior:"smooth"});
+    });
+
+    document.getElementById("downloadBtn").addEventListener("click",()=>{
+      const blob=new Blob([textReport],{type:"text/plain;charset=utf-8"}); const a=document.createElement("a");
+      a.href=URL.createObjectURL(blob); a.download="나의_미래진로_나침반_결과.txt"; a.click(); URL.revokeObjectURL(a.href);
+    });
+
+    document.getElementById("resetBtn").addEventListener("click",()=>{
+      if(!confirm("모든 응답을 지우고 처음부터 다시 시작할까요?"))return;
+      try{sessionStorage.removeItem(DRAFT_KEY);}catch(_){}
+      window.__skipGuard=true;
+      location.reload();
+    });
+
+    restoreDraft();
+    updateProgress();
+  </script>
+</body>
+</html>

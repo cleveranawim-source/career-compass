@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 시대 미래진로 검사도구 — Lev Lab</title>
+  <meta name="description" content="직업 정답이 아니라 진로 가설과 다음 행동을 찾는 학생용 자기검사 2종. 연구·수업용 프로토타입.">
+  <style>
+    :root{
+      --paper:#f1ede2; --sheet:#fbf8f1; --ink:#272217; --faint:#837b68;
+      --line:#ded5c0; --line-soft:#e9e2d1;
+      --teal:#17594e; --teal-soft:#dce8e0;
+      --plum:#7d2f35; --plum-soft:#ecdcd6;
+      --gold:#9c7a2c;
+      --serif:"KoPub Batang","KoPubWorld Batang","MaruBuri","Noto Serif KR","Nanum Myeongjo","HANBatang","Batang","AppleMyungjo",serif;
+      --sans:"Pretendard Variable","Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{-webkit-text-size-adjust:100%}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.62}
+    ::selection{background:var(--line-soft)}
+    .sheet{max-width:880px;margin:34px auto 60px;background:var(--sheet);border:1px solid var(--line);padding:clamp(26px,5.5vw,56px) clamp(18px,6vw,64px) clamp(36px,6vw,56px)}
+    .masthead{border-top:3px solid var(--ink);position:relative;padding-top:16px}
+    .masthead::before{content:"";position:absolute;top:5px;left:0;right:0;border-top:1px solid var(--ink)}
+    .mast-top{display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;font-size:11.5px;letter-spacing:.14em;font-weight:600;color:var(--faint)}
+    h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5.6vw,49px);line-height:1.24;letter-spacing:-.015em;margin:24px 0 14px}
+    .lede{max-width:660px;margin:0 0 24px;font-size:15.8px;line-height:1.85}
+    .mast-meta{display:flex;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;font-size:12.5px;color:var(--faint)}
+    .mast-meta span+span::before{content:"·";margin:0 9px;color:var(--line)}
+
+    .notice{margin:32px 0 4px;padding:18px 18px 13px;border:1px solid var(--ink);position:relative}
+    .notice-label{position:absolute;top:-9px;left:14px;background:var(--sheet);padding:0 9px;font-size:11px;letter-spacing:.24em;font-weight:700;color:var(--gold)}
+    .notice p{margin:5px 0;font-size:13.8px;line-height:1.75}
+
+    .issues{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:44px}
+    .issue{border:1px solid var(--line);padding:26px 24px 24px;display:flex;flex-direction:column;gap:0;border-top:3px solid var(--ink)}
+    .issue.t1{border-top-color:var(--teal)}
+    .issue.t2{border-top-color:var(--plum)}
+    .issue-no{font-size:11.5px;letter-spacing:.2em;font-weight:700;color:var(--faint)}
+    .issue h2{font-family:var(--serif);font-size:24px;margin:12px 0 4px;line-height:1.35;letter-spacing:-.01em}
+    .t1 h2 em{font-style:normal;color:var(--teal)}
+    .t2 h2 em{font-style:normal;color:var(--plum)}
+    .issue .meta{font-size:12.5px;color:var(--faint);margin:2px 0 12px}
+    .issue p.desc{margin:0 0 20px;font-size:14px;line-height:1.8;flex:1}
+    .issue a.start{display:inline-block;align-self:flex-start;text-decoration:none;font-weight:700;font-size:14.5px;padding:12px 22px;border:1px solid var(--ink);background:var(--ink);color:var(--sheet)}
+    .t1 a.start{background:var(--teal);border-color:var(--teal);color:#fff}
+    .t2 a.start{background:var(--plum);border-color:var(--plum);color:#fff}
+    .issue a.start:hover{opacity:.88}
+
+    .how{margin-top:44px;border-top:2px solid var(--ink);padding-top:14px}
+    .how h3{font-family:var(--serif);font-size:20px;margin:0 0 12px}
+    .how ol{margin:0;padding-left:22px;font-size:14px;line-height:1.9}
+    .how a{color:var(--ink)}
+    .colophon{margin-top:54px;border-top:2px solid var(--ink);padding-top:12px;display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;font-size:12px;color:var(--faint);letter-spacing:.04em}
+    @media(max-width:640px){.sheet{margin:0;border:0}}
+  </style>
+</head>
+<body>
+  <div class="sheet">
+
+    <header class="masthead">
+      <div class="mast-top"><span>LEV LAB 진로교육 연구도구</span><span>연구·수업용 프로토타입 v0.1.1</span></div>
+      <h1>AI 시대<br>미래진로 검사도구</h1>
+      <p class="lede">직업 하나를 정답처럼 고르는 검사가 아닙니다. 내가 즐기는 과업과 가치, 변화에 대처하는 자원, 실제 탐색 행동을 살펴 <strong>진로 가설과 다음 행동</strong>을 만드는 두 개의 자기검사입니다.</p>
+      <div class="mast-meta"><span>중·고등학생용</span><span>자기검사 2종</span><span>응답은 이 기기 밖으로 나가지 않습니다</span></div>
+    </header>
+
+    <div class="issues">
+      <article class="issue t1">
+        <span class="issue-no">제1호</span>
+        <h2>AI 시대<br><em>미래진로 나침반</em></h2>
+        <p class="meta">63문항 · 15~20분</p>
+        <p class="desc">과업 흥미(RIASEC)·일 가치·진로적응 4C·탐색 행동·인간–AI 협업을 함께 살펴, 상위 과업 조합과 우선 가치로 <strong>30일의 작은 실험</strong>을 설계합니다.</p>
+        <a class="start" href="compass.html">검사 시작하기</a>
+      </article>
+
+      <article class="issue t2">
+        <span class="issue-no">제2호</span>
+        <h2>계획된 우연<br><em>기회발견 자기검사</em></h2>
+        <p class="meta">25문항 · 7~10분</p>
+        <p class="desc">호기심·끈기·유연성·낙관성·작은 위험 감수 — 예상하지 못한 사건을 배움과 기회로 바꾸는 다섯 가지 행동 기술을 점검하고 <strong>7일 실천</strong>을 처방합니다.</p>
+        <a class="start" href="happenstance.html">검사 시작하기</a>
+      </article>
+    </div>
+
+    <section class="how">
+      <h3>수업에서 쓰는 순서</h3>
+      <ol>
+        <li>1차시 — 미래진로 나침반으로 진로 가설을 만들고 30일 미니 실험을 설계합니다.</li>
+        <li>2차시 — 계획된 우연 자기검사로 강점 기술 2개와 연습 기술 2개를 고르고 7일 행동을 약속합니다.</li>
+        <li>결과는 학생이 직접 인쇄(PDF)하거나 텍스트로 저장합니다. 채점 전에 인쇄하면 지필용 문항지가 나옵니다.</li>
+        <li>이론적 근거·운영안·금지 사용·타당화 로드맵은 <a href="https://github.com/cleveranawim-source/career-compass/blob/main/guide.md">학교 활용 및 타당화 가이드</a>를 참고하세요.</li>
+      </ol>
+    </section>
+
+    <aside class="notice">
+      <b class="notice-label">일러두기</b>
+      <p><strong>두 도구는 아직 표준화된 심리검사가 아닙니다.</strong> 이론과 최신 자료를 토대로 만든 연구·수업용 프로토타입이며, 학생의 선발·배치·입시 판단·진단에 사용할 수 없습니다.</p>
+      <p>응답은 서버로 전송되지 않고 각자의 브라우저 안에서만 처리됩니다. 결과 저장은 학생이 직접 선택합니다.</p>
+    </aside>
+
+    <footer class="colophon"><span>Lev Lab — 진로·사회정서교육 연구도구</span><span>v0.1.1 · 표준화 검사가 아닙니다</span></footer>
+  </div>
+</body>
+</html>
