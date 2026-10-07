@@ -2,208 +2,393 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>계획된 우연: 기회발견 자기검사 v0.1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>계획된 우연: 기회발견 자기검사</title>
+  <meta name="description" content="호기심·끈기·유연성·낙관성·작은 위험 감수 — 예상하지 못한 일을 기회로 바꾸는 다섯 가지 힘을 점검하고 7일 실천 미션을 받는 학생용 자기검사. 응답은 기기 밖으로 나가지 않습니다.">
+  <meta name="theme-color" content="#6d28d9">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="🔭 계획된 우연: 기회발견 자기검사">
+  <meta property="og:description" content="25문항 · 7~10분. 예상 못 한 일을 기회로 바꾸는 다섯 가지 힘과 7일 실천 미션.">
+  <meta property="og:url" content="https://cleveranawim-source.github.io/career-compass/happenstance.html">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔭</text></svg>">
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
     :root{
-      --paper:#f1ede2; --sheet:#fbf8f1; --ink:#272217; --faint:#837b68;
-      --line:#ded5c0; --line-soft:#e9e2d1;
-      --accent:#7d2f35; --accent-deep:#5f2227; --accent-soft:#ecdcd6;
-      --gold:#9c7a2c; --danger:#9e3120;
-      --serif:"KoPub Batang","KoPubWorld Batang","MaruBuri","Noto Serif KR","Nanum Myeongjo","HANBatang","Batang","AppleMyungjo",serif;
-      --sans:"Pretendard Variable","Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+      --bg:#f4f4f9; --card:#fff; --ink:#1b1a2e; --sub:#55546b; --faint:#80809a;
+      --line:#e3e2ee; --line-strong:#cac8dc;
+      --accent:#6d28d9; --accent-strong:#5b21b6; --accent-soft:#f1ebfe; --accent-ink:#fff;
+      --pop:#f59e0b; --pop-soft:#fff4dc; --pop-ink:#7a4d00;
+      --warn:#c2410c; --warn-soft:#fff0e6;
+      --r-lg:20px; --r-md:14px;
+      --shadow:0 1px 2px rgba(20,16,50,.05),0 6px 22px rgba(20,16,50,.06);
+      --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+      color-scheme:light;
+    }
+    @media (prefers-color-scheme:dark){
+      :root{
+        --bg:#0f0e17; --card:#18172a; --ink:#e9e7f5; --sub:#aeabc6; --faint:#83819c;
+        --line:#29273f; --line-strong:#3d3a58;
+        --accent:#a78bfa; --accent-strong:#c4b5fd; --accent-soft:#251d40; --accent-ink:#1a0b3a;
+        --pop:#fbbf24; --pop-soft:#33280f; --pop-ink:#fcd58a;
+        --warn:#fb923c; --warn-soft:#331d10;
+        --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 22px rgba(0,0,0,.25);
+        color-scheme:dark;
+      }
     }
     *{box-sizing:border-box}
-    html{-webkit-text-size-adjust:100%}
-    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.62}
-    ::selection{background:var(--accent-soft)}
-    .sheet{max-width:880px;margin:34px auto 60px;background:var(--sheet);border:1px solid var(--line);padding:clamp(26px,5.5vw,56px) clamp(18px,6vw,64px) clamp(36px,6vw,56px)}
-    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    html{-webkit-text-size-adjust:100%;scroll-padding-top:96px}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+    button,input,textarea{font:inherit;color:inherit}
+    a{color:var(--accent-strong);text-underline-offset:3px}
+    [hidden]{display:none!important}
+    .sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    .print-only{display:none}
 
-    /* 표제부 */
-    .masthead{border-top:3px solid var(--ink);position:relative;padding-top:16px}
-    .masthead::before{content:"";position:absolute;top:5px;left:0;right:0;border-top:1px solid var(--ink)}
-    .mast-top{display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;font-size:11.5px;letter-spacing:.14em;font-weight:600;color:var(--faint)}
-    h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5.6vw,49px);line-height:1.24;letter-spacing:-.015em;margin:24px 0 14px}
-    h1 em{font-style:normal;color:var(--accent)}
-    .lede{max-width:640px;margin:0 0 24px;font-size:15.8px;line-height:1.85}
-    .mast-meta{display:flex;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;font-size:12.5px;color:var(--faint)}
-    .mast-meta span+span::before{content:"·";margin:0 9px;color:var(--line)}
+    /* 상단 바 */
+    .appbar{position:sticky;top:0;z-index:30;background:var(--bg);background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    .appbar-in{max-width:760px;margin:0 auto;padding:6px 12px;display:flex;align-items:center;gap:8px;min-height:52px}
+    .home{display:inline-flex;align-items:center;min-height:40px;padding:0 10px;border-radius:10px;color:var(--sub);text-decoration:none;font-size:14px;font-weight:600;white-space:nowrap}
+    .home:hover{background:var(--line)}
+    .appbar-title{flex:1;min-width:0;font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .count{font-size:13.5px;font-weight:700;color:var(--sub);font-variant-numeric:tabular-nums;white-space:nowrap;padding-right:4px}
+    .segs{max-width:760px;margin:0 auto;padding:0 12px 6px;display:flex;gap:5px}
+    .seg{flex:1;padding:6px 0 8px;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+    .seg>i{display:block;height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+    .seg>i>b{display:block;height:100%;width:0;background:var(--accent);border-radius:inherit;transition:width .3s}
+    .seg[aria-current=step]>i{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
+    .seg:focus-visible{outline:3px solid var(--pop);outline-offset:1px;border-radius:6px}
 
-    /* 일러두기 */
-    .notice{margin:32px 0 4px;padding:18px 18px 13px;border:1px solid var(--ink);position:relative}
-    .notice-label{position:absolute;top:-9px;left:14px;background:var(--sheet);padding:0 9px;font-size:11px;letter-spacing:.24em;font-weight:700;color:var(--gold)}
-    .notice p{margin:5px 0;font-size:13.8px;line-height:1.75}
-    #introCard>p{max-width:680px;font-size:14.5px;margin:18px 0 0}
+    /* 공통 */
+    .wrap{max-width:760px;margin:0 auto;padding:20px 16px 72px}
+    .stack>*+*{margin-top:16px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:24px}
+    .kicker{margin:0 0 6px;font-size:13.5px;font-weight:700;color:var(--accent-strong)}
+    h1{font-size:clamp(30px,7vw,40px);line-height:1.25;margin:0 0 12px;letter-spacing:-.02em}
+    h1:focus,h2:focus{outline:none}
+    .h-sm{font-size:18px;margin:0 0 14px}
+    .lead{font-size:17px;color:var(--sub);margin:0 0 18px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0 0 22px;list-style:none}
+    .chips li{background:var(--accent-soft);color:var(--accent-strong);font-weight:700;font-size:14px;padding:6px 12px;border-radius:99px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:48px;padding:0 20px;border-radius:14px;border:1.5px solid var(--line-strong);background:var(--card);color:var(--ink);font-weight:700;font-size:15.5px;line-height:1.3;cursor:pointer;text-decoration:none;text-align:center;transition:transform .1s,background .15s,border-color .15s}
+    .btn:hover{border-color:var(--accent)}
+    .btn:active{transform:scale(.98)}
+    .btn:focus-visible{outline:3px solid var(--pop);outline-offset:2px}
+    .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+    .btn.primary:hover{background:var(--accent-strong);border-color:var(--accent-strong)}
+    .btn.big{min-height:56px;font-size:17px;padding:0 30px}
+    .btn.ghost{background:transparent}
+    .btn.sm{min-height:40px;font-size:14px;padding:0 14px;border-radius:11px}
+    .btn.danger{color:var(--warn)}
 
-    /* 문항부 */
-    .part{margin-top:46px}
-    .part-head{display:flex;gap:16px;align-items:flex-start;border-bottom:2px solid var(--ink);padding-bottom:13px}
-    .part-no{font-family:var(--serif);font-size:33px;line-height:1;color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;transform:translateY(3px)}
-    .part-head h2{margin:0;font-family:var(--serif);font-size:21px;letter-spacing:-.01em}
-    .part-head p{margin:5px 0 0;font-size:13px;color:var(--faint)}
-    fieldset.item{border:0;margin:0;padding:20px 0 16px;border-top:1px solid var(--line)}
-    .part fieldset.item:first-of-type{border-top:0}
-    .stem{display:block;width:100%;padding:0;margin:0 0 12px;font-weight:600;font-size:15px;line-height:1.6}
-    .qnum{display:inline-block;min-width:30px;font-family:var(--serif);color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums}
-    .scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
-    .scale label{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:1px;text-align:center;border:1px solid var(--line);background:transparent;padding:8px 3px 7px;cursor:pointer;min-height:58px;transition:border-color .15s,background .15s}
-    .scale label b{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
-    .scale label span{font-size:11px;color:var(--faint);line-height:1.35}
-    .scale label:hover{border-color:var(--accent)}
-    .scale input{position:absolute;opacity:0;pointer-events:none}
-    .scale label:has(input:checked){background:var(--accent);border-color:var(--accent)}
-    .scale label:has(input:checked) b,.scale label:has(input:checked) span{color:#f6f2e7}
-    .scale label:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
+    /* 시작 화면 */
+    .hero-emoji{font-size:46px;line-height:1;margin:0 0 14px}
+    .resume{margin:0 0 14px;padding:12px 14px;border-radius:var(--r-md);background:var(--pop-soft);color:var(--pop-ink);font-weight:700;font-size:15px}
+    .cta-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .tip-list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+    .tip-list li{display:flex;gap:12px;align-items:flex-start}
+    .tip-list .ico{font-size:22px;line-height:1.35;flex:none}
+    .skills{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+    .skills li{padding:12px;border-radius:var(--r-md);background:var(--bg);text-align:center;font-weight:700;font-size:15px}
+    .skills li span{display:block;font-size:26px;line-height:1.2;margin-bottom:2px}
+    details.teacher{padding:0}
+    details.teacher>summary{padding:16px 24px;cursor:pointer;font-weight:700;color:var(--sub);list-style:none;min-height:48px}
+    details.teacher>summary::-webkit-details-marker{display:none}
+    details.teacher>summary::before{content:"▸";display:inline-block;margin-right:8px;transition:transform .15s}
+    details.teacher[open]>summary::before{transform:rotate(90deg)}
+    details.teacher[open]>summary{border-bottom:1px solid var(--line)}
+    .tbody{padding:14px 24px 18px;font-size:14.5px;color:var(--sub)}
+    .tbody p{margin:0 0 10px}
 
-    /* 진행률 */
-    .progress-shell{position:sticky;top:0;z-index:20;background:var(--sheet);padding:10px 0 6px;margin-top:28px;border-bottom:1px solid var(--line-soft)}
-    .progress{height:3px;background:var(--line-soft)}
-    .progress>div{height:100%;width:0;background:var(--accent);transition:width .25s}
-    .progress-text{margin-top:5px;text-align:right;font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums;letter-spacing:.06em}
+    /* 단계 */
+    .step-head{margin:6px 4px 18px}
+    .cheer{display:inline-block;margin:0 0 12px;padding:6px 12px;border-radius:99px;background:var(--pop-soft);color:var(--pop-ink);font-weight:700;font-size:14px}
+    .step-head h2{font-size:clamp(23px,5.4vw,28px);line-height:1.3;margin:0 0 6px;letter-spacing:-.015em}
+    .guide{margin:0;color:var(--sub)}
+    .step-nav{display:flex;gap:10px;margin-top:20px}
+    .step-nav .btn.primary{flex:1;max-width:340px;margin-left:auto}
+    .step-msg{min-height:1.6em;margin:10px 4px 0;color:var(--warn);font-weight:700;text-align:right}
 
-    /* 채점 */
-    .score-block{margin-top:38px;border-top:2px solid var(--ink);padding-top:22px}
-    .score-block p{margin:0 0 16px;font-size:13.5px;color:var(--faint)}
-    button{font:inherit;font-weight:700;font-size:14.5px;padding:12px 22px;border:1px solid var(--ink);background:var(--ink);color:var(--sheet);cursor:pointer;border-radius:0}
-    button:hover{opacity:.88}
-    button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-    button.ghost{background:transparent;color:var(--ink)}
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-    .error{color:var(--danger);font-weight:700;min-height:22px;margin-top:12px;font-size:14px}
+    /* 문항 */
+    .item{border:1px solid var(--line);background:var(--card);border-radius:var(--r-lg);margin:0 0 12px;padding:18px 16px 16px;min-width:0;transition:border-color .2s,box-shadow .2s}
+    .item.done{border-color:var(--line-strong);border-color:color-mix(in srgb,var(--accent) 30%,var(--line))}
+    .item.missing{border-color:var(--warn);box-shadow:0 0 0 3px var(--warn-soft)}
+    .stem{float:left;width:100%;padding:0;margin:0 0 14px;font-weight:600;font-size:17px;line-height:1.55}
+    .stem-in{display:flex;gap:10px;align-items:flex-start}
+    .qnum{flex:none;display:inline-grid;place-items:center;min-width:28px;height:28px;padding:0 6px;border-radius:9px;background:var(--line);color:var(--sub);font-size:13.5px;font-weight:800;font-variant-numeric:tabular-nums;transition:background .2s,color .2s}
+    .item.done .qnum{background:var(--accent);color:var(--accent-ink)}
+    .scale{clear:both;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+    .opt{position:relative;display:block;cursor:pointer;-webkit-tap-highlight-color:transparent}
+    .opt input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+    .face{display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;padding:12px 4px 10px;border:1.5px solid var(--line);border-radius:var(--r-md);background:var(--card);text-align:center;transition:border-color .15s,background .15s,transform .1s}
+    .dot{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:2px solid var(--line-strong);font-weight:800;font-size:15px;color:var(--sub);font-variant-numeric:tabular-nums;transition:background .15s,border-color .15s,color .15s}
+    .lab{font-size:12.5px;line-height:1.35;color:var(--sub)}
+    .opt:hover .face{border-color:var(--accent)}
+    .opt:active .face{transform:scale(.96)}
+    .opt input:checked+.face{border-color:var(--accent);background:var(--accent-soft)}
+    .opt input:checked+.face .dot{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+    .opt input:checked+.face .lab{color:var(--ink);font-weight:700}
+    .opt input:focus-visible+.face{outline:3px solid var(--pop);outline-offset:2px}
+    .need{display:none;margin:10px 0 0;color:var(--warn);font-size:14px;font-weight:700}
+    .item.missing .need{display:block}
 
-    /* 결과 보고서 */
-    #results{display:none;margin-top:56px}
-    .report-head{border-top:3px solid var(--ink);position:relative;padding-top:14px}
-    .report-head::before{content:"";position:absolute;top:5px;left:0;right:0;border-top:1px solid var(--ink)}
-    .report-title{font-family:var(--serif);font-size:clamp(24px,4vw,31px);margin:18px 0 4px;font-weight:700;letter-spacing:-.01em}
-    .hyp{font-family:var(--serif);font-size:18px;line-height:2.05;margin:14px 0 4px}
-    .hyp-sub{font-size:14.5px;line-height:1.85;margin:8px 0 0}
-    .hl{background:linear-gradient(transparent 62%,var(--accent-soft) 62%);padding:0 2px;font-weight:700}
-    .report-sec{margin-top:40px;border-top:2px solid var(--ink);padding-top:14px}
-    .report-sec h3{font-family:var(--serif);font-size:20px;margin:0 0 4px}
-    .sec-guide{font-size:12.8px;color:var(--faint);margin:0 0 18px;line-height:1.7}
-    .result-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(236px,1fr));gap:26px}
-    .bar-row{display:grid;grid-template-columns:110px 1fr 44px;align-items:center;gap:10px;margin:11px 0 2px;font-size:13.5px}
-    .bar{height:7px;background:var(--line-soft)}
-    .bar span{display:block;height:100%;background:var(--accent)}
-    .bar-row strong{font-variant-numeric:tabular-nums;text-align:right;font-size:13px}
-    .band{text-align:right;font-size:11px;color:var(--faint);margin:0 0 5px}
-    .mean-item{margin:0 0 13px;font-size:14px;line-height:1.7}
-    .mean-item .small{display:block;color:var(--faint);font-size:12.8px}
-    .tie{font-size:12.5px;color:var(--gold);margin-top:12px;line-height:1.7}
-    .next{border:1px dashed var(--accent);padding:15px 16px 13px;margin:12px 0;font-size:14px;line-height:1.75}
-    .next-label{display:block;font-size:11px;letter-spacing:.18em;font-weight:700;color:var(--accent);margin-bottom:6px}
-    .journal{margin:12px 0 0;padding:0;list-style:none;counter-reset:j}
-    .journal li{position:relative;padding:11px 0 11px 42px;border-top:1px solid var(--line);font-size:14px;line-height:1.75}
-    .journal li:first-child{border-top:0}
-    .journal li::before{counter-increment:j;content:counter(j);position:absolute;left:6px;top:11px;font-family:var(--serif);font-weight:700;color:var(--accent);font-size:17px}
-    .footnote{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint);line-height:1.8}
-    .colophon{margin-top:54px;border-top:2px solid var(--ink);padding-top:12px;display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;font-size:12px;color:var(--faint);letter-spacing:.04em}
+    /* 결과 */
+    .hero{background:var(--accent-soft);border:1px solid var(--line-strong);border-color:color-mix(in srgb,var(--accent) 35%,transparent);border-radius:var(--r-lg);padding:26px 24px}
+    .type-emoji{display:block;font-size:34px;letter-spacing:6px;line-height:1.2;margin-bottom:8px}
+    .hero h2{font-size:clamp(26px,6.2vw,34px);line-height:1.3;margin:0 0 6px;color:var(--accent-strong);letter-spacing:-.02em}
+    .hero-desc{margin:0 0 16px;font-size:16.5px}
+    .tagrows{display:grid;gap:8px;margin:0 0 16px}
+    .tagrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+    .tag-k{font-size:13.5px;font-weight:700;color:var(--sub);min-width:80px}
+    .tag{background:var(--card);border:1px solid var(--line);padding:4px 11px;border-radius:99px;font-weight:700;font-size:14.5px}
+    .hyp{font-size:16px;line-height:1.75;margin:0;padding-top:14px;border-top:1px dashed var(--line-strong)}
+    .hero-note{margin:10px 0 0;font-size:14.5px;color:var(--sub)}
+    .notebox{border-radius:var(--r-md);padding:14px 16px;font-size:15px;background:var(--pop-soft);border:1px solid var(--line)}
+    .notebox.warn{background:var(--warn-soft)}
+    .notebox .btn{margin-top:10px}
+    .rsec h3{display:flex;align-items:center;gap:10px;font-size:20px;line-height:1.35;margin:0 0 6px}
+    .rsec-no{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-size:15px}
+    .sec-guide{font-size:14.5px;color:var(--sub);margin:0 0 16px}
+    .sec-foot{font-size:14px;color:var(--sub);margin:16px 0 0;padding-top:12px;border-top:1px solid var(--line)}
+    .rgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px;align-items:center}
+    .radar{margin:0}
+    .radar svg{display:block;width:100%;max-width:400px;height:auto;margin:0 auto}
+    .r-grid{fill:none;stroke:var(--line-strong);stroke-width:1}
+    .r-shape{fill:var(--accent);fill-opacity:.2;stroke:var(--accent);stroke-width:2.5;stroke-linejoin:round}
+    .r-dot{fill:var(--accent)}
+    .r-lab{font-size:14px;font-weight:700;fill:var(--ink)}
+    .r-emo{font-size:19px}
+    .mini-k{font-size:14px;font-weight:800;color:var(--sub);margin:0 0 8px}
+    .small{display:block;color:var(--sub);font-size:14px;line-height:1.55}
+    .tie{font-size:14px;color:var(--pop-ink);background:var(--pop-soft);border-radius:10px;padding:10px 12px;margin:14px 0 0}
+    .skill-list{display:grid;gap:4px}
+    .skill{padding:10px 0;border-top:1px solid var(--line)}
+    .skill:first-child{border-top:0}
+    .skill-top{display:flex;justify-content:space-between;gap:6px 8px;align-items:center;flex-wrap:wrap}
+    .skill-top b{font-size:16px}
+    .cap-bar{display:grid;grid-template-columns:minmax(0,1fr) 30px;gap:8px;align-items:center;margin:6px 0 2px}
+    .bar{display:block;height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+    .bar i{display:block;height:100%;border-radius:inherit;background:var(--accent)}
+    .bar-val{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;font-size:14px;color:var(--sub)}
+    .stage-legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 16px}
+    .stage{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--sub);white-space:nowrap}
+    .pips{display:inline-flex;gap:3px}
+    .pips i{width:7px;height:7px;border-radius:50%;background:var(--line-strong)}
+    .pips i.on{background:var(--accent)}
+    .mission{border:1.5px dashed var(--line-strong);border-radius:var(--r-md);padding:14px 16px;margin:10px 0}
+    .mission.main{border:2px solid var(--accent);background:var(--accent-soft)}
+    .mission-k{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-weight:800;font-size:15px;color:var(--accent-strong);margin-bottom:4px}
+    .mission p{margin:0}
+    .week{display:none}
+    .journal{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+    .journal li{padding:14px 16px;border-radius:var(--r-md);background:var(--bg);border:1px solid var(--line)}
+    .journal label{display:block;font-weight:700;font-size:15px}
+    .journal .jn{display:inline-grid;place-items:center;width:24px;height:24px;margin-right:6px;border-radius:7px;background:var(--accent);color:var(--accent-ink);font-size:13px;font-weight:800;vertical-align:1px}
+    .journal .q{display:block;font-weight:400;color:var(--sub);font-size:14.5px;margin:2px 0 0}
+    .journal textarea{display:block;width:100%;margin-top:8px;padding:10px 12px;border:1.5px solid var(--line-strong);border-radius:10px;background:var(--card);font-size:16px;line-height:1.5;resize:vertical}
+    .journal textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+    .actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+    .hint{font-size:14px;color:var(--faint);margin:12px 0 0}
+    #copyFallback textarea{width:100%;min-height:160px;margin-top:8px;padding:10px;border:1.5px solid var(--line-strong);border-radius:10px;background:var(--bg);font-size:14px}
+    .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:14px;font-weight:700;font-size:15px;box-shadow:0 8px 24px rgba(0,0,0,.2);transition:opacity .25s,transform .25s;width:max-content;max-width:calc(100% - 32px);z-index:50;text-align:center}
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+    .foot{max-width:760px;margin:0 auto;padding:0 16px 40px;font-size:13px;color:var(--faint);text-align:center}
+    .mirror{display:none}
 
-    @media(max-width:640px){
-      .sheet{margin:0;border:0}
-      .scale{gap:4px}
-      .scale label span{font-size:10px}
-      .scale label{min-height:62px;padding:7px 2px 6px}
-      .bar-row{grid-template-columns:92px 1fr 40px}
-      .part-no{font-size:26px}
+    @media (max-width:620px){
+      .rgrid{grid-template-columns:1fr}
+    }
+    @media (max-width:520px){
+      .wrap{padding:16px 12px 64px}
+      .card{padding:20px 16px}
+      .hero{padding:22px 18px}
+      details.teacher>summary{padding:14px 16px}
+      .tbody{padding:12px 16px 16px}
+      .item{padding:16px 12px 14px}
+      .stem{font-size:16px}
+      .scale{gap:5px}
+      .face{padding:10px 2px 8px;gap:5px}
+      .dot{width:32px;height:32px;font-size:14px}
+      .lab{font-size:11.5px}
+      .step-nav .btn.ghost{padding:0 14px}
+    }
+    @media (prefers-reduced-motion:reduce){
+      *{transition:none!important}
     }
     @media print{
-      body{background:#fff;font-size:12.5px}
-      .sheet{border:0;margin:0;max-width:none;padding:0}
-      .progress-shell,.no-print{display:none!important}
-      body:not(.scored) #results{display:none!important}
-      body.scored #introCard,body.scored #testPart{display:none!important}
-      fieldset.item{break-inside:avoid;padding:10px 0 8px}
-      .scale label{min-height:0;padding:5px 2px}
-      .report-sec,.next,.notice{break-inside:avoid}
-      #results{margin-top:22px}
-      .bar span,.hl,.scale label:has(input:checked){-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      :root{--bg:#fff;--card:#fff;--ink:#111;--sub:#444;--faint:#666;--line:#ccc;--line-strong:#999;--accent:#6d28d9;--accent-strong:#5b21b6;--accent-soft:#f1ebfe;--accent-ink:#fff;--pop-soft:#fff4dc;--pop-ink:#7a4d00;--warn-soft:#fff;--shadow:none;color-scheme:light}
+      @page{margin:14mm 12mm}
+      body{font-size:10.5pt;background:#fff}
+      .appbar,.no-print,.step-nav,.step-msg,.cheer,.need,.toast,.btn,.resume,.cta-row,.foot,#viewIntro .tips,#viewIntro details.teacher{display:none!important}
+      .print-only{display:block!important}
+      .wrap{max-width:none;padding:0}
+      .card,.item,.hero{box-shadow:none}
+      /* 채점 전 = 지필 문항지 */
+      body:not([data-view=result]) #viewIntro,body:not([data-view=result]) #viewTest{display:block!important}
+      body:not([data-view=result]) .step{display:block!important}
+      body:not([data-view=result]) .step-head{display:none}
+      body:not([data-view=result]) #viewResult{display:none!important}
+      #viewIntro .card{border:0;padding:0}
+      .hero-emoji{font-size:28px;margin:0 0 6px}
+      .item{break-inside:avoid;padding:8px 10px;margin:0 0 6px;border-radius:8px}
+      .stem{font-size:10.5pt;margin-bottom:6px}
+      .face{padding:4px 2px;gap:2px;border-radius:8px}
+      .dot{width:20px;height:20px;font-size:9pt;border-width:1.5px}
+      .lab{font-size:7.5pt}
+      /* 채점 후 = 결과 보고서 */
+      body[data-view=result] #viewIntro,body[data-view=result] #viewTest{display:none!important}
+      .hero,.rsec,.mission,.skill,.journal li{break-inside:avoid}
+      .stack>*+*{margin-top:10px}
+      .week{display:flex!important;gap:6px;margin-top:8px;font-size:9pt;color:#444}
+      .week span{display:inline-grid;place-items:center;width:30px;height:22px;border:1px solid #999;border-radius:4px}
+      .journal textarea{display:none}
+      .mirror{display:block!important;margin-top:4px;min-height:1.7em;border-bottom:1px solid #999;white-space:pre-wrap;font-weight:400}
+      .mirror.blank{min-height:3.2em}
+      *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     }
   </style>
 </head>
-<body>
-  <div class="sheet">
-
-    <header class="masthead">
-      <div class="mast-top"><span>LEV LAB 진로교육 연구도구 · 제2호</span><span>연구·수업용 프로토타입 v0.1.1</span></div>
-      <h1>계획된 우연<br><em>기회발견 자기검사</em></h1>
-      <p class="lede">우연을 기다리는 검사가 아닙니다. 예상하지 못한 사건을 배움과 기회로 바꾸기 위해 내가 어떤 행동 기술을 쓰는지 살펴봅니다.</p>
-      <div class="mast-meta"><span>학생 자기검사용</span><span>5개 기술 25문항</span><span>7~10분</span><span>응답은 이 기기 밖으로 나가지 않습니다</span></div>
-    </header>
-
-    <section id="introCard">
-      <aside class="notice">
-        <b class="notice-label">일러두기</b>
-        <p><strong>아직 표준화된 검사가 아닙니다.</strong> 아래 문항은 이론에 따라 새로 작성한 교육용 초안이며, 기존 PHCI 25문항의 번역·복제본이 아닙니다. 점수는 성격 낙인이나 선발에 쓰지 말고 다음 행동을 고르는 데만 사용하세요.</p>
-        <p>응답은 인터넷으로 전송되지 않으며, 실수로 새로고침해도 남도록 이 브라우저 탭 안에만 잠시 보관됩니다. 탭을 닫으면 함께 사라집니다.</p>
-      </aside>
-      <p>크럼볼츠와 동료들의 계획된 우연 이론은 진로에서 예기치 않은 사건이 불가피하며, <strong>호기심·끈기·유연성·낙관성·감당 가능한 위험 감수</strong>를 통해 그 사건을 기회로 만들 수 있다고 봅니다.</p>
-    </section>
-
-    <div class="progress-shell" aria-live="polite">
-      <div class="progress"><div id="progressBar"></div></div>
-      <div class="progress-text" id="progressText">0 / 25 응답</div>
+<body data-view="intro">
+  <header class="appbar">
+    <div class="appbar-in">
+      <a class="home" href="index.html">‹ 검사 목록</a>
+      <span class="appbar-title">🔭 기회발견 자기검사</span>
+      <span class="count" id="count" hidden>0 / 25</span>
     </div>
+    <nav class="segs" id="segs" aria-label="검사 단계" hidden></nav>
+  </header>
 
-    <section class="part" id="testPart">
-      <div class="part-head"><span class="part-no">01</span><div><h2>최근의 나와 얼마나 비슷한가요?</h2><p>1 전혀 그렇지 않다 · 2 그렇지 않은 편이다 · 3 보통이다 · 4 그런 편이다 · 5 매우 그렇다</p></div></div>
-      <div id="items"></div>
-    </section>
+  <main class="wrap">
+    <noscript><p class="card">이 검사는 자바스크립트가 켜져 있어야 작동해요. 브라우저 설정을 확인해 주세요.</p></noscript>
 
-    <section class="score-block no-print">
-      <p>모든 문항에 답하면 결과 보고서가 만들어집니다. 결과는 이 기기에서만 계산되며, 필요하면 인쇄하거나 텍스트 파일로 저장할 수 있습니다.</p>
-      <button class="primary" id="scoreBtn">나의 기회발견 기술 보기</button>
-      <div class="error" id="error" role="alert"></div>
-    </section>
-
-    <section id="results" aria-live="polite">
-      <div class="report-head">
-        <div class="mast-top"><span>결과 보고서 · <span id="reportDate"></span></span><span>기회발견 자기검사 v0.1.1</span></div>
-        <h2 class="report-title">나의 기회발견 프로필</h2>
-        <div id="summary"></div>
-      </div>
-
-      <div class="report-sec">
-        <h3>1. 다섯 기술의 현재 모습</h3>
-        <p class="sec-guide">임시 설명 기준: 발견 시작(1.00~2.49), 연습 중(2.50~3.49), 활용 중(3.50~4.19), 확장 중(4.20~5.00). 규준에 의한 등급이 아닙니다.</p>
-        <div class="result-cols">
-          <div><div id="bars"></div></div>
-          <div id="meanings"></div>
+    <!-- 시작 화면 -->
+    <section class="view stack" id="viewIntro">
+      <div class="card">
+        <div class="hero-emoji" aria-hidden="true">🔭</div>
+        <p class="kicker">계획된 우연 · 자기검사 2</p>
+        <h1 id="introTitle" tabindex="-1">기회발견 자기검사</h1>
+        <p class="lead">우연을 기다리는 검사가 아니에요. 예상하지 못한 일이 생겼을 때 그것을 <b>배움과 기회로 바꾸는 나의 행동 습관</b>을 살펴보고, 7일 동안 해 볼 미션을 받아요.</p>
+        <ul class="chips"><li>⏱ 7~10분</li><li>📝 25문항</li><li>🔒 응답은 이 기기에만</li></ul>
+        <p class="resume" id="resumeBox" hidden></p>
+        <div class="cta-row">
+          <button type="button" class="btn primary big" id="startBtn">시작하기</button>
+          <button type="button" class="btn ghost danger" id="restartBtn" hidden>처음부터 다시</button>
         </div>
+        <p class="print-only">이름 ______________________ &nbsp;&nbsp; 날짜 ______________ &nbsp;&nbsp; 최근의 나와 가장 가까운 번호 하나에 ○ 표시하세요. (1 전혀 그렇지 않다 · 2 그렇지 않은 편이다 · 3 보통이다 · 4 그런 편이다 · 5 매우 그렇다)</p>
       </div>
 
-      <div class="report-sec">
-        <h3>2. 7일 실천 처방</h3>
+      <div class="card tips">
+        <h2 class="h-sm">기회를 만드는 다섯 가지 힘</h2>
+        <p style="margin:0;color:var(--sub)">진로에서 예상 못 한 일은 꼭 생겨요. 크럼볼츠와 동료들의 ‘계획된 우연’ 이론은 아래 다섯 가지 행동으로 그런 일을 기회로 바꿀 수 있다고 봐요.</p>
+        <ul class="skills">
+          <li><span aria-hidden="true">🔍</span>호기심</li>
+          <li><span aria-hidden="true">💪</span>끈기</li>
+          <li><span aria-hidden="true">🌊</span>유연성</li>
+          <li><span aria-hidden="true">☀️</span>낙관성</li>
+          <li><span aria-hidden="true">🎯</span>작은 위험 감수</li>
+        </ul>
+      </div>
+
+      <div class="card tips">
+        <h2 class="h-sm">답하기 전에 알아 두세요</h2>
+        <ul class="tip-list">
+          <li><span class="ico" aria-hidden="true">🙆</span><div><b>정답이 없어요.</b> 점수는 나를 판단하는 꼬리표가 아니라, 다음에 해 볼 행동을 고르는 데만 써요.</div></li>
+          <li><span class="ico" aria-hidden="true">🪞</span><div><b>‘최근의 나’</b>와 얼마나 비슷한지 떠올리며 답해요.</div></li>
+          <li><span class="ico" aria-hidden="true">💾</span><div><b>응답은 인터넷으로 전송되지 않아요.</b> 실수로 새로고침해도 남도록 이 탭 안에만 잠시 보관되고, 탭을 닫으면 사라져요.</div></li>
+        </ul>
+      </div>
+
+      <details class="card teacher">
+        <summary>선생님·보호자용 안내</summary>
+        <div class="tbody">
+          <p><strong>아직 표준화된 검사가 아닙니다.</strong> 문항은 이론에 따라 새로 작성한 교육용 초안이며, 기존 PHCI 25문항의 번역·복제본이 아닙니다. 점수는 성격 낙인이나 선발에 쓰지 말고 다음 행동을 고르는 데만 사용하세요.</p>
+          <p>결과는 학생이 직접 복사·저장·인쇄합니다. 결과 화면이 아닌 곳에서 인쇄하면 지필용 문항지가, 결과 화면에서 인쇄하면 결과 보고서가 나옵니다.</p>
+          <p><button type="button" class="btn sm" data-print>🖨️ 지필용 문항지 인쇄</button></p>
+          <p>이론적 근거·운영안·금지 사용·타당화 로드맵: <a href="guide.pdf">학교 활용 및 타당화 가이드(PDF)</a></p>
+        </div>
+      </details>
+    </section>
+
+    <!-- 검사 화면 -->
+    <section class="view" id="viewTest" hidden>
+      <div id="steps"></div>
+    </section>
+
+    <!-- 결과 화면 -->
+    <section class="view stack" id="viewResult" hidden>
+      <div class="hero">
+        <p class="kicker">나의 기회발견 프로필 · <span id="reportDate"></span></p>
+        <p class="print-only">이름 ______________________</p>
+        <h2 id="resultTitle" tabindex="-1"></h2>
+        <div id="heroBody"></div>
+      </div>
+      <div id="flatNote"></div>
+
+      <article class="card rsec">
+        <h3><span class="rsec-no">1</span>다섯 가지 힘의 지금 모습</h3>
+        <p class="sec-guide">친구와 비교하는 등급이 아니라, 무엇을 연습할지 고르기 위한 임시 기준이에요.</p>
+        <div class="stage-legend" id="stageLegend" aria-hidden="true"></div>
+        <div class="rgrid">
+          <figure class="radar" id="radar"></figure>
+          <div class="skill-list" id="skillList"></div>
+        </div>
+        <div id="tieNote"></div>
+      </article>
+
+      <article class="card rsec">
+        <h3><span class="rsec-no">2</span>7일 실천 미션</h3>
+        <p class="sec-guide">점수가 낮은 힘은 부족한 게 아니라 연습하면 가장 많이 자랄 수 있는 힘이에요. 이번 주에는 이 두 가지를 의도적으로 연습해 봐요.</p>
         <div id="practices"></div>
-      </div>
+      </article>
 
-      <div class="report-sec">
-        <h3>3. 우연 포착 일지</h3>
-        <p class="sec-guide">예상 밖의 사건을 만났을 때 아래 다섯 칸을 채워 보세요. 공책에 그대로 옮겨 써도 됩니다.</p>
-        <ol class="journal">
-          <li><strong>포착:</strong> 예상 밖에 만난 사람·정보·실수·변화는 무엇이었나?</li>
-          <li><strong>해석:</strong> 이것이 보여 준 새로운 질문이나 가능성은 무엇인가?</li>
-          <li><strong>작은 행동:</strong> 안전하고 윤리적으로 7일 안에 할 수 있는 가장 작은 행동은?</li>
-          <li><strong>연결:</strong> 누구에게 묻거나 어떤 자료·경험과 연결할 것인가?</li>
-          <li><strong>성찰:</strong> 행동 후 무엇을 배웠고 다음 선택은 어떻게 바뀌었나?</li>
-        </ol>
-        <div class="actions no-print">
-          <button class="primary" onclick="window.print()">인쇄 / PDF 저장</button>
-          <button class="ghost" id="downloadBtn">텍스트 결과 저장</button>
-          <button class="ghost" id="resetBtn">다시 검사하기</button>
+      <article class="card rsec">
+        <h3><span class="rsec-no">3</span>우연 포착 일지</h3>
+        <p class="sec-guide">예상 밖의 일을 만났을 때 다섯 칸을 채워 보세요. 지금 떠오르는 일이 있다면 바로 적어도 좋아요. <span class="no-print">(선택 · 복사·저장·인쇄에 함께 담겨요)</span></p>
+        <ol class="journal" id="journal"></ol>
+        <p class="sec-foot">안전·윤리·법을 어기거나 감당하기 어려운 위험은 ‘계획된 우연’이 아니에요. 위험 감수는 실패해도 부담이 작고 되돌릴 수 있는 작은 실험을 뜻해요.</p>
+      </article>
+
+      <div class="card no-print">
+        <h3 class="h-sm">결과 챙기기</h3>
+        <div class="actions">
+          <button type="button" class="btn primary" id="copyBtn">📋 결과 복사하기</button>
+          <button type="button" class="btn" id="downloadBtn">💾 텍스트 파일로 저장</button>
+          <button type="button" class="btn" data-print>🖨️ 인쇄 · PDF 저장</button>
+          <button type="button" class="btn ghost" data-edit>✏️ 응답 고치기</button>
         </div>
-        <div class="footnote">안전·윤리·법을 어기거나 감당하기 어려운 위험은 ‘계획된 우연’이 아닙니다. 위험 감수는 실패 비용이 작고 되돌릴 수 있는 학습 실험을 뜻합니다. 결과는 3~6개월의 행동 연습 뒤 다시 확인하세요.</div>
+        <p class="hint">패들렛이나 학습지에 붙여 넣을 때는 ‘결과 복사하기’가 가장 편해요.</p>
+        <div id="copyFallback" hidden>
+          <p class="hint">이 기기에서는 자동 복사가 막혀 있어요. 아래 글을 길게 눌러 전체 선택한 뒤 복사하세요.</p>
+          <textarea readonly></textarea>
+        </div>
+        <p style="margin:16px 0 0"><button type="button" class="btn sm ghost danger" id="resetBtn">처음부터 다시 하기</button></p>
       </div>
-    </section>
 
-    <footer class="colophon"><span>Lev Lab — 진로·사회정서교육 연구도구</span><span>v0.1.1 · 표준화 검사가 아닙니다</span></footer>
-  </div>
+      <details class="card teacher">
+        <summary>결과를 읽을 때 유의할 점 (선생님·보호자용)</summary>
+        <div class="tbody">
+          <p>높은 점수는 ‘행운이 많다’는 뜻이 아니라, 우연한 사건을 알아차리고 행동으로 연결할 준비가 상대적으로 되어 있다는 뜻입니다. 결과는 3~6개월의 행동 연습 뒤 다시 확인하세요.</p>
+          <p>단계 구간(임시 설명 기준이며 규준이 아님): 발견 시작 1.00~2.49 · 연습 중 2.50~3.49 · 활용 중 3.50~4.19 · 확장 중 4.20~5.00</p>
+          <p>연구·수업용 미표준화 프로토타입이므로 선발·배치·성격 진단에 사용할 수 없습니다.</p>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="foot">Lev Lab · 진로·사회정서교육 연구도구 · v0.2.0 · 표준화 검사가 아닙니다</footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    const DRAFT_KEY="happenstance_v01_draft";
+  (function(){
+    "use strict";
+    const VERSION="v0.2.0";
+    const DRAFT_KEY="happenstance_v02_draft", OLD_KEY="happenstance_v01_draft";
+    const reduceMotion=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const SMOOTH=reduceMotion?"auto":"smooth";
+    const $=(s,r)=>(r||document).querySelector(s);
+    const $$=(s,r)=>[...(r||document).querySelectorAll(s)];
 
+    /* ---------- 문항·해석 자료 (문항 문구와 척도는 v0.1과 동일) ---------- */
     const items=[
       ["CU","낯선 수업·동아리·사람이 관심을 끌면 조금 더 알아본다."],
       ["CU","예상하지 못한 일이 생기면 ‘여기서 무엇을 배울 수 있을까?’라고 생각한다."],
@@ -231,6 +416,7 @@
       ["RT","안전과 책임을 확인한 뒤 내가 감당할 수 있는 도전을 선택한다."],
       ["RT","익숙한 선택만 고집하지 않고 새로운 역할을 맡아 본다."]
     ];
+    const keys=["CU","PE","FL","OP","RT"];
     const meta={
       CU:["호기심","새 학습 기회를 탐색하고 예상 밖 사건에 질문을 던지는 힘"],
       PE:["끈기","장애물 뒤에도 방법과 경로를 바꾸어 노력을 이어 가는 힘"],
@@ -238,6 +424,7 @@
       OP:["낙관성","불확실성 속에서도 가능한 기회를 보고 행동을 시작하는 힘"],
       RT:["작은 위험 감수","결과가 불확실해도 안전하고 되돌릴 수 있는 실험을 하는 힘"]
     };
+    const EMOJI={CU:"🔍",PE:"💪",FL:"🌊",OP:"☀️",RT:"🎯"};
     const practices={
       CU:"평소 관심 밖 분야 하나를 20분간 살펴보고 ‘놀란 점·궁금한 점·직접 확인할 점’을 한 가지씩 적으세요.",
       PE:"중단했던 작은 탐색 과제 하나를 골라 15분씩 세 번 시도하고, 매번 방법을 하나씩 바꾸세요.",
@@ -245,114 +432,373 @@
       OP:"지난달의 예상 밖 사건 세 개에서 얻은 자원·사람·질문을 한 가지씩 찾아 ‘기회 증거’로 기록하세요.",
       RT:"실패 비용이 작고 되돌릴 수 있는 행동 하나—문의 메일, 1차 작품, 체험 신청, 역할 지원—를 7일 안에 실행하세요."
     };
+    const journalQs=[
+      ["catch","포착","예상 밖에 만난 사람·정보·실수·변화는 무엇이었나?"],
+      ["mean","해석","이것이 보여 준 새로운 질문이나 가능성은 무엇인가?"],
+      ["act","작은 행동","안전하고 윤리적으로 7일 안에 할 수 있는 가장 작은 행동은?"],
+      ["link","연결","누구에게 묻거나 어떤 자료·경험과 연결할 것인가?"],
+      ["reflect","성찰","행동 후 무엇을 배웠고 다음 선택은 어떻게 바뀌었나?"]
+    ];
     const scale=["전혀 그렇지 않다","그렇지 않은 편이다","보통이다","그런 편이다","매우 그렇다"];
+    const STAGES=["발견 시작","연습 중","활용 중","확장 중"];
+    const PER=5, NSTEP=Math.ceil(items.length/PER), TOTAL=items.length;
+    const cheers=["", "좋아요, 계속 가 볼까요? 👍", "벌써 절반 가까이 왔어요 💪", "거의 다 왔어요!", "마지막 묶음이에요 🏁"];
 
-    /* ---- 문항 생성 ---- */
-    const itemsEl=document.getElementById("items");
-    items.forEach(([key,stem],i)=>{
-      const el=document.createElement("fieldset"); el.className="item"; el.dataset.key=key;
-      el.innerHTML=`<legend class="stem"><span class="qnum">${i+1}</span>${stem}</legend><div class="scale">${scale.map((s,j)=>`<label><input type="radio" name="q${i+1}" value="${j+1}"><b>${j+1}</b><span>${s}</span></label>`).join("")}</div>`;
-      itemsEl.appendChild(el);
-    });
+    /* ---------- 화면 만들기 ---------- */
+    const stepsEl=$("#steps");
+    for(let st=0;st<NSTEP;st++){
+      const html=items.slice(st*PER,st*PER+PER).map(([key,stem],j)=>{
+        const n=st*PER+j+1;
+        return `<fieldset class="item" data-key="${key}" id="item-${n}"><legend class="stem"><span class="stem-in"><span class="qnum" aria-hidden="true">${n}</span><span><span class="sr-only">${n}번. </span>${stem}</span></span></legend><div class="scale">${scale.map((lab,i)=>`<label class="opt"><input type="radio" name="q${n}" value="${i+1}"><span class="face"><span class="dot" aria-hidden="true">${i+1}</span><span class="lab">${lab}</span></span></label>`).join("")}</div><p class="need">이 문항에 답해 주세요</p></fieldset>`;
+      }).join("");
+      stepsEl.insertAdjacentHTML("beforeend",
+        `<section class="step" data-step="${st}" aria-labelledby="h-step-${st}" hidden>
+          <header class="step-head">
+            ${cheers[st]?`<p class="cheer">${cheers[st]}</p>`:""}
+            <p class="kicker">질문 묶음 ${st+1} / ${NSTEP}</p>
+            <h2 id="h-step-${st}" tabindex="-1">최근의 나와 얼마나 비슷한가요?</h2>
+            <p class="guide">잘하고 싶은 모습보다 <b>실제 요즘 모습</b>에 가깝게 골라 주세요.</p>
+          </header>
+          <div class="items">${html}</div>
+          <div class="step-nav"><button type="button" class="btn ghost" data-prev>‹ ${st===0?"처음 화면":"이전"}</button><button type="button" class="btn primary" data-next>${st===NSTEP-1?"결과 보기 ✨":"다음 ›"}</button></div>
+          <p class="step-msg" role="status"></p>
+        </section>`);
+    }
+    const stepEls=$$(".step");
+    const stepItemEls=stepEls.map(s=>$$(".item",s));
+    $("#segs").innerHTML=stepEls.map((_,i)=>`<button type="button" class="seg" data-go="${i}" aria-label="질문 묶음 ${i+1} 열기"><i><b></b></i></button>`).join("");
+    $("#stageLegend").innerHTML=STAGES.map((_,i)=>stageChip([1,3,3.8,4.6][i])).join("");
+    $("#journal").innerHTML=journalQs.map(([id,k,qq],i)=>`<li><label><span class="jn" aria-hidden="true">${i+1}</span>${k}<span class="q">${qq}</span><textarea data-journal="${id}" rows="2"></textarea><span class="mirror" data-mirror="${id}"></span></label></li>`).join("");
 
-    /* ---- 임시 보관 (탭 안에서만, 탭을 닫으면 삭제) ---- */
+    /* ---------- 상태 ---------- */
+    const state={view:"intro",step:0,journal:{}};
+    let lastResult=null;
+
+    const isDone=el=>!!el.querySelector("input:checked");
+    const answeredCount=()=>$$(".item input:checked").length;
+    const missingIn=st=>(stepItemEls[st]||[]).filter(el=>!isDone(el));
+    function firstIncompleteStep(){
+      for(let st=0;st<NSTEP;st++) if(missingIn(st).length) return st;
+      return null;
+    }
+
     function saveDraft(){
-      const d={a:{}};
-      document.querySelectorAll('.item input[type=radio]:checked').forEach(r=>d.a[r.name]=r.value);
+      const a={};
+      $$(".item input:checked").forEach(r=>{a[r.name]=r.value;});
+      const d={v:2,a,journal:state.journal,step:state.step,view:state.view};
       try{sessionStorage.setItem(DRAFT_KEY,JSON.stringify(d));}catch(_){}
     }
-    function restoreDraft(){
-      let d=null;
-      try{d=JSON.parse(sessionStorage.getItem(DRAFT_KEY)||"null");}catch(_){}
-      if(!d)return;
-      Object.entries(d.a||{}).forEach(([n,v])=>{
-        const el=document.querySelector(`.item input[name="${n}"][value="${v}"]`);
-        if(el)el.checked=true;
+    function loadDraft(){
+      for(const k of [DRAFT_KEY,OLD_KEY]){
+        try{const d=JSON.parse(sessionStorage.getItem(k)||"null"); if(d&&typeof d==="object") return d;}catch(_){}
+      }
+      return null;
+    }
+    function clearDraft(){
+      try{sessionStorage.removeItem(DRAFT_KEY); sessionStorage.removeItem(OLD_KEY);}catch(_){}
+    }
+
+    /* ---------- 이동 ---------- */
+    function go(t,opt){
+      const o=Object.assign({push:true,focus:true},opt);
+      const view=(t==="intro"||t==="result")?t:"test";
+      if(view==="test") state.step=t;
+      state.view=view;
+      document.body.dataset.view=view;
+      $("#viewIntro").hidden=view!=="intro";
+      $("#viewTest").hidden=view!=="test";
+      $("#viewResult").hidden=view!=="result";
+      $("#segs").hidden=view!=="test";
+      $("#count").hidden=view!=="test";
+      stepEls.forEach((s,i)=>{s.hidden=!(view==="test"&&i===state.step);});
+      const url=view==="intro"?location.pathname+location.search:view==="result"?"#result":`#step-${state.step+1}`;
+      try{history[o.push?"pushState":"replaceState"]({t},"",url);}catch(_){}
+      if(view==="intro") updateIntro();
+      updateProgress();
+      saveDraft();
+      window.scrollTo(0,0);
+      if(o.focus){
+        const h=view==="test"?$(`#h-step-${state.step}`):view==="result"?$("#resultTitle"):$("#introTitle");
+        if(h) h.focus({preventScroll:true});
+      }
+    }
+    window.addEventListener("popstate",e=>{
+      const t=(e.state&&e.state.t!==undefined)?e.state.t:"intro";
+      if(t==="result"){
+        if(answeredCount()===TOTAL){renderResults(); go("result",{push:false});}
+        else go(firstIncompleteStep()||0,{push:false});
+        return;
+      }
+      go(t,{push:false});
+    });
+
+    function next(st){
+      const msg=$(".step-msg",stepEls[st]);
+      const miss=missingIn(st);
+      if(miss.length){
+        miss.forEach(el=>el.classList.add("missing"));
+        msg.textContent=`아직 ${miss.length}문항이 남았어요. 표시된 문항에 답해 주세요.`;
+        miss[0].scrollIntoView({behavior:SMOOTH,block:"center"});
+        return;
+      }
+      msg.textContent="";
+      if(st<NSTEP-1) return go(st+1);
+      const fi=firstIncompleteStep();
+      if(fi!==null){
+        go(fi);
+        missingIn(fi).forEach(el=>el.classList.add("missing"));
+        toast(`${TOTAL-answeredCount()}문항이 남았어요. 이 묶음부터 마저 답해 주세요.`);
+        return;
+      }
+      renderResults();
+      go("result");
+    }
+
+    /* ---------- 진행률 ---------- */
+    function updateProgress(){
+      $("#count").textContent=`${answeredCount()} / ${TOTAL}`;
+      $$(".seg").forEach((seg,i)=>{
+        const it=stepItemEls[i];
+        seg.firstElementChild.firstElementChild.style.width=`${it.filter(isDone).length/it.length*100}%`;
+        if(state.view==="test"&&i===state.step) seg.setAttribute("aria-current","step"); else seg.removeAttribute("aria-current");
+      });
+    }
+    function updateIntro(){
+      const n=answeredCount();
+      const box=$("#resumeBox");
+      if(n>0){
+        box.hidden=false;
+        box.textContent=n===TOTAL?`✅ 모든 문항에 답해 두었어요. 결과를 다시 볼 수 있어요.`:`💾 지난번 응답이 남아 있어요 (${n} / ${TOTAL}). 이어서 해 볼까요?`;
+        $("#startBtn").textContent=n===TOTAL?"결과 보기":"이어서 하기";
+        $("#restartBtn").hidden=false;
+      } else {
+        box.hidden=true;
+        $("#startBtn").textContent="시작하기";
+        $("#restartBtn").hidden=true;
+      }
+    }
+
+    /* ---------- 응답 ---------- */
+    document.addEventListener("change",e=>{
+      const t=e.target;
+      if(!t.matches(".item input[type=radio]")) return;
+      const item=t.closest(".item");
+      const first=!item.classList.contains("done");
+      item.classList.add("done");
+      item.classList.remove("missing");
+      const st=Number(item.closest(".step").dataset.step);
+      if(!missingIn(st).length) $(".step-msg",stepEls[st]).textContent="";
+      updateProgress();
+      saveDraft();
+      if(first) setTimeout(()=>advanceFrom(item),160);
+    });
+    function advanceFrom(item){
+      const list=stepItemEls[Number(item.closest(".step").dataset.step)];
+      const nxt=list.slice(list.indexOf(item)+1).find(el=>!isDone(el));
+      const target=nxt||$(".step-nav",item.closest(".step"));
+      const r=target.getBoundingClientRect();
+      if(r.top<100||r.bottom>window.innerHeight-16) target.scrollIntoView({behavior:SMOOTH,block:nxt?"center":"end"});
+    }
+
+    /* ---------- 일지 ---------- */
+    const journalInputs=$$("[data-journal]");
+    journalInputs.forEach(inp=>inp.addEventListener("input",()=>{state.journal[inp.dataset.journal]=inp.value; saveDraft();}));
+    function syncMirrors(){
+      journalInputs.forEach(inp=>{
+        const m=$(`[data-mirror="${inp.dataset.journal}"]`);
+        const v=inp.value.trim();
+        m.textContent=v; m.classList.toggle("blank",!v);
       });
     }
 
-    function answeredCount(){return document.querySelectorAll('.item input[type=radio]:checked').length;}
-    function updateProgress(){
-      const done=answeredCount();
-      document.getElementById("progressBar").style.width=`${done/25*100}%`;
-      document.getElementById("progressText").textContent=`${done} / 25 응답`;
+    /* ---------- 채점 ---------- */
+    function mean(key){
+      const v=$$(`.item[data-key="${key}"] input:checked`).map(x=>Number(x.value));
+      return v.reduce((a,b)=>a+b,0)/v.length;
     }
-    document.addEventListener("change",e=>{
-      if(e.target.matches('.item input[type=radio]')){updateProgress(); saveDraft();}
-    });
-    window.addEventListener("beforeunload",e=>{
-      if(window.__skipGuard)return;
-      if(answeredCount()>0 && !document.body.classList.contains("scored")){e.preventDefault(); e.returnValue="";}
-    });
-
-    /* ---- 채점 ---- */
-    function mean(key){const v=[...document.querySelectorAll(`.item[data-key="${key}"]`)].map(x=>Number(x.querySelector("input:checked").value));return v.reduce((a,b)=>a+b,0)/v.length;}
-    function band(v){return v<2.5?"발견 시작":v<3.5?"연습 중":v<4.2?"활용 중":"확장 중";}
-    function josa(word,pair){ // pair: "과와"·"을를" 등 [받침O, 받침X] 순
+    function stageIdx(v){return v<2.5?0:v<3.5?1:v<4.2?2:3;}
+    function band(v){return STAGES[stageIdx(v)];}
+    function josa(word,pair){ // pair: "과와"·"을를"·"이가" 등 [받침O, 받침X] 순
       const code=word.charCodeAt(word.length-1);
-      if(code<0xAC00||code>0xD7A3)return pair[0];
+      if(code<0xAC00||code>0xD7A3) return pair[0];
       return (code-0xAC00)%28>0?pair[0]:pair[1];
     }
-    function tiedAfter(sortedArr,n){
-      const cut=sortedArr[n-1][1];
-      return sortedArr.slice(n).filter(([,v])=>Math.abs(v-cut)<1e-9).map(([k])=>meta[k][0]);
+    function tiedAfter(arr,n){
+      const cut=arr[n-1][1];
+      return arr.slice(n).filter(([,v])=>Math.abs(v-cut)<1e-9).map(([k])=>meta[k][0]);
+    }
+    function stageChip(v){
+      const s=stageIdx(v);
+      return `<span class="stage"><span class="pips" aria-hidden="true">${[0,1,2,3].map(i=>`<i${i<=s?' class="on"':""}></i>`).join("")}</span>${STAGES[s]}</span>`;
+    }
+    function radar(ks,vals,labels,title){
+      const W=360,H=340,cx=180,cy=170,R=88,LR=R+44,n=ks.length;
+      const ang=i=>-Math.PI/2+i*2*Math.PI/n;
+      const pt=(i,f)=>[cx+Math.cos(ang(i))*R*f,cy+Math.sin(ang(i))*R*f];
+      const fmt=p=>p.map(x=>x.toFixed(1)).join(",");
+      const poly=f=>ks.map((_,i)=>fmt(pt(i,f))).join(" ");
+      const frac=v=>Math.max(0,Math.min(1,(v-1)/4));
+      let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}: ${ks.map((k,i)=>`${labels[i][1]} ${vals[k].toFixed(1)}`).join(", ")}">`;
+      s+=[.25,.5,.75,1].map(f=>`<polygon class="r-grid" points="${poly(f)}"/>`).join("");
+      s+=ks.map((_,i)=>{const p=pt(i,1);return `<line class="r-grid" x1="${cx}" y1="${cy}" x2="${p[0].toFixed(1)}" y2="${p[1].toFixed(1)}"/>`;}).join("");
+      s+=`<polygon class="r-shape" points="${ks.map((k,i)=>fmt(pt(i,frac(vals[k])))).join(" ")}"/>`;
+      s+=ks.map((k,i)=>{const p=pt(i,frac(vals[k]));return `<circle class="r-dot" cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="4"/>`;}).join("");
+      s+=ks.map((k,i)=>{
+        const x=cx+Math.cos(ang(i))*LR, y=cy+Math.sin(ang(i))*LR;
+        return `<text class="r-lab" text-anchor="middle" x="${x.toFixed(1)}" y="${(y-4).toFixed(1)}"><tspan class="r-emo" x="${x.toFixed(1)}">${labels[i][0]}</tspan><tspan x="${x.toFixed(1)}" dy="1.25em">${labels[i][1]}</tspan></text>`;
+      }).join("");
+      return s+"</svg>";
     }
 
-    let textReport="";
-    document.getElementById("scoreBtn").addEventListener("click",()=>{
-      const done=answeredCount();
-      if(done<25){
-        document.getElementById("error").textContent=`아직 ${25-done}문항이 남았습니다.`;
-        [...document.querySelectorAll(".item")].find(x=>!x.querySelector("input:checked"))?.scrollIntoView({behavior:"smooth",block:"center"});
-        return;
-      }
-      document.getElementById("error").textContent="";
-
-      const scores=Object.fromEntries(Object.keys(meta).map(k=>[k,mean(k)]));
+    function renderResults(){
+      const scores=Object.fromEntries(keys.map(k=>[k,mean(k)]));
       const ordered=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
       const orderedAsc=[...ordered].reverse();
       const high=ordered.slice(0,2), low=orderedAsc.slice(0,2);
       const tieHigh=tiedAfter(ordered,2), tieLow=tiedAfter(orderedAsc,2);
-
+      const uniform=new Set($$(".item input:checked").map(x=>x.value)).size===1;
+      const spread=ordered[0][1]-ordered[ordered.length-1][1];
       const dateStr=new Date().toLocaleDateString("ko-KR",{year:"numeric",month:"long",day:"numeric"});
-      document.getElementById("reportDate").textContent=dateStr;
-
+      const [h0,h1,l0,l1]=[high[0][0],high[1][0],low[0][0],low[1][0]].map(k=>meta[k][0]);
+      const flat=spread<1e-9;
+      const hyp=flat
+        ?`다섯 가지 힘의 점수가 모두 같아서 강점과 연습할 힘을 아직 가르기 어려워요. 이번 주에는 ${l0}${josa(l0,"과와")} ${l1} 미션부터 가볍게 시작해 봐요.`
+        :`지금 나는 ${h0}${josa(h0,"과와")} ${h1}${josa(h1,"을를")} 비교적 잘 쓰고 있고, 앞으로 7일 동안은 ${l0}${josa(l0,"과와")} ${l1}${josa(l1,"을를")} 의도적으로 연습해요.`;
       const tieBits=[];
-      if(tieHigh.length)tieBits.push(`${tieHigh.join(", ")} 점수가 강점 기술 2위와 같습니다`);
-      if(tieLow.length)tieBits.push(`${tieLow.join(", ")} 점수가 연습 기술 2위와 같습니다`);
-      const h0=meta[high[0][0]][0], h1=meta[high[1][0]][0], l0=meta[low[0][0]][0], l1=meta[low[1][0]][0];
-      document.getElementById("summary").innerHTML=
-        `<p class="hyp">현재 나는 <span class="hl">${h0}</span>${josa(h0,"과와")} <span class="hl">${h1}</span>${josa(h1,"을를")} 비교적 잘 쓰고 있고, 다음 7일 동안은 <span class="hl">${l0}</span>${josa(l0,"과와")} <span class="hl">${l1}</span>${josa(l1,"을를")} 의도적으로 연습합니다.</p>`+
-        `<p class="hyp-sub">높은 점수는 ‘행운이 많다’는 뜻이 아니라, 우연한 사건을 알아차리고 행동으로 연결할 준비가 상대적으로 되어 있다는 뜻입니다.</p>`+
-        (tieBits.length?`<p class="tie">※ ${tieBits.join(" · ")}. 순서는 표기 순서에 따라 정한 것이므로 동점 기술도 함께 살펴보세요.</p>`:"");
+      if(tieHigh.length) tieBits.push(`${tieHigh.join(", ")}${josa(tieHigh[tieHigh.length-1],"이가")} 잘 쓰는 힘 2위와 같아요`);
+      if(tieLow.length) tieBits.push(`${tieLow.join(", ")}${josa(tieLow[tieLow.length-1],"이가")} 연습할 힘 2위와 같아요`);
 
-      document.getElementById("bars").innerHTML=ordered.map(([k,v])=>`<div class="bar-row"><span>${meta[k][0]}</span><div class="bar"><span style="width:${v/5*100}%"></span></div><strong>${v.toFixed(2)}</strong></div><div class="band">${band(v)}</div>`).join("");
-      document.getElementById("meanings").innerHTML=ordered.map(([k])=>`<div class="mean-item"><b>${meta[k][0]}</b><span class="small">${meta[k][1]}</span></div>`).join("");
-      document.getElementById("practices").innerHTML=
-        low.map(([k,v])=>`<div class="next"><b class="next-label">${meta[k][0]} · ${band(v)}</b>${practices[k]}</div>`).join("")+
-        `<div class="next"><b class="next-label">강점 활용</b>${meta[high[0][0]][0]}${josa(meta[high[0][0]][0],"을를")} 활용해 위 두 연습을 끝까지 실행하세요. 예를 들어 강점이 호기심이라면 연습 자체를 새로운 실험으로 만들어 봅니다.</div>`;
+      $("#reportDate").textContent=dateStr;
+      $("#resultTitle").innerHTML=flat
+        ?`<span class="type-emoji" aria-hidden="true">🔭</span>다섯 가지 힘이 고르게 비슷해요`
+        :`<span class="type-emoji" aria-hidden="true">${EMOJI[high[0][0]]}${EMOJI[high[1][0]]}</span>나의 강점은 ${h0} · ${h1}`;
+      $("#heroBody").innerHTML=
+        `<p class="hero-desc">${flat?"점수 차이가 없어서 강점을 고르기 어려워요. 미션을 해 보며 나에게 맞는 힘을 찾아가요.":"예상 못 한 일을 만났을 때 지금 비교적 잘 쓰고 있는 힘이에요."}</p>
+        <div class="tagrows">
+          ${flat?"":`<div class="tagrow"><span class="tag-k">잘 쓰는 힘</span>${high.map(([k])=>`<span class="tag">${EMOJI[k]} ${meta[k][0]}</span>`).join("")}</div>`}
+          <div class="tagrow"><span class="tag-k">이번 주 연습</span>${low.map(([k])=>`<span class="tag">${EMOJI[k]} ${meta[k][0]}</span>`).join("")}</div>
+        </div>
+        <p class="hyp">${hyp}</p>
+        <p class="hero-note">🍀 높은 점수는 ‘행운이 많다’는 뜻이 아니에요. 우연한 일을 알아차리고 행동으로 이어 갈 준비가 되어 있다는 뜻이에요.</p>`;
 
-      textReport=`계획된 우연: 기회발견 자기검사 v0.1.1 — 결과 보고서 (${dateStr})\n\n${ordered.map(([k,v])=>`${meta[k][0]}: ${v.toFixed(2)} (${band(v)}) - ${meta[k][1]}`).join("\n")}${tieBits.length?`\n\n※ 동점 안내: ${tieBits.join(" / ")}`:""}\n\n[7일 실천]\n${low.map(([k])=>`${meta[k][0]}: ${practices[k]}`).join("\n")}\n\n주의: 연구·수업용 미표준화 프로토타입이며 선발·배치·성격 진단에 사용할 수 없습니다.`;
+      $("#flatNote").innerHTML=uniform
+        ?`<div class="notebox warn"><b>🤔 모든 문항에 같은 번호를 골랐어요.</b><br>이렇게 답하면 결과가 나에 대해 알려 주는 것이 거의 없어요. 시간이 된다면 천천히 다시 답해 보세요.<br><button type="button" class="btn sm no-print" data-edit>✏️ 응답 고치기</button></div>`
+        :spread<0.4
+        ?`<div class="notebox"><b>💡 다섯 가지 힘의 점수가 서로 비슷해요.</b><br>가장 높은 점수와 가장 낮은 점수의 차이가 0.4점보다 작아요. 강점·연습 구분은 가볍게 참고하고, 마음이 가는 미션부터 골라 해 봐도 좋아요.</div>`
+        :"";
 
-      document.body.classList.add("scored");
-      document.getElementById("results").style.display="block";
-      document.getElementById("results").scrollIntoView({behavior:"smooth"});
+      $("#radar").innerHTML=radar(keys,scores,keys.map(k=>[EMOJI[k],meta[k][0]]),"다섯 가지 힘 프로필");
+      $("#skillList").innerHTML=ordered.map(([k,v])=>`<div class="skill"><div class="skill-top"><b>${EMOJI[k]} ${meta[k][0]}</b>${stageChip(v)}</div><div class="cap-bar"><span class="bar" aria-hidden="true"><i style="width:${v/5*100}%"></i></span><span class="bar-val">${v.toFixed(1)}</span></div><span class="small">${meta[k][1]}</span></div>`).join("");
+      $("#tieNote").innerHTML=tieBits.length?`<p class="tie">※ ${tieBits.join(" · ")}. 순서는 정해진 표기 순서로 골랐으니 동점인 힘도 함께 살펴보세요.</p>`:"";
+
+      const week=`<div class="week" aria-hidden="true">실천 체크 ${["1","2","3","4","5","6","7"].map(d=>`<span>${d}일</span>`).join("")}</div>`;
+      $("#practices").innerHTML=
+        low.map(([k,v])=>`<div class="mission"><span class="mission-k">${EMOJI[k]} ${meta[k][0]} ${stageChip(v)}</span><p>${practices[k]}</p>${week}</div>`).join("")+
+        `<div class="mission main"><span class="mission-k">⭐ 강점 활용</span><p>${flat?"내가 가장 자신 있다고 느끼는 힘을":`${h0}${josa(h0,"을를")}`} 활용해 위 두 미션을 끝까지 해 보세요. 예를 들어 강점이 호기심이라면 미션 자체를 새로운 실험처럼 만들어 봐요.</p></div>`;
+
+      lastResult={dateStr,ordered,high,low,tieBits,hyp,uniform};
+    }
+
+    /* ---------- 결과 내보내기 ---------- */
+    function reportText(){
+      const r=lastResult; if(!r) return "";
+      const j=journalQs.map(([id,k])=>[k,(state.journal[id]||"").trim()]).filter(([,v])=>v);
+      return [
+        `계획된 우연: 기회발견 자기검사 ${VERSION} — 결과 (${r.dateStr})`,"",
+        "■ 요약",r.hyp,
+        ...(r.tieBits.length?[`※ 동점: ${r.tieBits.join(" / ")}`]:[]),
+        "","■ 다섯 가지 힘",...r.ordered.map(([k,v])=>`- ${meta[k][0]}: ${v.toFixed(2)} (${band(v)}) — ${meta[k][1]}`),
+        "","■ 7일 실천 미션",...r.low.map(([k])=>`- ${meta[k][0]}: ${practices[k]}`),
+        ...(j.length?["","■ 우연 포착 일지",...j.map(([k,v])=>`- ${k}: ${v}`)]:[]),
+        ...(r.uniform?["","※ 모든 문항에 같은 번호로 응답함 — 해석에 주의"]:[]),
+        "","※ 연구·수업용 미표준화 프로토타입이며 선발·배치·성격 진단에 사용할 수 없습니다."
+      ].join("\n");
+    }
+    async function copyText(t){
+      try{ if(navigator.clipboard&&window.isSecureContext){ await navigator.clipboard.writeText(t); return true; } }catch(_){}
+      const ta=document.createElement("textarea");
+      ta.value=t; ta.setAttribute("readonly",""); ta.style.cssText="position:fixed;top:0;left:0;width:1px;height:1px;opacity:0";
+      document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0,t.length);
+      let ok=false; try{ok=document.execCommand("copy");}catch(_){}
+      ta.remove(); return ok;
+    }
+    $("#copyBtn").addEventListener("click",async()=>{
+      const t=reportText();
+      const fb=$("#copyFallback");
+      if(await copyText(t)){ fb.hidden=true; toast("📋 결과를 복사했어요. 패들렛이나 메모장에 붙여 넣으세요."); }
+      else { fb.hidden=false; const ta=$("textarea",fb); ta.value=t; ta.focus(); ta.select(); }
+    });
+    $("#downloadBtn").addEventListener("click",()=>{
+      const blob=new Blob(["﻿"+reportText()],{type:"text/plain;charset=utf-8"});
+      const url=URL.createObjectURL(blob), a=document.createElement("a");
+      const d=new Date(), ymd=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+      a.href=url; a.download=`나의_기회발견_자기검사_결과_${ymd}.txt`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),2000);
     });
 
-    document.getElementById("downloadBtn").addEventListener("click",()=>{
-      const b=new Blob([textReport],{type:"text/plain;charset=utf-8"});const a=document.createElement("a");
-      a.href=URL.createObjectURL(b);a.download="나의_기회발견_자기검사_결과.txt";a.click();URL.revokeObjectURL(a.href);
+    function beforePrint(){
+      syncMirrors();
+      $$("#viewResult details").forEach(d=>{d.dataset.wasOpen=d.open?"1":""; d.open=true;});
+    }
+    window.addEventListener("beforeprint",beforePrint);
+    window.addEventListener("afterprint",()=>{ $$("#viewResult details").forEach(d=>{d.open=d.dataset.wasOpen==="1";}); });
+
+    /* ---------- 버튼 ---------- */
+    document.addEventListener("click",e=>{
+      const b=e.target.closest("button"); if(!b) return;
+      if(b.hasAttribute("data-next")) return next(state.step);
+      if(b.hasAttribute("data-prev")) return state.step===0?go("intro"):go(state.step-1);
+      if(b.hasAttribute("data-go")) return go(Number(b.dataset.go));
+      if(b.hasAttribute("data-edit")){ go(0); toast("고칠 묶음으로 이동한 뒤, 마지막에 ‘결과 보기’를 다시 눌러 주세요."); return; }
+      if(b.hasAttribute("data-print")){ beforePrint(); window.print(); }
+    });
+    $("#startBtn").addEventListener("click",()=>{
+      const n=answeredCount();
+      if(n===0) return go(0);
+      if(n===TOTAL){ renderResults(); return go("result"); }
+      go(firstIncompleteStep());
     });
 
-    document.getElementById("resetBtn").addEventListener("click",()=>{
-      if(!confirm("모든 응답을 지우고 처음부터 다시 시작할까요?"))return;
-      try{sessionStorage.removeItem(DRAFT_KEY);}catch(_){}
-      window.__skipGuard=true;
-      location.reload();
+    // 한 번 더 눌러야 지워지는 버튼 (인앱 브라우저에서 confirm 창이 막히는 경우 대비)
+    function armReset(btn){
+      const label=btn.textContent; let armed=0, timer=null;
+      btn.addEventListener("click",()=>{
+        if(Date.now()-armed>4000){
+          armed=Date.now(); btn.textContent="한 번 더 누르면 모든 응답이 지워져요";
+          clearTimeout(timer); timer=setTimeout(()=>{btn.textContent=label;},4000);
+          return;
+        }
+        clearDraft(); window.__skipGuard=true; location.replace(location.pathname+location.search);
+      });
+    }
+    armReset($("#resetBtn")); armReset($("#restartBtn"));
+
+    window.addEventListener("beforeunload",e=>{
+      if(window.__skipGuard) return;
+      if(answeredCount()>0&&state.view!=="result"){e.preventDefault(); e.returnValue="";}
     });
 
-    restoreDraft();
-    updateProgress();
+    let toastTimer=null;
+    function toast(msg){
+      const t=$("#toast"); t.textContent=msg; t.classList.add("show");
+      clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove("show"),3200);
+    }
+
+    /* ---------- 시작 ---------- */
+    const d=loadDraft();
+    if(d){
+      Object.entries(d.a||{}).forEach(([n,v])=>{
+        const el=$(`.item input[name="${n}"][value="${v}"]`);
+        if(el){el.checked=true; el.closest(".item").classList.add("done");}
+      });
+      if(d.journal) journalInputs.forEach(inp=>{const v=d.journal[inp.dataset.journal]; if(typeof v==="string"){inp.value=v; state.journal[inp.dataset.journal]=v;}});
+    }
+    const n0=answeredCount();
+    if(d&&d.view==="result"&&n0===TOTAL){ renderResults(); go("result",{push:false,focus:false}); }
+    else if(d&&d.view==="test"){ go(Math.min(Math.max(Number(d.step)||0,0),NSTEP-1),{push:false,focus:false}); if(n0) toast("💾 저장해 둔 응답을 불러왔어요."); }
+    else go("intro",{push:false,focus:false});
+  })();
   </script>
 </body>
 </html>

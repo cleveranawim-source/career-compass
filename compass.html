@@ -2,236 +2,454 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AI 시대 미래진로 나침반 v0.1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AI 시대 미래진로 나침반</title>
+  <meta name="description" content="내가 끌리는 활동, 일할 때 중요한 것, 변화에 대처하는 힘을 살펴보고 30일 동안 해 볼 작은 실험을 만드는 학생용 자기검사. 응답은 기기 밖으로 나가지 않습니다.">
+  <meta name="theme-color" content="#0f766e">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="🧭 AI 시대 미래진로 나침반">
+  <meta property="og:description" content="63문항 · 15~20분. 직업 정답 대신 나의 진로 가설과 30일 작은 실험을 찾아요.">
+  <meta property="og:url" content="https://cleveranawim-source.github.io/career-compass/compass.html">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
     :root{
-      --paper:#f1ede2; --sheet:#fbf8f1; --ink:#272217; --faint:#837b68;
-      --line:#ded5c0; --line-soft:#e9e2d1;
-      --accent:#17594e; --accent-deep:#0f453c; --accent-soft:#dce8e0;
-      --gold:#9c7a2c; --danger:#9e3120;
-      --serif:"KoPub Batang","KoPubWorld Batang","MaruBuri","Noto Serif KR","Nanum Myeongjo","HANBatang","Batang","AppleMyungjo",serif;
-      --sans:"Pretendard Variable","Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+      --bg:#f3f5f8; --card:#fff; --ink:#172131; --sub:#4d5a6c; --faint:#7a8597;
+      --line:#e1e5ec; --line-strong:#c7ced9;
+      --accent:#0f766e; --accent-strong:#0b5c55; --accent-soft:#e2f3f0; --accent-ink:#fff;
+      --pop:#f59e0b; --pop-soft:#fff4dc; --pop-ink:#7a4d00;
+      --warn:#c2410c; --warn-soft:#fff0e6;
+      --r-lg:20px; --r-md:14px;
+      --shadow:0 1px 2px rgba(15,23,42,.05),0 6px 22px rgba(15,23,42,.06);
+      --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+      color-scheme:light;
+    }
+    @media (prefers-color-scheme:dark){
+      :root{
+        --bg:#0e1116; --card:#161b22; --ink:#e6eaf0; --sub:#a8b2c0; --faint:#7d8898;
+        --line:#252c36; --line-strong:#3a4350;
+        --accent:#2dd4bf; --accent-strong:#5eead4; --accent-soft:#102f2b; --accent-ink:#042321;
+        --pop:#fbbf24; --pop-soft:#33280f; --pop-ink:#fcd58a;
+        --warn:#fb923c; --warn-soft:#331d10;
+        --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 22px rgba(0,0,0,.25);
+        color-scheme:dark;
+      }
     }
     *{box-sizing:border-box}
-    html{-webkit-text-size-adjust:100%}
-    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.62}
-    ::selection{background:var(--accent-soft)}
-    .sheet{max-width:880px;margin:34px auto 60px;background:var(--sheet);border:1px solid var(--line);padding:clamp(26px,5.5vw,56px) clamp(18px,6vw,64px) clamp(36px,6vw,56px)}
-    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    html{-webkit-text-size-adjust:100%;scroll-padding-top:96px}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+    button,input,textarea{font:inherit;color:inherit}
+    a{color:var(--accent-strong);text-underline-offset:3px}
+    [hidden]{display:none!important}
+    .sr-only{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    .print-only{display:none}
 
-    /* 표제부 */
-    .masthead{border-top:3px solid var(--ink);position:relative;padding-top:16px}
-    .masthead::before{content:"";position:absolute;top:5px;left:0;right:0;border-top:1px solid var(--ink)}
-    .mast-top{display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;font-size:11.5px;letter-spacing:.14em;font-weight:600;color:var(--faint)}
-    h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,5.6vw,49px);line-height:1.24;letter-spacing:-.015em;margin:24px 0 14px}
-    h1 em{font-style:normal;color:var(--accent)}
-    .lede{max-width:640px;margin:0 0 24px;font-size:15.8px;line-height:1.85}
-    .mast-meta{display:flex;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;font-size:12.5px;color:var(--faint)}
-    .mast-meta span+span::before{content:"·";margin:0 9px;color:var(--line)}
+    /* 상단 바 */
+    .appbar{position:sticky;top:0;z-index:30;background:var(--bg);background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    .appbar-in{max-width:760px;margin:0 auto;padding:6px 12px;display:flex;align-items:center;gap:8px;min-height:52px}
+    .home{display:inline-flex;align-items:center;min-height:40px;padding:0 10px;border-radius:10px;color:var(--sub);text-decoration:none;font-size:14px;font-weight:600;white-space:nowrap}
+    .home:hover{background:var(--line)}
+    .appbar-title{flex:1;min-width:0;font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .count{font-size:13.5px;font-weight:700;color:var(--sub);font-variant-numeric:tabular-nums;white-space:nowrap;padding-right:4px}
+    .segs{max-width:760px;margin:0 auto;padding:0 12px 6px;display:flex;gap:5px}
+    .seg{flex:1;padding:6px 0 8px;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+    .seg>i{display:block;height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+    .seg>i>b{display:block;height:100%;width:0;background:var(--accent);border-radius:inherit;transition:width .3s}
+    .seg[aria-current=step]>i{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)}
+    .seg:focus-visible{outline:3px solid var(--pop);outline-offset:1px;border-radius:6px}
 
-    /* 일러두기 */
-    .notice{margin:32px 0 4px;padding:18px 18px 13px;border:1px solid var(--ink);position:relative}
-    .notice-label{position:absolute;top:-9px;left:14px;background:var(--sheet);padding:0 9px;font-size:11px;letter-spacing:.24em;font-weight:700;color:var(--gold)}
-    .notice p{margin:5px 0;font-size:13.8px;line-height:1.75}
+    /* 공통 */
+    .wrap{max-width:760px;margin:0 auto;padding:20px 16px 72px}
+    .stack>*+*{margin-top:16px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:24px}
+    .kicker{margin:0 0 6px;font-size:13.5px;font-weight:700;color:var(--accent-strong)}
+    h1{font-size:clamp(30px,7vw,40px);line-height:1.25;margin:0 0 12px;letter-spacing:-.02em}
+    h1:focus,h2:focus{outline:none}
+    .h-sm{font-size:18px;margin:0 0 14px}
+    .lead{font-size:17px;color:var(--sub);margin:0 0 18px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0 0 22px;list-style:none}
+    .chips li{background:var(--accent-soft);color:var(--accent-strong);font-weight:700;font-size:14px;padding:6px 12px;border-radius:99px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:48px;padding:0 20px;border-radius:14px;border:1.5px solid var(--line-strong);background:var(--card);color:var(--ink);font-weight:700;font-size:15.5px;line-height:1.3;cursor:pointer;text-decoration:none;text-align:center;transition:transform .1s,background .15s,border-color .15s}
+    .btn:hover{border-color:var(--accent)}
+    .btn:active{transform:scale(.98)}
+    .btn:focus-visible{outline:3px solid var(--pop);outline-offset:2px}
+    .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+    .btn.primary:hover{background:var(--accent-strong);border-color:var(--accent-strong)}
+    .btn.big{min-height:56px;font-size:17px;padding:0 30px}
+    .btn.ghost{background:transparent}
+    .btn.sm{min-height:40px;font-size:14px;padding:0 14px;border-radius:11px}
+    .btn.danger{color:var(--warn)}
 
-    /* 문항부 */
-    .part{margin-top:46px}
-    .part-head{display:flex;gap:16px;align-items:flex-start;border-bottom:2px solid var(--ink);padding-bottom:13px}
-    .part-no{font-family:var(--serif);font-size:33px;line-height:1;color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;transform:translateY(3px)}
-    .part-head h2{margin:0;font-family:var(--serif);font-size:21px;letter-spacing:-.01em}
-    .part-head p{margin:5px 0 0;font-size:13px;color:var(--faint)}
-    fieldset.item{border:0;margin:0;padding:20px 0 16px;border-top:1px solid var(--line)}
-    .part fieldset.item:first-of-type{border-top:0}
-    .stem{display:block;width:100%;padding:0;margin:0 0 12px;font-weight:600;font-size:15px;line-height:1.6}
-    .qnum{display:inline-block;min-width:30px;font-family:var(--serif);color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums}
-    .scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
-    .scale label{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:1px;text-align:center;border:1px solid var(--line);background:transparent;padding:8px 3px 7px;cursor:pointer;min-height:58px;transition:border-color .15s,background .15s}
-    .scale label b{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
-    .scale label span{font-size:11px;color:var(--faint);line-height:1.35}
-    .scale label:hover{border-color:var(--accent)}
-    .scale input{position:absolute;opacity:0;pointer-events:none}
-    .scale label:has(input:checked){background:var(--accent);border-color:var(--accent)}
-    .scale label:has(input:checked) b,.scale label:has(input:checked) span{color:#f6f2e7}
-    .scale label:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
+    /* 시작 화면 */
+    .hero-emoji{font-size:46px;line-height:1;margin:0 0 14px}
+    .resume{margin:0 0 14px;padding:12px 14px;border-radius:var(--r-md);background:var(--pop-soft);color:var(--pop-ink);font-weight:700;font-size:15px}
+    .cta-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .tip-list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+    .tip-list li{display:flex;gap:12px;align-items:flex-start}
+    .tip-list .ico{font-size:22px;line-height:1.35;flex:none}
+    .preview{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .preview li{padding:12px 14px;border-radius:var(--r-md);background:var(--bg);font-size:15px}
+    .preview b{display:block;font-size:15.5px}
+    details.teacher{padding:0}
+    details.teacher>summary{padding:16px 24px;cursor:pointer;font-weight:700;color:var(--sub);list-style:none;min-height:48px}
+    details.teacher>summary::-webkit-details-marker{display:none}
+    details.teacher>summary::before{content:"▸";display:inline-block;margin-right:8px;transition:transform .15s}
+    details.teacher[open]>summary::before{transform:rotate(90deg)}
+    details.teacher[open]>summary{border-bottom:1px solid var(--line)}
+    .tbody{padding:14px 24px 18px;font-size:14.5px;color:var(--sub)}
+    .tbody p{margin:0 0 10px}
 
-    /* 미래 문제 선택 */
-    fieldset.arena-set{border:0;margin:0;padding:0}
-    .arena-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(198px,1fr));gap:8px;margin-top:16px}
-    .arena{display:flex;gap:9px;align-items:flex-start;border:1px solid var(--line);padding:11px 12px;cursor:pointer;font-size:13.5px;line-height:1.5;transition:border-color .15s,background .15s}
-    .arena input{margin:3px 0 0;accent-color:var(--accent)}
-    .arena:hover{border-color:var(--accent)}
-    .arena:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
-    .arena:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
-    .arena-msg{display:block;min-height:18px;font-size:12.5px;color:var(--danger);margin-top:9px;font-weight:600}
-    .part-note{font-size:12.5px;color:var(--faint);margin:12px 0 0}
+    /* 단계 */
+    .step-head{margin:6px 4px 18px}
+    .cheer{display:inline-block;margin:0 0 12px;padding:6px 12px;border-radius:99px;background:var(--pop-soft);color:var(--pop-ink);font-weight:700;font-size:14px}
+    .step-head h2{font-size:clamp(23px,5.4vw,28px);line-height:1.3;margin:0 0 6px;letter-spacing:-.015em}
+    .guide{margin:0;color:var(--sub)}
+    .step-nav{display:flex;gap:10px;margin-top:20px}
+    .step-nav .btn.primary{flex:1;max-width:340px;margin-left:auto}
+    .step-msg{min-height:1.6em;margin:10px 4px 0;color:var(--warn);font-weight:700;text-align:right}
 
-    /* 진행률 */
-    .progress-shell{position:sticky;top:0;z-index:20;background:var(--sheet);padding:10px 0 6px;margin-top:28px;border-bottom:1px solid var(--line-soft)}
-    .progress{height:3px;background:var(--line-soft)}
-    .progress>div{height:100%;width:0;background:var(--accent);transition:width .25s}
-    .progress-text{margin-top:5px;text-align:right;font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums;letter-spacing:.06em}
+    /* 문항 */
+    .item{border:1px solid var(--line);background:var(--card);border-radius:var(--r-lg);margin:0 0 12px;padding:18px 16px 16px;min-width:0;transition:border-color .2s,box-shadow .2s}
+    .item.done{border-color:var(--line-strong);border-color:color-mix(in srgb,var(--accent) 30%,var(--line))}
+    .item.missing{border-color:var(--warn);box-shadow:0 0 0 3px var(--warn-soft)}
+    .stem{float:left;width:100%;padding:0;margin:0 0 14px;font-weight:600;font-size:17px;line-height:1.55}
+    .stem-in{display:flex;gap:10px;align-items:flex-start}
+    .qnum{flex:none;display:inline-grid;place-items:center;min-width:28px;height:28px;padding:0 6px;border-radius:9px;background:var(--line);color:var(--sub);font-size:13.5px;font-weight:800;font-variant-numeric:tabular-nums;transition:background .2s,color .2s}
+    .item.done .qnum{background:var(--accent);color:var(--accent-ink)}
+    .scale{clear:both;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+    .opt{position:relative;display:block;cursor:pointer;-webkit-tap-highlight-color:transparent}
+    .opt input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+    .face{display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;padding:12px 4px 10px;border:1.5px solid var(--line);border-radius:var(--r-md);background:var(--card);text-align:center;transition:border-color .15s,background .15s,transform .1s}
+    .dot{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:2px solid var(--line-strong);font-weight:800;font-size:15px;color:var(--sub);font-variant-numeric:tabular-nums;transition:background .15s,border-color .15s,color .15s}
+    .lab{font-size:12.5px;line-height:1.35;color:var(--sub)}
+    .opt:hover .face{border-color:var(--accent)}
+    .opt:active .face{transform:scale(.96)}
+    .opt input:checked+.face{border-color:var(--accent);background:var(--accent-soft)}
+    .opt input:checked+.face .dot{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+    .opt input:checked+.face .lab{color:var(--ink);font-weight:700}
+    .opt input:focus-visible+.face{outline:3px solid var(--pop);outline-offset:2px}
+    .need{display:none;margin:10px 0 0;color:var(--warn);font-size:14px;font-weight:700}
+    .item.missing .need{display:block}
 
-    /* 채점 */
-    .score-block{margin-top:38px;border-top:2px solid var(--ink);padding-top:22px}
-    .score-block p{margin:0 0 16px;font-size:13.5px;color:var(--faint)}
-    button{font:inherit;font-weight:700;font-size:14.5px;padding:12px 22px;border:1px solid var(--ink);background:var(--ink);color:var(--sheet);cursor:pointer;border-radius:0}
-    button:hover{opacity:.88}
-    button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-    button.ghost{background:transparent;color:var(--ink)}
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-    .error{color:var(--danger);font-weight:700;min-height:22px;margin-top:12px;font-size:14px}
+    /* 미래 문제 */
+    fieldset.arena-set{border:0;margin:0;padding:0;min-width:0}
+    .arena-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+    .chip{position:relative;display:block;cursor:pointer;-webkit-tap-highlight-color:transparent}
+    .chip input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+    .chip-face{display:flex;align-items:center;gap:10px;min-height:60px;padding:12px 14px;border:1.5px solid var(--line);border-radius:var(--r-md);background:var(--card);font-weight:600;transition:border-color .15s,background .15s,opacity .15s}
+    .chip-emoji{font-size:24px;line-height:1;flex:none}
+    .chip-txt{flex:1}
+    .chip-badge{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:2px solid var(--line-strong);font-size:13px;font-weight:800;color:var(--accent-ink)}
+    .chip:hover .chip-face{border-color:var(--accent)}
+    .chip input:checked+.chip-face{border-color:var(--accent);background:var(--accent-soft)}
+    .chip input:checked+.chip-face .chip-badge{background:var(--accent);border-color:var(--accent)}
+    .chip input:disabled+.chip-face{opacity:.42;cursor:not-allowed}
+    .chip input:focus-visible+.chip-face{outline:3px solid var(--pop);outline-offset:2px}
+    .arena-count{margin:14px 4px 0;font-weight:700;color:var(--accent-strong)}
+    .note{font-size:14px;color:var(--faint);margin:8px 4px 0}
 
-    /* 결과 보고서 */
-    #results{display:none;margin-top:56px}
-    .report-head{border-top:3px solid var(--ink);position:relative;padding-top:14px}
-    .report-head::before{content:"";position:absolute;top:5px;left:0;right:0;border-top:1px solid var(--ink)}
-    .report-title{font-family:var(--serif);font-size:clamp(24px,4vw,31px);margin:18px 0 4px;font-weight:700;letter-spacing:-.01em}
-    .hyp{font-family:var(--serif);font-size:18px;line-height:2.05;margin:14px 0 4px}
-    .hyp-sub{font-size:14.5px;line-height:1.85;margin:8px 0 0}
-    .hl{background:linear-gradient(transparent 62%,var(--accent-soft) 62%);padding:0 2px;font-weight:700}
-    .report-sec{margin-top:40px;border-top:2px solid var(--ink);padding-top:14px}
-    .report-sec h3{font-family:var(--serif);font-size:20px;margin:0 0 4px}
-    .sec-guide{font-size:12.8px;color:var(--faint);margin:0 0 18px;line-height:1.7}
-    .result-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(236px,1fr));gap:26px}
-    .col-title{font-size:12px;letter-spacing:.16em;color:var(--gold);font-weight:700;margin:0 0 10px}
-    .bar-row{display:grid;grid-template-columns:96px 1fr 44px;align-items:center;gap:10px;margin:11px 0 2px;font-size:13.5px}
-    .bar{height:7px;background:var(--line-soft)}
-    .bar span{display:block;height:100%;background:var(--accent)}
-    .bar-row strong{font-variant-numeric:tabular-nums;text-align:right;font-size:13px}
-    .band{text-align:right;font-size:11px;color:var(--faint);margin:0 0 5px}
-    .mean-item{margin:0 0 13px;font-size:14px;line-height:1.7}
-    .mean-item .small{display:block;color:var(--faint);font-size:12.8px}
-    .tie{font-size:12.5px;color:var(--gold);margin-top:12px;line-height:1.7}
-    .next{border:1px dashed var(--accent);padding:15px 16px 13px;margin:12px 0;font-size:14px;line-height:1.75}
-    .next-label{display:block;font-size:11px;letter-spacing:.18em;font-weight:700;color:var(--accent);margin-bottom:6px}
-    .footnote{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint);line-height:1.8}
-    .colophon{margin-top:54px;border-top:2px solid var(--ink);padding-top:12px;display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;font-size:12px;color:var(--faint);letter-spacing:.04em}
+    /* 결과 */
+    .hero{background:var(--accent-soft);border:1px solid var(--line-strong);border-color:color-mix(in srgb,var(--accent) 35%,transparent);border-radius:var(--r-lg);padding:26px 24px}
+    .type-emoji{display:block;font-size:34px;letter-spacing:6px;line-height:1.2;margin-bottom:8px}
+    .hero h2{font-size:clamp(26px,6.2vw,34px);line-height:1.3;margin:0 0 6px;color:var(--accent-strong);letter-spacing:-.02em}
+    .hero-desc{margin:0 0 16px;font-size:16.5px}
+    .tagrows{display:grid;gap:8px;margin:0 0 16px}
+    .tagrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+    .tag-k{font-size:13.5px;font-weight:700;color:var(--sub);min-width:80px}
+    .tag{background:var(--card);border:1px solid var(--line);padding:4px 11px;border-radius:99px;font-weight:700;font-size:14.5px}
+    .tag.muted{font-weight:500;color:var(--sub)}
+    .hyp{font-size:16px;line-height:1.75;margin:0;padding-top:14px;border-top:1px dashed var(--line-strong)}
+    .hero-note{margin:10px 0 0;font-size:14.5px;color:var(--sub)}
+    .notebox{border-radius:var(--r-md);padding:14px 16px;font-size:15px;background:var(--pop-soft);border:1px solid var(--line)}
+    .notebox.warn{background:var(--warn-soft)}
+    .notebox .btn{margin-top:10px}
+    .rsec h3{display:flex;align-items:center;gap:10px;font-size:20px;line-height:1.35;margin:0 0 6px}
+    .rsec-no{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-size:15px}
+    .sec-guide{font-size:14.5px;color:var(--sub);margin:0 0 16px}
+    .sec-foot{font-size:14px;color:var(--sub);margin:16px 0 0;padding-top:12px;border-top:1px solid var(--line)}
+    .rgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:center}
+    .radar{margin:0}
+    .radar svg{display:block;width:100%;max-width:400px;height:auto;margin:0 auto}
+    .r-grid{fill:none;stroke:var(--line-strong);stroke-width:1}
+    .r-shape{fill:var(--accent);fill-opacity:.2;stroke:var(--accent);stroke-width:2.5;stroke-linejoin:round}
+    .r-dot{fill:var(--accent)}
+    .r-lab{font-size:14px;font-weight:700;fill:var(--ink)}
+    .r-emo{font-size:19px}
+    .mini-k{font-size:14px;font-weight:800;color:var(--sub);margin:0 0 8px}
+    .mean{display:grid;gap:12px}
+    .mean-item{display:flex;gap:12px;align-items:flex-start}
+    .rank{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent-strong);font-weight:800;font-size:13.5px;margin-top:1px}
+    .mean-item b{font-size:16px}
+    .score{margin-left:6px;font-size:13.5px;font-weight:800;color:var(--accent-strong);font-variant-numeric:tabular-nums}
+    .small{display:block;color:var(--sub);font-size:14px;line-height:1.55}
+    .tie{font-size:14px;color:var(--pop-ink);background:var(--pop-soft);border-radius:10px;padding:10px 12px;margin:14px 0 0}
+    details.more{margin-top:14px}
+    details.more>summary{cursor:pointer;font-weight:700;font-size:14.5px;color:var(--accent-strong);min-height:40px;display:flex;align-items:center}
+    .bar-row{display:grid;grid-template-columns:118px minmax(0,1fr) 34px;align-items:center;gap:10px;margin:10px 0;font-size:15px}
+    .bar{display:block;height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+    .bar i{display:block;height:100%;border-radius:inherit;background:var(--faint)}
+    .bar-row.hi .bar i,.cap .bar i{background:var(--accent)}
+    .bar-row.hi .bar-name{font-weight:800}
+    .bar-val{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;font-size:14px;color:var(--sub)}
+    .stage-legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 16px}
+    .capgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+    .capbox{border:1px solid var(--line);border-radius:var(--r-md);padding:14px 14px 8px}
+    .capbox h4{margin:0;font-size:15.5px}
+    .capbox .small{font-size:13.5px}
+    .cap{padding:10px 0;border-top:1px solid var(--line)}
+    .capbox h4+.small{margin:0 0 6px}
+    .cap-top{display:flex;justify-content:space-between;gap:6px 8px;align-items:center;flex-wrap:wrap}
+    .cap-bar{display:grid;grid-template-columns:minmax(0,1fr) 30px;gap:8px;align-items:center;margin:6px 0 2px}
+    .stage{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--sub);white-space:nowrap}
+    .pips{display:inline-flex;gap:3px}
+    .pips i{width:7px;height:7px;border-radius:50%;background:var(--line-strong)}
+    .pips i.on{background:var(--accent)}
+    .mission{border:1.5px dashed var(--line-strong);border-radius:var(--r-md);padding:14px 16px;margin:10px 0}
+    .mission.main{border:2px solid var(--accent);background:var(--accent-soft)}
+    .mission-k{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-weight:800;font-size:15px;color:var(--accent-strong);margin-bottom:4px}
+    .mission p{margin:0}
+    .low-k{margin-top:20px}
+    .plan{margin-top:18px;padding:16px;border-radius:var(--r-md);background:var(--bg);border:1px solid var(--line)}
+    .plan .mini-k{margin:0}
+    .plan label{display:block;font-weight:700;font-size:15px;margin:12px 0 0}
+    .plan textarea,.plan input{display:block;width:100%;margin-top:6px;padding:10px 12px;border:1.5px solid var(--line-strong);border-radius:10px;background:var(--card);font-weight:400;font-size:16px;line-height:1.5;resize:vertical}
+    .plan textarea:focus,.plan input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+    .actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+    .hint{font-size:14px;color:var(--faint);margin:12px 0 0}
+    #copyFallback textarea{width:100%;min-height:160px;margin-top:8px;padding:10px;border:1.5px solid var(--line-strong);border-radius:10px;background:var(--bg);font-size:14px}
+    .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,16px);opacity:0;pointer-events:none;background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:14px;font-weight:700;font-size:15px;box-shadow:0 8px 24px rgba(0,0,0,.2);transition:opacity .25s,transform .25s;width:max-content;max-width:calc(100% - 32px);z-index:50;text-align:center}
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+    .foot{max-width:760px;margin:0 auto;padding:0 16px 40px;font-size:13px;color:var(--faint);text-align:center}
 
-    @media(max-width:640px){
-      .sheet{margin:0;border:0}
-      .scale{gap:4px}
-      .scale label span{font-size:10px}
-      .scale label{min-height:62px;padding:7px 2px 6px}
-      .bar-row{grid-template-columns:84px 1fr 40px}
-      .part-no{font-size:26px}
+    @media (max-width:620px){
+      .rgrid{grid-template-columns:1fr}
+    }
+    @media (max-width:520px){
+      .preview{grid-template-columns:1fr}
+      .wrap{padding:16px 12px 64px}
+      .card{padding:20px 16px}
+      .hero{padding:22px 18px}
+      details.teacher>summary{padding:14px 16px}
+      .tbody{padding:12px 16px 16px}
+      .item{padding:16px 12px 14px}
+      .stem{font-size:16px}
+      .scale{gap:5px}
+      .face{padding:10px 2px 8px;gap:5px}
+      .dot{width:32px;height:32px;font-size:14px}
+      .lab{font-size:11.5px}
+      .bar-row{grid-template-columns:100px minmax(0,1fr) 32px;font-size:14px}
+      .step-nav .btn.ghost{padding:0 14px}
+    }
+    @media (prefers-reduced-motion:reduce){
+      *{transition:none!important}
     }
     @media print{
-      body{background:#fff;font-size:12.5px}
-      .sheet{border:0;margin:0;max-width:none;padding:0}
-      .progress-shell,.no-print{display:none!important}
-      body:not(.scored) #results{display:none!important}
-      body.scored #introCard,body.scored #arenaCard,body.scored #testArea{display:none!important}
-      fieldset.item{break-inside:avoid;padding:10px 0 8px}
-      .scale label{min-height:0;padding:5px 2px}
-      .report-sec,.next,.notice{break-inside:avoid}
-      #results{margin-top:22px}
-      .bar span,.hl,.scale label:has(input:checked),.arena:has(input:checked){-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      :root{--bg:#fff;--card:#fff;--ink:#111;--sub:#444;--faint:#666;--line:#ccc;--line-strong:#999;--accent:#0f766e;--accent-strong:#0b5c55;--accent-soft:#e2f3f0;--accent-ink:#fff;--pop-soft:#fff4dc;--pop-ink:#7a4d00;--warn-soft:#fff;--shadow:none;color-scheme:light}
+      @page{margin:14mm 12mm}
+      body{font-size:10.5pt;background:#fff}
+      .appbar,.no-print,.step-nav,.step-msg,.cheer,.need,.toast,.btn,.resume,.cta-row,.foot,.arena-count,#viewIntro .tips,#viewIntro details.teacher{display:none!important}
+      .print-only{display:block!important}
+      .wrap{max-width:none;padding:0}
+      .card,.item,.hero{box-shadow:none}
+      /* 채점 전 = 지필 문항지 */
+      body:not([data-view=result]) #viewIntro,body:not([data-view=result]) #viewTest{display:block!important}
+      body:not([data-view=result]) .step{display:block!important}
+      body:not([data-view=result]) #viewResult{display:none!important}
+      #viewIntro .card{border:0;padding:0}
+      .hero-emoji{font-size:28px;margin:0 0 6px}
+      .step{margin-top:14pt}
+      .step-head{margin:0 0 8pt}
+      .item{break-inside:avoid;padding:8px 10px;margin:0 0 6px;border-radius:8px}
+      .stem{font-size:10.5pt;margin-bottom:6px}
+      .face{padding:4px 2px;gap:2px;border-radius:8px}
+      .dot{width:20px;height:20px;font-size:9pt;border-width:1.5px}
+      .lab{font-size:7.5pt}
+      .chip-face{min-height:0;padding:6px 10px}
+      /* 채점 후 = 결과 보고서 */
+      body[data-view=result] #viewIntro,body[data-view=result] #viewTest{display:none!important}
+      .hero,.rsec,.mission,.capbox,.mean-item,.bar-row{break-inside:avoid}
+      .stack>*+*{margin-top:10px}
+      .plan textarea,.plan input{display:none}
+      .mirror{display:block!important;margin-top:4px;min-height:1.7em;border-bottom:1px solid #999;white-space:pre-wrap;font-weight:400}
+      .mirror.blank{min-height:2.6em}
+      *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     }
+    .mirror{display:none}
   </style>
 </head>
-<body>
-  <div class="sheet">
-
-    <header class="masthead">
-      <div class="mast-top"><span>LEV LAB 진로교육 연구도구 · 제1호</span><span>연구·수업용 프로토타입 v0.1.1</span></div>
-      <h1>AI 시대<br><em>미래진로 나침반</em></h1>
-      <p class="lede">직업 하나를 정답처럼 고르는 대신, 내가 즐기는 과업과 중요하게 여기는 가치, 변화에 대처하는 자원, 실제 탐색 행동, 인간–AI 협업 방식을 함께 살펴봅니다.</p>
-      <div class="mast-meta"><span>중·고등학생용</span><span>63문항</span><span>15~20분</span><span>응답은 이 기기 밖으로 나가지 않습니다</span></div>
-    </header>
-
-    <section id="introCard">
-      <aside class="notice">
-        <b class="notice-label">일러두기</b>
-        <p><strong>이 도구는 아직 표준화된 심리검사가 아닙니다.</strong> 점수로 학생을 선발·배치·서열화하거나 ‘미래에 성공할 직업’을 단정해서는 안 됩니다. 지금의 진로 가설을 만들고 작은 경험으로 확인하기 위한 대화 도구입니다.</p>
-        <p>정답은 없습니다. ‘잘할 것 같은 것’보다 <strong>지금 내가 실제로 느끼고 행동하는 모습</strong>에 가깝게 답하세요. 응답은 인터넷으로 전송되지 않으며, 실수로 새로고침해도 남도록 이 브라우저 탭 안에만 잠시 보관됩니다. 탭을 닫으면 함께 사라집니다.</p>
-      </aside>
-    </section>
-
-    <section class="part" id="arenaCard">
-      <div class="part-head"><span class="part-no">00</span><div><h2>요즘 더 알아보고 싶은 미래 문제</h2><p>직업명이 아니라 해결해 보고 싶은 문제 영역을 최대 3개 골라 보세요. 선택하지 않아도 검사를 진행할 수 있습니다.</p></div></div>
-      <fieldset class="arena-set">
-        <legend class="sr-only">요즘 더 알아보고 싶은 미래 문제 (최대 3개 선택)</legend>
-        <div class="arena-grid" id="arenaGrid"></div>
-      </fieldset>
-      <span class="arena-msg" id="arenaMsg" role="status"></span>
-      <p class="part-note">이 목록은 노동시장과 사회 변화에 맞춰 매년 갱신하는 모듈입니다. 선택은 능력 점수가 아니라 현재의 관심 신호입니다.</p>
-    </section>
-
-    <div class="progress-shell" aria-live="polite">
-      <div class="progress"><div id="progressBar"></div></div>
-      <div class="progress-text" id="progressText">0 / 63 응답</div>
+<body data-view="intro">
+  <header class="appbar">
+    <div class="appbar-in">
+      <a class="home" href="index.html">‹ 검사 목록</a>
+      <span class="appbar-title">🧭 미래진로 나침반</span>
+      <span class="count" id="count" hidden>0 / 63</span>
     </div>
+    <nav class="segs" id="segs" aria-label="검사 단계" hidden></nav>
+  </header>
 
-    <div id="testArea"></div>
+  <main class="wrap">
+    <noscript><p class="card">이 검사는 자바스크립트가 켜져 있어야 작동해요. 브라우저 설정을 확인해 주세요.</p></noscript>
 
-    <section class="score-block no-print">
-      <p>모든 문항에 답하면 결과 보고서가 만들어집니다. 결과는 이 기기에서만 계산되며, 필요하면 인쇄하거나 텍스트 파일로 저장할 수 있습니다.</p>
-      <button class="primary" id="scoreBtn">내 진로 나침반 보기</button>
-      <div class="error" id="error" role="alert"></div>
-    </section>
-
-    <section id="results" aria-live="polite">
-      <div class="report-head">
-        <div class="mast-top"><span>결과 보고서 · <span id="reportDate"></span></span><span>미래진로 나침반 v0.1.1</span></div>
-        <h2 class="report-title">나의 현재 진로 가설</h2>
-        <div id="hypothesis"></div>
+    <!-- 시작 화면 -->
+    <section class="view stack" id="viewIntro">
+      <div class="card">
+        <div class="hero-emoji" aria-hidden="true">🧭</div>
+        <p class="kicker">AI 시대 진로 탐색 · 자기검사 1</p>
+        <h1 id="introTitle" tabindex="-1">미래진로 나침반</h1>
+        <p class="lead">직업 하나를 맞히는 검사가 아니에요. 내가 끌리는 활동, 일할 때 중요한 것, 변화에 대처하는 힘을 살펴보고 <b>앞으로 30일 동안 해 볼 작은 실험</b>을 만들어요.</p>
+        <ul class="chips"><li>⏱ 15~20분</li><li>📝 63문항</li><li>🔒 응답은 이 기기에만</li></ul>
+        <p class="resume" id="resumeBox" hidden></p>
+        <div class="cta-row">
+          <button type="button" class="btn primary big" id="startBtn">시작하기</button>
+          <button type="button" class="btn ghost danger" id="restartBtn" hidden>처음부터 다시</button>
+        </div>
+        <p class="print-only">이름 ______________________ &nbsp;&nbsp; 날짜 ______________ &nbsp;&nbsp; 각 문항에서 나와 가장 가까운 번호 하나에 ○ 표시하세요.</p>
       </div>
 
-      <div class="report-sec">
-        <h3>1. 내가 끌리는 과업</h3>
-        <p class="sec-guide">홀랜드 RIASEC를 직업명이 아닌 활동·과업 언어로 바꾼 상대적 프로필입니다. 점수의 높고 낮음보다 상위 2~3개의 조합을 봅니다.</p>
-        <div class="result-cols">
-          <div><div id="interestBars"></div></div>
+      <div class="card tips">
+        <h2 class="h-sm">결과로 알 수 있는 것</h2>
+        <ul class="preview">
+          <li><b>🎯 끌리는 활동 조합</b>만들기·탐구·표현·돕기·이끌기·정리 중 나의 조합</li>
+          <li><b>💎 일할 때 중요한 것</b>의미, 성장, 자율, 관계, 안정, 영향 중 우선순위</li>
+          <li><b>🌱 변화에 대처하는 힘</b>진로적응·탐색 행동·AI 협업의 지금 단계</li>
+          <li><b>🧪 30일 작은 실험</b>바로 해 볼 수 있는 나만의 진로 실험</li>
+        </ul>
+      </div>
+
+      <div class="card tips">
+        <h2 class="h-sm">답하기 전에 알아 두세요</h2>
+        <ul class="tip-list">
+          <li><span class="ico" aria-hidden="true">🙆</span><div><b>정답이 없어요.</b> 점수로 나를 평가하거나 친구와 줄 세우지 않아요.</div></li>
+          <li><span class="ico" aria-hidden="true">🪞</span><div><b>‘잘할 것 같은 나’ 말고 ‘지금의 나’</b>에 가깝게 답해요. 실제로 느끼고 행동하는 모습이 기준이에요.</div></li>
+          <li><span class="ico" aria-hidden="true">💾</span><div><b>응답은 인터넷으로 전송되지 않아요.</b> 실수로 새로고침해도 남도록 이 탭 안에만 잠시 보관되고, 탭을 닫으면 사라져요.</div></li>
+        </ul>
+      </div>
+
+      <details class="card teacher">
+        <summary>선생님·보호자용 안내</summary>
+        <div class="tbody">
+          <p><strong>이 도구는 아직 표준화된 심리검사가 아닙니다.</strong> 점수로 학생을 선발·배치·서열화하거나 ‘미래에 성공할 직업’을 단정해서는 안 됩니다. 지금의 진로 가설을 만들고 작은 경험으로 확인하기 위한 대화 도구입니다.</p>
+          <p>결과는 학생이 직접 복사·저장·인쇄합니다. 결과 화면이 아닌 곳에서 인쇄하면 지필용 문항지가, 결과 화면에서 인쇄하면 결과 보고서가 나옵니다.</p>
+          <p><button type="button" class="btn sm" data-print>🖨️ 지필용 문항지 인쇄</button></p>
+          <p>이론적 근거·운영안·금지 사용·타당화 로드맵: <a href="guide.pdf">학교 활용 및 타당화 가이드(PDF)</a></p>
+        </div>
+      </details>
+    </section>
+
+    <!-- 검사 화면 -->
+    <section class="view" id="viewTest" hidden>
+      <div id="steps"></div>
+    </section>
+
+    <!-- 결과 화면 -->
+    <section class="view stack" id="viewResult" hidden>
+      <div class="hero">
+        <p class="kicker">나의 지금 진로 가설 · <span id="reportDate"></span></p>
+        <p class="print-only">이름 ______________________</p>
+        <h2 id="resultTitle" tabindex="-1"></h2>
+        <div id="heroBody"></div>
+      </div>
+      <div id="flatNote"></div>
+
+      <article class="card rsec">
+        <h3><span class="rsec-no">1</span>내가 끌리는 활동</h3>
+        <p class="sec-guide">여섯 가지 활동 유형(홀랜드 RIASEC)을 직업 이름이 아니라 ‘하는 일’의 언어로 나타냈어요. 점수 하나하나보다 <b>위쪽 2~3개의 조합</b>을 보세요.</p>
+        <div class="rgrid">
+          <figure class="radar" id="interestRadar"></figure>
           <div id="interestMeaning"></div>
         </div>
-      </div>
+        <div id="interestTie"></div>
+        <details class="more"><summary>여섯 가지 점수 모두 보기</summary><div id="interestMore"></div></details>
+        <p class="sec-foot">추천 직업이 아니라 여러 직업과 프로젝트에 공통으로 나오는 활동이에요. 실제로 해 본 뒤 에너지·몰입·배움이 있었는지 기록해 보세요.</p>
+      </article>
 
-      <div class="report-sec">
-        <h3>2. 내가 중요하게 여기는 일의 조건</h3>
-        <p class="sec-guide">가치에는 정답이 없습니다. 상위 가치가 서로 충돌할 때 어떤 타협을 할지도 탐색 주제가 됩니다.</p>
-        <div class="result-cols">
-          <div><div id="valueBars"></div></div>
+      <article class="card rsec">
+        <h3><span class="rsec-no">2</span>일할 때 중요한 것</h3>
+        <p class="sec-guide">가치에는 정답이 없어요. 위쪽 가치끼리 부딪힐 때 무엇을 먼저 지킬지도 좋은 탐색 주제예요.</p>
+        <div class="rgrid">
+          <div id="valueBars"></div>
           <div id="valueMeaning"></div>
         </div>
-      </div>
+        <p class="sec-foot">예: ‘자율·창의’와 ‘안정·균형’이 모두 높다면, 어느 정도의 안정 속에서 얼마나 선택권이 필요한지 실제 환경별로 비교해 보세요.</p>
+      </article>
 
-      <div class="report-sec">
-        <h3>3. 변화 속에서 길을 만드는 자원</h3>
-        <p class="sec-guide">아래 단계는 규준이 아닌 임시 설명 기준입니다: 발견 시작(1.00~2.49), 연습 중(2.50~3.49), 활용 중(3.50~4.19), 확장 중(4.20~5.00).</p>
-        <div class="result-cols">
-          <div><p class="col-title">진로적응 4C</p><div id="adaptBars"></div></div>
-          <div><p class="col-title">탐색 행동 자본</p><div id="actionBars"></div></div>
-          <div><p class="col-title">인간–AI 협업</p><div id="aiBars"></div></div>
-        </div>
-      </div>
+      <article class="card rsec">
+        <h3><span class="rsec-no">3</span>변화 속에서 길을 만드는 힘</h3>
+        <p class="sec-guide">지금 어느 단계쯤인지 보여 줘요. 친구와 비교하는 등급이 아니라, 다음에 무엇을 연습할지 고르기 위한 임시 기준이에요.</p>
+        <div class="stage-legend" id="stageLegend" aria-hidden="true"></div>
+        <div class="capgrid" id="capGrid"></div>
+      </article>
 
-      <div class="report-sec">
-        <h3>4. 앞으로 30일의 작은 실험</h3>
+      <article class="card rsec">
+        <h3><span class="rsec-no">4</span>앞으로 30일의 작은 실험</h3>
         <div id="nextSteps"></div>
-        <div class="actions no-print">
-          <button class="primary" onclick="window.print()">인쇄 / PDF 저장</button>
-          <button class="ghost" id="downloadBtn">텍스트 결과 저장</button>
-          <button class="ghost" id="resetBtn">다시 검사하기</button>
+        <div class="plan">
+          <p class="mini-k">✍️ 나의 30일 실험 계획 <span class="no-print" style="font-weight:500">(선택 · 복사·저장·인쇄에 함께 담겨요)</span></p>
+          <label>무엇을 해 볼까요?
+            <textarea data-plan="what" rows="2" placeholder="예: 우리 동네 하천 쓰레기 문제를 조사해서 1분 영상으로 만들기"></textarea>
+            <span class="mirror" data-mirror="what"></span>
+          </label>
+          <label>언제까지 할까요? 누구에게 도움을 받을까요?
+            <input data-plan="when" type="text" placeholder="예: 11월 첫째 주까지, 과학 선생님께 자료 물어보기">
+            <span class="mirror" data-mirror="when"></span>
+          </label>
+          <label>끝나고 나에게 물어볼 질문
+            <textarea data-plan="ask" rows="2" placeholder="예: 직접 해 보니 생각보다 재미있었나? 무엇이 가장 힘들었나?"></textarea>
+            <span class="mirror" data-mirror="ask"></span>
+          </label>
         </div>
-        <div class="footnote">결과는 현재 상태의 스냅샷입니다. 3~6개월 뒤 실제 경험을 한 후 다시 실시해 변화와 새로운 질문을 비교하세요. 과목·학과·직업 결정에는 상담, 성취 자료, 포트폴리오, 체험 기록, 노동시장 정보 등을 함께 사용해야 합니다.</div>
-      </div>
-    </section>
+      </article>
 
-    <footer class="colophon"><span>Lev Lab — 진로·사회정서교육 연구도구</span><span>v0.1.1 · 표준화 검사가 아닙니다</span></footer>
-  </div>
+      <div class="card no-print">
+        <h3 class="h-sm">결과 챙기기</h3>
+        <div class="actions">
+          <button type="button" class="btn primary" id="copyBtn">📋 결과 복사하기</button>
+          <button type="button" class="btn" id="downloadBtn">💾 텍스트 파일로 저장</button>
+          <button type="button" class="btn" data-print>🖨️ 인쇄 · PDF 저장</button>
+          <button type="button" class="btn ghost" data-edit>✏️ 응답 고치기</button>
+        </div>
+        <p class="hint">패들렛이나 학습지에 붙여 넣을 때는 ‘결과 복사하기’가 가장 편해요.</p>
+        <div id="copyFallback" hidden>
+          <p class="hint">이 기기에서는 자동 복사가 막혀 있어요. 아래 글을 길게 눌러 전체 선택한 뒤 복사하세요.</p>
+          <textarea readonly></textarea>
+        </div>
+        <p style="margin:16px 0 0"><button type="button" class="btn sm ghost danger" id="resetBtn">처음부터 다시 하기</button></p>
+      </div>
+
+      <details class="card teacher" id="resultTeacher">
+        <summary>결과를 읽을 때 유의할 점 (선생님·보호자용)</summary>
+        <div class="tbody">
+          <p>결과는 현재 상태의 스냅샷입니다. 3~6개월 뒤 실제 경험을 한 후 다시 실시해 변화와 새로운 질문을 비교하세요. 과목·학과·직업 결정에는 상담, 성취 자료, 포트폴리오, 체험 기록, 노동시장 정보 등을 함께 사용해야 합니다.</p>
+          <p>단계 구간(임시 설명 기준이며 규준이 아님): 발견 시작 1.00~2.49 · 연습 중 2.50~3.49 · 활용 중 3.50~4.19 · 확장 중 4.20~5.00</p>
+          <p>이 도구는 표준화된 심리검사가 아니므로 선발·배치·서열화·진단에 사용할 수 없습니다.</p>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="foot">Lev Lab · 진로·사회정서교육 연구도구 · v0.2.0 · 표준화 검사가 아닙니다</footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    const DRAFT_KEY="career_compass_v01_draft";
+  (function(){
+    "use strict";
+    const VERSION="v0.2.0";
+    const DRAFT_KEY="career_compass_v02_draft", OLD_KEY="career_compass_v01_draft";
+    const reduceMotion=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);
+    const SMOOTH=reduceMotion?"auto":"smooth";
+    const $=(s,r)=>(r||document).querySelector(s);
+    const $$=(s,r)=>[...(r||document).querySelectorAll(s)];
 
-    const arenas = [
-      "건강·돌봄·삶의 질", "기후·에너지·생태", "디지털·AI·데이터 신뢰",
-      "교육·학습·성장", "문화·콘텐츠·소통", "지역사회·공공·안전",
-      "제조·로봇·이동", "식량·생명과학·자원"
+    /* ---------- 문항·해석 자료 (문항 문구와 척도는 v0.1과 동일) ---------- */
+    const arenas=[
+      ["🩺","건강·돌봄·삶의 질"],["🌱","기후·에너지·생태"],["🤖","디지털·AI·데이터 신뢰"],
+      ["📚","교육·학습·성장"],["🎬","문화·콘텐츠·소통"],["🏘️","지역사회·공공·안전"],
+      ["🏭","제조·로봇·이동"],["🧬","식량·생명과학·자원"]
     ];
 
-    const sections = [
-      {title:"활동 선호", guide:"각 활동을 앞으로 더 해 보고 싶은 정도를 표시하세요.", scale:["전혀 하고 싶지 않다","별로 하고 싶지 않다","보통이다","해 보고 싶다","매우 해 보고 싶다"], items:[
+    const sections=[
+      {title:"활동 선호", head:"어떤 활동에 끌리나요?", guide:"각 활동을 앞으로 더 해 보고 싶은 정도를 표시하세요.", scale:["전혀 하고 싶지 않다","별로 하고 싶지 않다","보통이다","해 보고 싶다","매우 해 보고 싶다"], items:[
         ["R","손이나 도구를 사용해 물건을 만들거나 고치는 활동을 해 보고 싶다."],
         ["R","교실 밖 현장이나 자연에서 직접 움직이며 문제를 해결해 보고 싶다."],
         ["R","기계·장비·재료가 어떻게 작동하는지 직접 다뤄 보고 싶다."],
@@ -251,7 +469,7 @@
         ["C","일정·규칙·절차를 만들어 일이 안정적으로 돌아가게 하는 데 관심이 있다."],
         ["C","오류를 찾아내고 결과가 기준에 맞는지 꼼꼼히 확인하는 활동이 좋다."]
       ]},
-      {title:"일에서 원하는 것", guide:"장래에 어떤 일을 하든 나에게 얼마나 중요한 조건인지 표시하세요.", scale:["전혀 중요하지 않다","별로 중요하지 않다","보통이다","중요하다","매우 중요하다"], items:[
+      {title:"일에서 원하는 것", head:"일할 때 무엇이 중요한가요?", cheer:"좋아요! 이번엔 일의 조건을 골라 봐요 👍", guide:"장래에 어떤 일을 하든 나에게 얼마나 중요한 조건인지 표시하세요.", scale:["전혀 중요하지 않다","별로 중요하지 않다","보통이다","중요하다","매우 중요하다"], items:[
         ["VM","내 일이 다른 사람이나 사회에 긍정적인 변화를 만드는 것."],
         ["VM","내가 중요하다고 느끼는 실제 문제 해결에 기여하는 것."],
         ["VG","새로운 것을 계속 배우며 전문성을 키울 수 있는 것."],
@@ -265,7 +483,7 @@
         ["VI","내가 만든 결과가 인정받고 실제 영향력을 갖는 것."],
         ["VI","책임을 맡아 중요한 결정과 변화를 이끄는 것."]
       ]},
-      {title:"변화에 대처하는 방식", guide:"최근의 나와 얼마나 비슷한지 표시하세요.", scale:["전혀 그렇지 않다","그렇지 않은 편이다","보통이다","그런 편이다","매우 그렇다"], items:[
+      {title:"변화에 대처하는 방식", head:"변화가 생기면 나는?", cheer:"벌써 절반 가까이 왔어요 💪", guide:"최근의 나와 얼마나 비슷한지 표시하세요.", scale:["전혀 그렇지 않다","그렇지 않은 편이다","보통이다","그런 편이다","매우 그렇다"], items:[
         ["ACN","미래의 사회와 일의 변화를 알아보고 내 선택에 어떤 의미가 있는지 생각한다."],
         ["ACN","하나의 직업을 확정하지 않았더라도 다음에 해 볼 일을 계획한다."],
         ["ACN","과목·활동 선택이 앞으로의 여러 가능성과 어떻게 이어지는지 살펴본다."],
@@ -279,7 +497,7 @@
         ["ACF","실패나 계획 변경이 생겨도 다른 방법을 찾아 다시 시도할 수 있다."],
         ["ACF","내 강점을 구체적인 경험과 사례로 설명할 수 있다."]
       ]},
-      {title:"실제 탐색 행동", guide:"최근 6개월 동안의 실제 행동에 가깝게 답하세요.", scale:["전혀 하지 않았다","거의 하지 않았다","가끔 했다","여러 번 했다","꾸준히 했다"], items:[
+      {title:"실제 탐색 행동", head:"최근 6개월, 실제로 해 본 것은?", cheer:"3분의 2를 넘었어요! 생각이 아니라 ‘실제로 한 일’을 떠올려 봐요 🔎", guide:"최근 6개월 동안의 실제 행동에 가깝게 답하세요.", scale:["전혀 하지 않았다","거의 하지 않았다","가끔 했다","여러 번 했다","꾸준히 했다"], items:[
         ["EX","관심 분야를 공식 자료·영상·책·현직자 이야기 등 여러 출처로 알아보았다."],
         ["EX","서로 다른 분야의 직업인이나 전공자에게 실제 경험을 물어보았다."],
         ["EX","관심 분야의 필요한 과업·역량·학습 경로를 비교해 보았다."],
@@ -290,7 +508,7 @@
         ["CN","필요한 정보나 기회를 물어볼 수 있는 사람을 알고 있다."],
         ["CN","익숙한 관계 밖의 사람이나 기관에도 예의를 갖춰 질문해 보았다."]
       ]},
-      {title:"인간–AI 협업 방식", guide:"AI를 거의 써 보지 않았다면 현재 할 수 있는 정도에 가깝게 답하세요.", scale:["전혀 그렇지 않다","그렇지 않은 편이다","보통이다","그런 편이다","매우 그렇다"], items:[
+      {title:"인간–AI 협업 방식", head:"AI와 함께 일할 때 나는?", cheer:"마지막 단계예요 🏁", guide:"AI를 거의 써 보지 않았다면 현재 할 수 있는 정도에 가깝게 답하세요.", scale:["전혀 그렇지 않다","그렇지 않은 편이다","보통이다","그런 편이다","매우 그렇다"], items:[
         ["HA","AI를 쓰기 전에 내가 해결하려는 문제와 판단 기준을 먼저 정한다."],
         ["HA","AI의 제안을 그대로 따르지 않고 최종 선택과 책임은 사람이 맡아야 한다고 생각한다."],
         ["HA","공감·맥락 판단·가치 선택처럼 사람이 특별히 책임져야 할 부분을 구분한다."],
@@ -306,7 +524,7 @@
       ]}
     ];
 
-    const meta = {
+    const meta={
       R:["만들기·현장","도구·재료·공간을 직접 다루며 눈에 보이는 변화를 만드는 과업"],
       I:["탐구·분석","질문을 세우고 자료·실험·논리로 원인과 원리를 밝히는 과업"],
       A:["창작·표현","새로운 의미·형식·경험을 상상하고 표현하는 과업"],
@@ -322,8 +540,9 @@
       HA:["인간 주도성","목표·판단·책임을 사람이 갖기"], HE:["윤리·책임","안전·권리·공정성을 살피기"],
       HV:["비판적 검증","출처·오류·한계를 확인하기"], HD:["적용·설계","문제를 나누고 반복해 공동 창작하기"]
     };
+    const EMOJI={R:"🔧",I:"🔬",A:"🎨",S:"🤝",E:"🚀",C:"🗂️"};
 
-    const pairMeta = {
+    const pairMeta={
       RI:["실험·제작 문제해결자","원리를 탐구하고 실제 장치·환경·제품으로 시험하는 조합"],
       RA:["감각적 설계·제작자","아이디어를 재료와 형태로 구현하는 조합"], RS:["현장 지원·코치","사람을 돕는 일을 실제 활동과 현장에서 수행하는 조합"],
       RE:["현장 실행 리더","현장 자원과 사람을 움직여 결과를 만드는 조합"], RC:["정밀 운영·품질 설계자","도구와 절차를 정확하고 안전하게 운영하는 조합"],
@@ -339,192 +558,472 @@
     const adaptKeys=["ACN","ACT","ACU","ACF"];
     const actionKeys=["EX","EP","CN"];
     const aiKeys=["HA","HE","HV","HD"];
-    const selectedArenas = new Set();
-
-    /* ---- 미래 문제 선택 ---- */
-    const arenaGrid=document.getElementById("arenaGrid");
-    const arenaMsg=document.getElementById("arenaMsg");
-    let arenaMsgTimer=null;
-    arenas.forEach((a,i)=>{
-      const label=document.createElement("label"); label.className="arena";
-      label.innerHTML=`<input type="checkbox" value="${i}"><span>${a}</span>`;
-      label.querySelector("input").addEventListener("change",e=>{
-        if(e.target.checked && selectedArenas.size>=3){
-          e.target.checked=false;
-          arenaMsg.textContent="최대 3개까지 선택할 수 있습니다.";
-          clearTimeout(arenaMsgTimer); arenaMsgTimer=setTimeout(()=>{arenaMsg.textContent="";},2500);
-          return;
-        }
-        e.target.checked?selectedArenas.add(a):selectedArenas.delete(a);
-        saveDraft();
-      });
-      arenaGrid.appendChild(label);
-    });
-
-    /* ---- 문항 생성 ---- */
-    const testArea=document.getElementById("testArea");
-    let q=0;
-    sections.forEach((sec,si)=>{
-      const part=document.createElement("section"); part.className="part";
-      part.innerHTML=`<div class="part-head"><span class="part-no">${String(si+1).padStart(2,"0")}</span><div><h2>${sec.title}</h2><p>${sec.guide}</p></div></div>`;
-      sec.items.forEach(([key,stem])=>{
-        q++;
-        const item=document.createElement("fieldset"); item.className="item"; item.dataset.key=key;
-        item.innerHTML=`<legend class="stem"><span class="qnum">${q}</span>${stem}</legend><div class="scale">${sec.scale.map((lab,idx)=>`<label><input type="radio" name="q${q}" value="${idx+1}"><b>${idx+1}</b><span>${lab}</span></label>`).join("")}</div>`;
-        part.appendChild(item);
-      });
-      testArea.appendChild(part);
-    });
-
-    /* ---- 임시 보관 (탭 안에서만, 탭을 닫으면 삭제) ---- */
-    function saveDraft(){
-      const d={a:{},ar:[...document.querySelectorAll('#arenaGrid input:checked')].map(x=>x.value)};
-      document.querySelectorAll('.item input[type=radio]:checked').forEach(r=>d.a[r.name]=r.value);
-      try{sessionStorage.setItem(DRAFT_KEY,JSON.stringify(d));}catch(_){}
-    }
-    function restoreDraft(){
-      let d=null;
-      try{d=JSON.parse(sessionStorage.getItem(DRAFT_KEY)||"null");}catch(_){}
-      if(!d)return;
-      Object.entries(d.a||{}).forEach(([n,v])=>{
-        const el=document.querySelector(`.item input[name="${n}"][value="${v}"]`);
-        if(el)el.checked=true;
-      });
-      (d.ar||[]).forEach(v=>{
-        const el=document.querySelector(`#arenaGrid input[value="${v}"]`);
-        if(el){el.checked=true; selectedArenas.add(arenas[Number(v)]);}
-      });
-    }
-
-    document.addEventListener("change",e=>{
-      if(e.target.matches('.item input[type=radio]')){updateProgress(); saveDraft();}
-    });
-    function answeredCount(){return document.querySelectorAll('.item input[type=radio]:checked').length;}
-    function updateProgress(){
-      const done=answeredCount();
-      document.getElementById("progressBar").style.width=`${done/63*100}%`;
-      document.getElementById("progressText").textContent=`${done} / 63 응답`;
-    }
-    window.addEventListener("beforeunload",e=>{
-      if(window.__skipGuard)return;
-      if(answeredCount()>0 && !document.body.classList.contains("scored")){e.preventDefault(); e.returnValue="";}
-    });
-
-    /* ---- 채점 ---- */
-    function meanFor(key){
-      const vals=[...document.querySelectorAll(`.item[data-key="${key}"]`)].map(el=>Number(el.querySelector("input:checked").value));
-      return vals.reduce((a,b)=>a+b,0)/vals.length;
-    }
-    function scores(keys){return Object.fromEntries(keys.map(k=>[k,meanFor(k)]));}
-    function sorted(obj){return Object.entries(obj).sort((a,b)=>b[1]-a[1]);}
-    function band(v){return v<2.5?"발견 시작":v<3.5?"연습 중":v<4.2?"활용 중":"확장 중";}
-    function josa(word,pair){ // pair: "과와"·"을를" 등 [받침O, 받침X] 순
-      const code=word.charCodeAt(word.length-1);
-      if(code<0xAC00||code>0xD7A3)return pair[0];
-      return (code-0xAC00)%28>0?pair[0]:pair[1];
-    }
-    function tiedAfter(sortedArr,n){
-      const cut=sortedArr[n-1][1];
-      return sortedArr.slice(n).filter(([,v])=>Math.abs(v-cut)<1e-9).map(([k])=>meta[k][0]);
-    }
-    function bars(target,obj,showBand=false){
-      target.innerHTML=sorted(obj).map(([k,v])=>`<div class="bar-row"><span>${meta[k][0]}</span><div class="bar"><span style="width:${v/5*100}%"></span></div><strong>${v.toFixed(2)}</strong></div>${showBand?`<div class="band">${band(v)}</div>`:""}`).join("");
-    }
 
     const recommendations={
-      ACN:"관심: 3년 뒤 한 모습만 정하지 말고 ‘가능한 미래 3개’를 적은 뒤, 각각 이번 달에 확인할 질문을 하나씩 만드세요.",
-      ACT:"통제: 가장 중요한 진로 과제를 20분 안에 할 수 있는 첫 행동으로 줄여 7일 안에 일정에 넣으세요.",
-      ACU:"호기심: 지금까지 잘 몰랐던 분야 두 개를 골라 현직자 하루·핵심 과업·진입 경로를 비교하세요.",
-      ACF:"자신감: 작은 결과물 하나를 완성하고 ‘막힘–시도–배운 점’을 포트폴리오에 기록하세요.",
-      EX:"탐색: 관심 분야 하나를 공식 통계, 교육기관 자료, 현직자 이야기의 세 출처로 교차 확인하세요.",
-      EP:"경험: 2시간짜리 미니 프로젝트·관찰·봉사·시제품 중 하나로 실제 과업을 해 보세요.",
-      CN:"연결: 궁금한 분야의 사람 한 명에게 세 가지 구체적 질문을 담아 예의 있게 연락해 보세요.",
-      HA:"인간 주도성: AI를 켜기 전에 ‘내 목표·내 기준·사람이 책임질 결정’을 세 줄로 먼저 쓰세요.",
-      HE:"윤리·책임: 다음 AI 과제에서 개인정보·저작권·편향·영향을 확인하는 네 칸 체크리스트를 사용하세요.",
-      HV:"비판적 검증: AI 답변의 핵심 주장 두 개를 원자료나 신뢰할 수 있는 다른 출처로 확인하세요.",
-      HD:"적용·설계: 작은 문제를 세 단계로 나누고 AI를 쓸 단계와 사람이 맡을 단계를 정한 뒤 두 번 이상 수정하세요."
+      ACN:"3년 뒤 한 모습만 정하지 말고 ‘가능한 미래 3개’를 적은 뒤, 각각 이번 달에 확인할 질문을 하나씩 만드세요.",
+      ACT:"가장 중요한 진로 과제를 20분 안에 할 수 있는 첫 행동으로 줄여 7일 안에 일정에 넣으세요.",
+      ACU:"지금까지 잘 몰랐던 분야 두 개를 골라 현직자 하루·핵심 과업·진입 경로를 비교하세요.",
+      ACF:"작은 결과물 하나를 완성하고 ‘막힘–시도–배운 점’을 포트폴리오에 기록하세요.",
+      EX:"관심 분야 하나를 공식 통계, 교육기관 자료, 현직자 이야기의 세 출처로 교차 확인하세요.",
+      EP:"2시간짜리 미니 프로젝트·관찰·봉사·시제품 중 하나로 실제 과업을 해 보세요.",
+      CN:"궁금한 분야의 사람 한 명에게 세 가지 구체적 질문을 담아 예의 있게 연락해 보세요.",
+      HA:"AI를 켜기 전에 ‘내 목표·내 기준·사람이 책임질 결정’을 세 줄로 먼저 쓰세요.",
+      HE:"다음 AI 과제에서 개인정보·저작권·편향·영향을 확인하는 네 칸 체크리스트를 사용하세요.",
+      HV:"AI 답변의 핵심 주장 두 개를 원자료나 신뢰할 수 있는 다른 출처로 확인하세요.",
+      HD:"작은 문제를 세 단계로 나누고 AI를 쓸 단계와 사람이 맡을 단계를 정한 뒤 두 번 이상 수정하세요."
     };
     const experimentByInterest={
       R:"직접 만들기·고치기·현장 관찰 중 하나", I:"궁금한 문제를 자료나 작은 실험으로 조사하는 일", A:"아이디어를 글·이미지·영상·디자인 결과물로 표현하는 일",
       S:"누군가를 인터뷰·설명·지원하고 반응을 듣는 일", E:"작은 프로젝트를 제안하고 사람의 참여를 이끄는 일", C:"흩어진 정보나 과정을 정리하고 오류·품질을 확인하는 일"
     };
     const lensByValue={VM:"실제 사람이나 공동체에 어떤 도움이 되는지 확인하며",VG:"새 기술 하나를 의도적으로 배우며",VA:"방법과 형식을 스스로 정하며",VR:"한 명 이상의 협력자와 함께하며",VS:"시간·비용·지속 가능 조건까지 비교하며",VI:"결과를 공개하고 피드백과 영향력을 확인하며"};
+    const STAGES=["발견 시작","연습 중","활용 중","확장 중"];
 
-    let textReport="";
-    document.getElementById("scoreBtn").addEventListener("click",()=>{
-      const done=answeredCount();
-      if(done<63){
-        document.getElementById("error").textContent=`아직 ${63-done}문항이 남았습니다.`;
-        const first=[...document.querySelectorAll(".item")].find(el=>!el.querySelector("input:checked"));
-        first?.scrollIntoView({behavior:"smooth",block:"center"});
+    /* ---------- 화면 만들기 ---------- */
+    const LAST=sections.length;            // 단계 0(관심 문제) + 문항 단계 1..LAST
+    const TOTAL=sections.reduce((n,s)=>n+s.items.length,0);
+    const stepNames=["관심 문제",...sections.map(s=>s.title)];
+    const stepsEl=$("#steps");
+
+    stepsEl.insertAdjacentHTML("beforeend",
+      `<section class="step" data-step="0" aria-labelledby="h-step-0" hidden>
+        <header class="step-head">
+          <p class="kicker">1 / ${LAST+1} 단계 · 관심 문제</p>
+          <h2 id="h-step-0" tabindex="-1">요즘 더 알아보고 싶은 미래 문제는?</h2>
+          <p class="guide">직업 이름이 아니라 <b>해결해 보고 싶은 문제 영역</b>을 최대 3개 골라요. 고르지 않고 넘어가도 괜찮아요.</p>
+        </header>
+        <fieldset class="arena-set">
+          <legend class="sr-only">요즘 더 알아보고 싶은 미래 문제 (최대 3개 선택)</legend>
+          <div class="arena-grid" id="arenaGrid">${arenas.map(([e,n],i)=>`<label class="chip"><input type="checkbox" value="${i}"><span class="chip-face"><span class="chip-emoji" aria-hidden="true">${e}</span><span class="chip-txt">${n}</span><span class="chip-badge" aria-hidden="true"></span></span></label>`).join("")}</div>
+        </fieldset>
+        <p class="arena-count" id="arenaCount" aria-live="polite"></p>
+        <p class="note">처음 고른 문제가 30일 실험 주제로 추천돼요. 이 목록은 사회 변화에 맞춰 해마다 바뀌고, 고른 것은 능력 점수가 아니라 지금의 관심 신호예요.</p>
+        <div class="step-nav"><button type="button" class="btn ghost" data-prev>‹ 처음 화면</button><button type="button" class="btn primary" data-next>다음 단계 ›</button></div>
+      </section>`);
+
+    let q=0;
+    sections.forEach((sec,si)=>{
+      const st=si+1;
+      const items=sec.items.map(([key,stem])=>{
+        q++;
+        return `<fieldset class="item" data-key="${key}" id="item-${q}"><legend class="stem"><span class="stem-in"><span class="qnum" aria-hidden="true">${q}</span><span><span class="sr-only">${q}번. </span>${stem}</span></span></legend><div class="scale">${sec.scale.map((lab,i)=>`<label class="opt"><input type="radio" name="q${q}" value="${i+1}"><span class="face"><span class="dot" aria-hidden="true">${i+1}</span><span class="lab">${lab}</span></span></label>`).join("")}</div><p class="need">이 문항에 답해 주세요</p></fieldset>`;
+      }).join("");
+      stepsEl.insertAdjacentHTML("beforeend",
+        `<section class="step" data-step="${st}" aria-labelledby="h-step-${st}" hidden>
+          <header class="step-head">
+            ${sec.cheer?`<p class="cheer">${sec.cheer}</p>`:""}
+            <p class="kicker">${st+1} / ${LAST+1} 단계 · ${sec.title}</p>
+            <h2 id="h-step-${st}" tabindex="-1">${sec.head}</h2>
+            <p class="guide">${sec.guide}</p>
+          </header>
+          <div class="items">${items}</div>
+          <div class="step-nav"><button type="button" class="btn ghost" data-prev>‹ 이전</button><button type="button" class="btn primary" data-next>${st===LAST?"결과 보기 ✨":"다음 단계 ›"}</button></div>
+          <p class="step-msg" role="status"></p>
+        </section>`);
+    });
+
+    const stepEls=$$(".step");
+    const stepItemEls=stepEls.map(s=>$$(".item",s));
+    $("#segs").innerHTML=stepNames.map((n,i)=>`<button type="button" class="seg" data-go="${i}" aria-label="${i+1}단계 ${n} 열기"><i><b></b></i></button>`).join("");
+    $("#stageLegend").innerHTML=STAGES.map((_,i)=>stageChip([1,3,3.8,4.6][i])).join("");
+
+    /* ---------- 상태 ---------- */
+    const state={view:"intro",step:0,arenas:[],plan:{what:"",when:"",ask:""}};
+    let lastResult=null;
+
+    const isDone=el=>!!el.querySelector("input:checked");
+    const answeredCount=()=>$$(".item input:checked").length;
+    const missingIn=st=>(stepItemEls[st]||[]).filter(el=>!isDone(el));
+    function firstIncompleteStep(){
+      for(let st=1;st<=LAST;st++) if(missingIn(st).length) return st;
+      return null;
+    }
+
+    function saveDraft(){
+      const a={};
+      $$(".item input:checked").forEach(r=>{a[r.name]=r.value;});
+      const d={v:2,a,ar:state.arenas,plan:state.plan,step:state.step,view:state.view};
+      try{sessionStorage.setItem(DRAFT_KEY,JSON.stringify(d));}catch(_){}
+    }
+    function loadDraft(){
+      for(const k of [DRAFT_KEY,OLD_KEY]){
+        try{const d=JSON.parse(sessionStorage.getItem(k)||"null"); if(d&&typeof d==="object") return d;}catch(_){}
+      }
+      return null;
+    }
+    function clearDraft(){
+      try{sessionStorage.removeItem(DRAFT_KEY); sessionStorage.removeItem(OLD_KEY);}catch(_){}
+    }
+
+    /* ---------- 이동 ---------- */
+    function go(t,opt){
+      const o=Object.assign({push:true,focus:true},opt);
+      const view=(t==="intro"||t==="result")?t:"test";
+      if(view==="test") state.step=t;
+      state.view=view;
+      document.body.dataset.view=view;
+      $("#viewIntro").hidden=view!=="intro";
+      $("#viewTest").hidden=view!=="test";
+      $("#viewResult").hidden=view!=="result";
+      $("#segs").hidden=view!=="test";
+      $("#count").hidden=view!=="test";
+      stepEls.forEach((s,i)=>{s.hidden=!(view==="test"&&i===state.step);});
+      const url=view==="intro"?location.pathname+location.search:view==="result"?"#result":`#step-${state.step+1}`;
+      try{history[o.push?"pushState":"replaceState"]({t},"",url);}catch(_){}
+      if(view==="intro") updateIntro();
+      updateProgress();
+      saveDraft();
+      window.scrollTo(0,0);
+      if(o.focus){
+        const h=view==="test"?$(`#h-step-${state.step}`):view==="result"?$("#resultTitle"):$("#introTitle");
+        if(h) h.focus({preventScroll:true});
+      }
+    }
+    window.addEventListener("popstate",e=>{
+      const t=(e.state&&e.state.t!==undefined)?e.state.t:"intro";
+      if(t==="result"){
+        if(answeredCount()===TOTAL){renderResults(); go("result",{push:false});}
+        else go(firstIncompleteStep()||0,{push:false});
         return;
       }
-      document.getElementById("error").textContent="";
+      go(t,{push:false});
+    });
 
+    function next(st){
+      if(st===0) return go(1);
+      const msg=$(".step-msg",stepEls[st]);
+      const miss=missingIn(st);
+      if(miss.length){
+        miss.forEach(el=>el.classList.add("missing"));
+        msg.textContent=`아직 ${miss.length}문항이 남았어요. 표시된 문항에 답해 주세요.`;
+        miss[0].scrollIntoView({behavior:SMOOTH,block:"center"});
+        return;
+      }
+      msg.textContent="";
+      if(st<LAST) return go(st+1);
+      const fi=firstIncompleteStep();
+      if(fi){
+        go(fi);
+        missingIn(fi).forEach(el=>el.classList.add("missing"));
+        toast(`${TOTAL-answeredCount()}문항이 남았어요. 이 단계부터 마저 답해 주세요.`);
+        return;
+      }
+      renderResults();
+      go("result");
+    }
+
+    /* ---------- 진행률 ---------- */
+    function updateProgress(){
+      const done=answeredCount();
+      $("#count").textContent=`${done} / ${TOTAL}`;
+      $$(".seg").forEach((seg,i)=>{
+        let f;
+        if(i===0) f=(state.step>0||done>0||state.view==="result")?1:0;
+        else {const it=stepItemEls[i]; f=it.filter(isDone).length/it.length;}
+        seg.firstElementChild.firstElementChild.style.width=`${f*100}%`;
+        if(state.view==="test"&&i===state.step) seg.setAttribute("aria-current","step"); else seg.removeAttribute("aria-current");
+      });
+    }
+
+    function updateIntro(){
+      const n=answeredCount();
+      const box=$("#resumeBox");
+      if(n>0){
+        box.hidden=false;
+        box.textContent=n===TOTAL?`✅ 모든 문항에 답해 두었어요. 결과를 다시 볼 수 있어요.`:`💾 지난번 응답이 남아 있어요 (${n} / ${TOTAL}). 이어서 해 볼까요?`;
+        $("#startBtn").textContent=n===TOTAL?"결과 보기":"이어서 하기";
+        $("#restartBtn").hidden=false;
+      } else {
+        box.hidden=true;
+        $("#startBtn").textContent="시작하기";
+        $("#restartBtn").hidden=true;
+      }
+    }
+
+    /* ---------- 응답 ---------- */
+    document.addEventListener("change",e=>{
+      const t=e.target;
+      if(!t.matches(".item input[type=radio]")) return;
+      const item=t.closest(".item");
+      const first=!item.classList.contains("done");
+      item.classList.add("done");
+      item.classList.remove("missing");
+      const st=Number(item.closest(".step").dataset.step);
+      if(!missingIn(st).length) $(".step-msg",stepEls[st]).textContent="";
+      updateProgress();
+      saveDraft();
+      if(first) setTimeout(()=>advanceFrom(item),160);
+    });
+    function advanceFrom(item){
+      const list=stepItemEls[Number(item.closest(".step").dataset.step)];
+      const nxt=list.slice(list.indexOf(item)+1).find(el=>!isDone(el));
+      const target=nxt||$(".step-nav",item.closest(".step"));
+      const r=target.getBoundingClientRect();
+      if(r.top<100||r.bottom>window.innerHeight-16) target.scrollIntoView({behavior:SMOOTH,block:nxt?"center":"end"});
+    }
+
+    /* ---------- 관심 문제 ---------- */
+    const arenaInputs=$$("#arenaGrid input");
+    $("#arenaGrid").addEventListener("change",e=>{
+      const i=Number(e.target.value);
+      if(e.target.checked){
+        if(state.arenas.length>=3){e.target.checked=false; return;}
+        if(!state.arenas.includes(i)) state.arenas.push(i);
+      } else state.arenas=state.arenas.filter(x=>x!==i);
+      syncArenas();
+      saveDraft();
+    });
+    function syncArenas(){
+      const full=state.arenas.length>=3;
+      arenaInputs.forEach(inp=>{
+        const i=Number(inp.value), pos=state.arenas.indexOf(i);
+        inp.checked=pos>=0;
+        inp.disabled=full&&pos<0;
+        inp.closest(".chip").querySelector(".chip-badge").textContent=pos>=0?pos+1:"";
+      });
+      $("#arenaCount").textContent=full?"3개를 모두 골랐어요. 바꾸려면 하나를 해제하세요.":`${state.arenas.length} / 3 선택`;
+    }
+
+    /* ---------- 실험 계획 ---------- */
+    const planInputs=$$("[data-plan]");
+    planInputs.forEach(inp=>inp.addEventListener("input",()=>{state.plan[inp.dataset.plan]=inp.value; saveDraft();}));
+    function syncMirrors(){
+      planInputs.forEach(inp=>{
+        const m=$(`[data-mirror="${inp.dataset.plan}"]`);
+        const v=inp.value.trim();
+        m.textContent=v; m.classList.toggle("blank",!v);
+      });
+    }
+
+    /* ---------- 채점 ---------- */
+    function meanFor(key){
+      const vals=$$(`.item[data-key="${key}"] input:checked`).map(x=>Number(x.value));
+      return vals.reduce((a,b)=>a+b,0)/vals.length;
+    }
+    const scores=keys=>Object.fromEntries(keys.map(k=>[k,meanFor(k)]));
+    const sorted=obj=>Object.entries(obj).sort((a,b)=>b[1]-a[1]);
+    function stageIdx(v){return v<2.5?0:v<3.5?1:v<4.2?2:3;}
+    function band(v){return STAGES[stageIdx(v)];}
+    function shortName(k){return meta[k][0].replace(/\(.*?\)/,"");}
+    function josa(word,pair){ // pair: "과와"·"을를"·"이가" 등 [받침O, 받침X] 순
+      const code=word.charCodeAt(word.length-1);
+      if(code<0xAC00||code>0xD7A3) return pair[0];
+      return (code-0xAC00)%28>0?pair[0]:pair[1];
+    }
+    function tiedAfter(arr,n){
+      const cut=arr[n-1][1];
+      return arr.slice(n).filter(([,v])=>Math.abs(v-cut)<1e-9).map(([k])=>shortName(k));
+    }
+    function stageChip(v){
+      const s=stageIdx(v);
+      return `<span class="stage"><span class="pips" aria-hidden="true">${[0,1,2,3].map(i=>`<i${i<=s?' class="on"':""}></i>`).join("")}</span>${STAGES[s]}</span>`;
+    }
+    function barRow(name,v,hi){
+      return `<div class="bar-row${hi?" hi":""}"><span class="bar-name">${name}</span><span class="bar" aria-hidden="true"><i style="width:${v/5*100}%"></i></span><span class="bar-val">${v.toFixed(1)}</span></div>`;
+    }
+    function radar(keys,vals,labels,title){
+      const W=360,H=340,cx=180,cy=170,R=88,LR=R+44,n=keys.length;
+      const ang=i=>-Math.PI/2+i*2*Math.PI/n;
+      const pt=(i,f)=>[cx+Math.cos(ang(i))*R*f,cy+Math.sin(ang(i))*R*f];
+      const fmt=p=>p.map(x=>x.toFixed(1)).join(",");
+      const poly=f=>keys.map((_,i)=>fmt(pt(i,f))).join(" ");
+      const frac=v=>Math.max(0,Math.min(1,(v-1)/4));
+      let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}: ${keys.map((k,i)=>`${labels[i][1]} ${vals[k].toFixed(1)}`).join(", ")}">`;
+      s+=[.25,.5,.75,1].map(f=>`<polygon class="r-grid" points="${poly(f)}"/>`).join("");
+      s+=keys.map((_,i)=>{const p=pt(i,1);return `<line class="r-grid" x1="${cx}" y1="${cy}" x2="${p[0].toFixed(1)}" y2="${p[1].toFixed(1)}"/>`;}).join("");
+      s+=`<polygon class="r-shape" points="${keys.map((k,i)=>fmt(pt(i,frac(vals[k])))).join(" ")}"/>`;
+      s+=keys.map((k,i)=>{const p=pt(i,frac(vals[k]));return `<circle class="r-dot" cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="4"/>`;}).join("");
+      s+=keys.map((k,i)=>{
+        const x=cx+Math.cos(ang(i))*LR, y=cy+Math.sin(ang(i))*LR;
+        return `<text class="r-lab" text-anchor="middle" x="${x.toFixed(1)}" y="${(y-4).toFixed(1)}"><tspan class="r-emo" x="${x.toFixed(1)}">${labels[i][0]}</tspan><tspan x="${x.toFixed(1)}" dy="1.25em">${labels[i][1]}</tspan></text>`;
+      }).join("");
+      return s+"</svg>";
+    }
+
+    function renderResults(){
       const interest=scores(interestOrder), values=scores(valueKeys), adapt=scores(adaptKeys), action=scores(actionKeys), ai=scores(aiKeys);
-      const sortedI=sorted(interest), sortedV=sorted(values);
-      const topI=sortedI.slice(0,3), topV=sortedV.slice(0,3);
-      const pair=[topI[0][0],topI[1][0]].sort((a,b)=>interestOrder.indexOf(a)-interestOrder.indexOf(b)).join("");
-      const pairInfo=pairMeta[pair];
-      const tieI=tiedAfter(sortedI,2), tieV=tiedAfter(sortedV,2);
-      const arenaText=selectedArenas.size?[...selectedArenas].join(" · "):"아직 정하지 않음 — 다음 탐색에서 골라도 됩니다";
-
+      const sI=sorted(interest), sV=sorted(values);
+      const topI=sI.slice(0,3), topV=sV.slice(0,3);
+      const i0=topI[0][0], i1=topI[1][0];
+      const pairKey=[i0,i1].sort((a,b)=>interestOrder.indexOf(a)-interestOrder.indexOf(b)).join("");
+      const [pairName,pairDesc]=pairMeta[pairKey];
+      const tieI=tiedAfter(sI,2), tieV=tiedAfter(sV,2);
+      const arenaSel=state.arenas.map(i=>arenas[i]);
+      const uniform=new Set($$(".item input:checked").map(x=>x.value)).size===1;
+      const spreadI=sI[0][1]-sI[sI.length-1][1];
+      const lowTop=sI[0][1]<2.5;
       const dateStr=new Date().toLocaleDateString("ko-KR",{year:"numeric",month:"long",day:"numeric"});
-      document.getElementById("reportDate").textContent=dateStr;
-
       const v0=meta[topV[0][0]][0], v1=meta[topV[1][0]][0];
-      document.getElementById("hypothesis").innerHTML=
-        `<p class="hyp">지금 나는 <span class="hl">「${pairInfo[0]}」(${topI[0][0]}${topI[1][0]})</span> 조합의 과업에 끌리고, <span class="hl">${v0}</span>${josa(v0,"과와")} <span class="hl">${v1}</span>${josa(v1,"을를")} 중요하게 여깁니다.</p>`+
-        `<p class="hyp-sub">${pairInfo[1]}입니다. 현재 관심 문제는 <strong>${arenaText}</strong>입니다. 이것은 확정된 진로가 아니라 경험으로 확인할 가설입니다.</p>`;
-
-      bars(document.getElementById("interestBars"),interest);
-      document.getElementById("interestMeaning").innerHTML=
-        `<div class="mean-item"><b>상위 조합 「${pairInfo[0]}」</b><span class="small">${pairInfo[1]}</span></div>`+
-        topI.map(([k])=>`<div class="mean-item"><b>${meta[k][0]}</b><span class="small">${meta[k][1]}</span></div>`).join("")+
-        `<p class="sec-guide" style="margin-top:12px">추천 직업명이 아니라 여러 직업과 프로젝트에서 반복되는 과업 언어입니다. 실제로 해 본 뒤 에너지·몰입·배움의 증거를 기록하세요.</p>`+
-        (tieI.length?`<p class="tie">※ ${tieI.join(", ")} 점수가 2위와 같습니다. 위 조합은 표기 순서에 따라 정한 것이므로, 동점인 과업이 들어간 다른 조합도 함께 살펴보세요.</p>`:"");
-
-      bars(document.getElementById("valueBars"),values);
-      document.getElementById("valueMeaning").innerHTML=
-        topV.map(([k])=>`<div class="mean-item"><b>${meta[k][0]}</b><span class="small">${meta[k][1]}</span></div>`).join("")+
-        `<p class="sec-guide" style="margin-top:12px">예: 자율성과 안정이 모두 높다면, 어느 정도의 안정 속에서 얼마나 선택권이 필요한지 실제 환경별로 비교합니다.</p>`+
-        (tieV.length?`<p class="tie">※ ${tieV.join(", ")} 점수가 2위와 같습니다. 동점 가치도 함께 우선 가치로 다루세요.</p>`:"");
-
-      bars(document.getElementById("adaptBars"),adapt,true);
-      bars(document.getElementById("actionBars"),action,true);
-      bars(document.getElementById("aiBars"),ai,true);
-
-      const capability={...adapt,...action,...ai};
+      const capability=Object.assign({},adapt,action,ai);
       const low=Object.entries(capability).sort((a,b)=>a[1]-b[1]).slice(0,3);
-      const expTask=experimentByInterest[topI[0][0]];
-      const exp=`${lensByValue[topV[0][0]]} ${expTask}${josa(expTask,"을를")} 해 보세요. 주제는 ‘${selectedArenas.size?[...selectedArenas][0]:"요즘 궁금한 생활 속 문제"}’에서 고르고, 시작 전 예상과 끝난 뒤 실제 느낌을 비교하세요.`;
-      document.getElementById("nextSteps").innerHTML=
-        `<div class="next"><b class="next-label">핵심 진로 실험</b>${exp}</div>`+
-        low.map(([k])=>`<div class="next"><b class="next-label">${meta[k][0]} · ${band(capability[k])}</b>${recommendations[k]}</div>`).join("")+
-        `<div class="next"><b class="next-label">상담 질문</b>“이 결과 중 실제 경험으로 확인된 것은 무엇이고, 아직 생각만으로 답한 것은 무엇인가?”를 교사·보호자·친구와 이야기하세요.</div>`;
+      const expTask=experimentByInterest[i0];
+      const topic=arenaSel.length?arenaSel[0][1]:"요즘 궁금한 생활 속 문제";
+      const exp=`${lensByValue[topV[0][0]]} ${expTask}${josa(expTask,"을를")} 해 보세요. 주제는 ‘${topic}’에서 고르고, 시작 전 예상과 끝난 뒤 실제 느낌을 비교하세요.`;
+      const flatI=spreadI<1e-9;
+      const hyp=flatI
+        ?`여섯 가지 활동 점수가 모두 같아서 끌리는 조합을 아직 정하기 어려워요. 일할 때는 ${v0}${josa(v0,"과와")} ${v1}${josa(v1,"을를")} 상대적으로 중요하게 여겨요.`
+        :lowTop
+        ?`아직 뚜렷하게 끌리는 활동은 많지 않아요. 그래도 그중에서는 「${pairName}」 조합이 상대적으로 높고, ${v0}${josa(v0,"과와")} ${v1}${josa(v1,"을를")} 중요하게 여겨요.`
+        :`지금 나는 「${pairName}」 조합의 활동에 끌리고, ${v0}${josa(v0,"과와")} ${v1}${josa(v1,"을를")} 중요하게 여겨요.`;
 
-      const lines=(obj)=>sorted(obj).map(([k,v])=>`- ${meta[k][0]}: ${v.toFixed(2)}${[...adaptKeys,...actionKeys,...aiKeys].includes(k)?` (${band(v)})`:""}`).join("\n");
-      textReport=`AI 시대 미래진로 나침반 v0.1.1 — 결과 보고서 (${dateStr})\n\n[현재 진로 가설]\n${pairInfo[0]} (${topI[0][0]}${topI[1][0]}): ${pairInfo[1]}\n우선 가치: ${topV.slice(0,2).map(([k])=>meta[k][0]).join(" + ")}\n관심 문제: ${arenaText}${tieI.length?`\n※ 동점 안내: ${tieI.join(", ")} 점수가 과업 2위와 같음`:""}${tieV.length?`\n※ 동점 안내: ${tieV.join(", ")} 점수가 가치 2위와 같음`:""}\n\n[과업 흥미]\n${lines(interest)}\n\n[일 가치]\n${lines(values)}\n\n[진로적응]\n${lines(adapt)}\n\n[탐색 행동]\n${lines(action)}\n\n[인간-AI 협업]\n${lines(ai)}\n\n[30일 핵심 실험]\n${exp}\n\n[보완 행동]\n${low.map(([k])=>recommendations[k]).join("\n")}\n\n주의: 연구·수업용 미표준화 프로토타입이며 선발·배치·진단에 사용할 수 없습니다.`;
+      $("#reportDate").textContent=dateStr;
+      $("#resultTitle").innerHTML=flatI
+        ?`<span class="type-emoji" aria-hidden="true">🧭</span>아직 탐색 중`
+        :`<span class="type-emoji" aria-hidden="true">${EMOJI[i0]}${EMOJI[i1]}</span>「${pairName}」`;
+      $("#heroBody").innerHTML=
+        `<p class="hero-desc">${flatI?"여섯 가지 활동 점수가 모두 같아요. 직접 해 보면서 끌리는 활동을 찾아가요.":`${pairDesc}이에요.`}</p>
+        <div class="tagrows">
+          <div class="tagrow"><span class="tag-k">끌리는 활동</span>${flatI?`<span class="tag muted">여섯 가지 점수가 모두 같음</span>`:[i0,i1].map(k=>`<span class="tag">${EMOJI[k]} ${meta[k][0]}</span>`).join("")}</div>
+          <div class="tagrow"><span class="tag-k">중요한 조건</span><span class="tag">${v0}</span><span class="tag">${v1}</span></div>
+          <div class="tagrow"><span class="tag-k">관심 문제</span>${arenaSel.length?arenaSel.map(([e,n])=>`<span class="tag">${e} ${n}</span>`).join(""):`<span class="tag muted">아직 고르지 않았어요 · 탐색하면서 골라도 돼요</span>`}</div>
+        </div>
+        <p class="hyp">${hyp}</p>
+        <p class="hero-note">✋ 정해진 진로가 아니라, 직접 해 보며 확인할 <b>가설</b>이에요.</p>`;
 
-      document.body.classList.add("scored");
-      document.getElementById("results").style.display="block";
-      document.getElementById("results").scrollIntoView({behavior:"smooth"});
+      $("#flatNote").innerHTML=uniform
+        ?`<div class="notebox warn"><b>🤔 모든 문항에 같은 번호를 골랐어요.</b><br>이렇게 답하면 결과가 나에 대해 알려 주는 것이 거의 없어요. 시간이 된다면 천천히 다시 답해 보세요.<br><button type="button" class="btn sm no-print" data-edit>✏️ 응답 고치기</button></div>`
+        :spreadI<0.5
+        ?`<div class="notebox"><b>💡 활동 점수들이 서로 비슷해요.</b><br>가장 높은 점수와 가장 낮은 점수의 차이가 0.5점보다 작아요. 조합 이름은 가볍게 참고하고, 여러 활동을 직접 해 보며 차이를 찾아보세요.</div>`
+        :"";
+
+      $("#interestRadar").innerHTML=radar(interestOrder,interest,interestOrder.map(k=>[EMOJI[k],meta[k][0]]),"끌리는 활동 프로필");
+      $("#interestMeaning").innerHTML=`<p class="mini-k">가장 높은 세 가지</p><div class="mean">${topI.map(([k,v],idx)=>`<div class="mean-item"><span class="rank">${idx+1}</span><div><b>${EMOJI[k]} ${meta[k][0]}</b><span class="score">${v.toFixed(1)}</span><span class="small">${meta[k][1]}</span></div></div>`).join("")}</div>`;
+      $("#interestTie").innerHTML=tieI.length?`<p class="tie">※ ${tieI.join(", ")}${josa(tieI[tieI.length-1],"이가")} 2위와 점수가 같아요. 조합은 정해진 순서로 골랐으니, 동점인 활동이 들어간 다른 조합도 함께 살펴보세요.</p>`:"";
+      $("#interestMore").innerHTML=sI.map(([k,v],idx)=>barRow(`${EMOJI[k]} ${meta[k][0]}`,v,idx<2)).join("");
+
+      $("#valueBars").innerHTML=sV.map(([k,v],idx)=>barRow(meta[k][0],v,idx<2)).join("");
+      $("#valueMeaning").innerHTML=`<p class="mini-k">가장 중요하게 여기는 세 가지</p><div class="mean">${topV.map(([k],idx)=>`<div class="mean-item"><span class="rank">${idx+1}</span><div><b>${meta[k][0]}</b><span class="small">${meta[k][1]}</span></div></div>`).join("")}</div>`+
+        (tieV.length?`<p class="tie">※ ${tieV.join(", ")}${josa(tieV[tieV.length-1],"이가")} 2위와 점수가 같아요. 동점인 가치도 함께 중요한 가치로 생각해 보세요.</p>`:"");
+
+      const capBox=(title,sub,obj)=>`<div class="capbox"><h4>${title}</h4><span class="small">${sub}</span>${sorted(obj).map(([k,v])=>`<div class="cap"><div class="cap-top"><b>${shortName(k)}</b>${stageChip(v)}</div><div class="cap-bar"><span class="bar" aria-hidden="true"><i style="width:${v/5*100}%"></i></span><span class="bar-val">${v.toFixed(1)}</span></div><span class="small">${meta[k][1]}</span></div>`).join("")}</div>`;
+      $("#capGrid").innerHTML=
+        capBox("🧭 변화에 대처하는 힘","진로적응 4C",adapt)+
+        capBox("👣 실제 탐색 행동","최근 6개월",action)+
+        capBox("🤖 AI와 함께 일하기","인간–AI 협업",ai);
+
+      $("#nextSteps").innerHTML=
+        `<div class="mission main"><span class="mission-k">🧪 핵심 진로 실험</span><p>${exp}</p></div>
+        <p class="mini-k low-k">🌱 지금 키우기 좋은 힘 세 가지</p>
+        <p class="small" style="margin:-4px 0 6px">점수가 낮다는 건 부족하다는 뜻이 아니라, 연습하면 가장 많이 자랄 수 있다는 뜻이에요.</p>
+        ${low.map(([k,v])=>`<div class="mission"><span class="mission-k">${shortName(k)} ${stageChip(v)}</span><p>${recommendations[k]}</p></div>`).join("")}
+        <div class="mission"><span class="mission-k">💬 이야기 나누기</span><p>“이 결과 중 실제 경험으로 확인된 것은 무엇이고, 아직 생각만으로 답한 것은 무엇일까?” 선생님·보호자·친구와 이야기해 보세요.</p></div>`;
+
+      lastResult={dateStr,interest,values,adapt,action,ai,i0,i1,pairName,pairDesc,hyp,tieI,tieV,arenaSel,exp,low,uniform,flatI};
+    }
+
+    /* ---------- 결과 내보내기 ---------- */
+    function reportText(){
+      const r=lastResult; if(!r) return "";
+      const lines=(obj,st)=>sorted(obj).map(([k,v])=>`- ${meta[k][0]}: ${v.toFixed(2)}${st?` (${band(v)})`:""}`);
+      const p=state.plan;
+      const plan=[["무엇을",p.what],["언제까지·누구와",p.when],["확인할 질문",p.ask]].filter(([,v])=>v&&v.trim());
+      return [
+        `AI 시대 미래진로 나침반 ${VERSION} — 결과 (${r.dateStr})`,"",
+        "■ 나의 지금 진로 가설",
+        r.flatI?"과업 흥미 점수가 모두 같아 조합을 정하지 않음":`「${r.pairName}」(${r.i0}${r.i1}) — ${r.pairDesc}`,
+        r.hyp,
+        `· 관심 문제: ${r.arenaSel.length?r.arenaSel.map(a=>a[1]).join(" · "):"아직 고르지 않음"}`,
+        ...(r.tieI.length?[`※ 동점: ${r.tieI.join(", ")} — 과업 흥미 2위와 같음`]:[]),
+        ...(r.tieV.length?[`※ 동점: ${r.tieV.join(", ")} — 일 가치 2위와 같음`]:[]),
+        "","■ 과업 흥미",...lines(r.interest),
+        "","■ 일 가치",...lines(r.values),
+        "","■ 진로적응 4C",...lines(r.adapt,true),
+        "","■ 탐색 행동",...lines(r.action,true),
+        "","■ 인간–AI 협업",...lines(r.ai,true),
+        "","■ 30일 핵심 실험",r.exp,
+        "","■ 지금 키우기 좋은 힘",...r.low.map(([k])=>`- ${shortName(k)}: ${recommendations[k]}`),
+        ...(plan.length?["","■ 나의 30일 실험 계획",...plan.map(([k,v])=>`- ${k}: ${v.trim()}`)]:[]),
+        ...(r.uniform?["","※ 모든 문항에 같은 번호로 응답함 — 해석에 주의"]:[]),
+        "","※ 연구·수업용 미표준화 프로토타입이며 선발·배치·진단에 사용할 수 없습니다."
+      ].join("\n");
+    }
+    async function copyText(t){
+      try{ if(navigator.clipboard&&window.isSecureContext){ await navigator.clipboard.writeText(t); return true; } }catch(_){}
+      const ta=document.createElement("textarea");
+      ta.value=t; ta.setAttribute("readonly",""); ta.style.cssText="position:fixed;top:0;left:0;width:1px;height:1px;opacity:0";
+      document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0,t.length);
+      let ok=false; try{ok=document.execCommand("copy");}catch(_){}
+      ta.remove(); return ok;
+    }
+    $("#copyBtn").addEventListener("click",async()=>{
+      const t=reportText();
+      const fb=$("#copyFallback");
+      if(await copyText(t)){ fb.hidden=true; toast("📋 결과를 복사했어요. 패들렛이나 메모장에 붙여 넣으세요."); }
+      else { fb.hidden=false; const ta=$("textarea",fb); ta.value=t; ta.focus(); ta.select(); }
+    });
+    $("#downloadBtn").addEventListener("click",()=>{
+      const blob=new Blob(["﻿"+reportText()],{type:"text/plain;charset=utf-8"});
+      const url=URL.createObjectURL(blob), a=document.createElement("a");
+      const d=new Date(), ymd=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+      a.href=url; a.download=`나의_미래진로_나침반_결과_${ymd}.txt`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),2000);
     });
 
-    document.getElementById("downloadBtn").addEventListener("click",()=>{
-      const blob=new Blob([textReport],{type:"text/plain;charset=utf-8"}); const a=document.createElement("a");
-      a.href=URL.createObjectURL(blob); a.download="나의_미래진로_나침반_결과.txt"; a.click(); URL.revokeObjectURL(a.href);
+    function beforePrint(){
+      syncMirrors();
+      $$("#viewResult details").forEach(d=>{d.dataset.wasOpen=d.open?"1":""; d.open=true;});
+    }
+    window.addEventListener("beforeprint",beforePrint);
+    window.addEventListener("afterprint",()=>{ $$("#viewResult details").forEach(d=>{d.open=d.dataset.wasOpen==="1";}); });
+
+    /* ---------- 버튼 ---------- */
+    document.addEventListener("click",e=>{
+      const b=e.target.closest("button"); if(!b) return;
+      if(b.hasAttribute("data-next")) return next(state.step);
+      if(b.hasAttribute("data-prev")) return state.step===0?go("intro"):go(state.step-1);
+      if(b.hasAttribute("data-go")) return go(Number(b.dataset.go));
+      if(b.hasAttribute("data-edit")){ go(1); toast("고칠 단계로 이동한 뒤, 마지막에 ‘결과 보기’를 다시 눌러 주세요."); return; }
+      if(b.hasAttribute("data-print")){ beforePrint(); window.print(); }
+    });
+    $("#startBtn").addEventListener("click",()=>{
+      const n=answeredCount();
+      if(n===0) return go(0);
+      if(n===TOTAL){ renderResults(); return go("result"); }
+      go(firstIncompleteStep());
     });
 
-    document.getElementById("resetBtn").addEventListener("click",()=>{
-      if(!confirm("모든 응답을 지우고 처음부터 다시 시작할까요?"))return;
-      try{sessionStorage.removeItem(DRAFT_KEY);}catch(_){}
-      window.__skipGuard=true;
-      location.reload();
+    // 한 번 더 눌러야 지워지는 버튼 (인앱 브라우저에서 confirm 창이 막히는 경우 대비)
+    function armReset(btn){
+      const label=btn.textContent; let armed=0, timer=null;
+      btn.addEventListener("click",()=>{
+        if(Date.now()-armed>4000){
+          armed=Date.now(); btn.textContent="한 번 더 누르면 모든 응답이 지워져요";
+          clearTimeout(timer); timer=setTimeout(()=>{btn.textContent=label;},4000);
+          return;
+        }
+        clearDraft(); window.__skipGuard=true; location.replace(location.pathname+location.search);
+      });
+    }
+    armReset($("#resetBtn")); armReset($("#restartBtn"));
+
+    window.addEventListener("beforeunload",e=>{
+      if(window.__skipGuard) return;
+      if(answeredCount()>0&&state.view!=="result"){e.preventDefault(); e.returnValue="";}
     });
 
-    restoreDraft();
-    updateProgress();
+    let toastTimer=null;
+    function toast(msg){
+      const t=$("#toast"); t.textContent=msg; t.classList.add("show");
+      clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove("show"),3200);
+    }
+
+    /* ---------- 시작 ---------- */
+    const d=loadDraft();
+    if(d){
+      Object.entries(d.a||{}).forEach(([n,v])=>{
+        const el=$(`.item input[name="${n}"][value="${v}"]`);
+        if(el){el.checked=true; el.closest(".item").classList.add("done");}
+      });
+      state.arenas=(d.ar||[]).map(Number).filter((i,idx,arr)=>i>=0&&i<arenas.length&&arr.indexOf(i)===idx).slice(0,3);
+      if(d.plan) planInputs.forEach(inp=>{const v=d.plan[inp.dataset.plan]; if(typeof v==="string"){inp.value=v; state.plan[inp.dataset.plan]=v;}});
+    }
+    syncArenas();
+    const n0=answeredCount();
+    if(d&&d.view==="result"&&n0===TOTAL){ renderResults(); go("result",{push:false,focus:false}); }
+    else if(d&&d.view==="test"){ go(Math.min(Math.max(Number(d.step)||0,0),LAST),{push:false,focus:false}); if(n0) toast("💾 저장해 둔 응답을 불러왔어요."); }
+    else go("intro",{push:false,focus:false});
+  })();
   </script>
 </body>
 </html>

@@ -2,13 +2,14 @@
 """guide.md → guide.pdf (에디토리얼 인쇄판).
 
 사용법:
-    <venv>/bin/python tools/build_guide_pdf.py
+    <venv>/bin/python tools/build_guide_pdf.py      (macOS·Linux)
+    py tools\\build_guide_pdf.py                      (Windows)
 
 - markdown 패키지로 본문 변환, 검사 도구와 같은 디자인 토큰의 인쇄 CSS로 감싼 뒤
   Chrome 헤드리스 --print-to-pdf로 A4 PDF 생성, reportlab+pypdf로 쪽번호 스탬프.
-- 필요 패키지: markdown, pypdf, reportlab. Chrome 설치 필요.
+- 필요 패키지: markdown, pypdf, reportlab. Chrome 설치 필요(경로가 다르면 CHROME 환경변수로 지정).
 """
-import re, subprocess, sys, tempfile
+import os, re, shutil, subprocess, sys, tempfile
 from io import BytesIO
 from pathlib import Path
 
@@ -20,7 +21,29 @@ from reportlab.pdfgen import canvas
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "guide.md"
 OUT = ROOT / "guide.pdf"
-CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+
+
+def find_chrome():
+    """CHROME 환경변수 → OS별 기본 설치 경로 → PATH 순으로 Chrome을 찾는다."""
+    if os.environ.get("CHROME"):
+        return os.environ["CHROME"]
+    candidates = [
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+        os.path.expandvars(r"%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe"),
+    ]
+    for c in candidates:
+        if Path(c).is_file():
+            return c
+    for name in ("google-chrome", "google-chrome-stable", "chromium", "chromium-browser", "chrome"):
+        found = shutil.which(name)
+        if found:
+            return found
+    sys.exit("Chrome을 찾지 못했습니다. CHROME 환경변수에 실행 파일 경로를 지정하세요.")
+
+
+CHROME = find_chrome()
 
 md_text = SRC.read_text(encoding="utf-8")
 
